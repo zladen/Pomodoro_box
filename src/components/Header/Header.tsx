@@ -1,18 +1,15 @@
 import React from 'react'
-import { PomodoroIcon, StatisticIcon } from '../Icons'
-import './header.css'
+import { StatisticLink } from '../StatisticLink'
+import { Logo } from '../Logo'
+import styles from './header.module.scss'
 
 export function Header() {
 
 	return (
-		<header className='header'>
-            <div>
-                <PomodoroIcon />
-                <p>Pomodoro_box</p>
-            </div>
-            <div>
-                <StatisticIcon />
-                <a href="">Статистика</a>
+		<header className={styles.header}>
+            <div className={styles.container}>
+                <Logo />
+                <StatisticLink />   
             </div>
         </header>
 	)

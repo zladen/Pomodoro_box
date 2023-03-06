@@ -1,0 +1,64 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+:root {
+	--whiteLightness: 100%;
+	--white:          hsl(0, 0%, var(--whiteLightness));
+	--black:          #333333;
+	--red22:          #DC3E22;
+	--red0F:          #B7280F;
+	--red79:          #EA8A79;
+	--orange:         #FFDDA9;
+	--violet:         #DFDCFE;
+	--blue:           #C5F1FF;
+	--green4F:        #A8B64F;
+	--green41:        #899441;
+	--grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4.31%));
+	--greyE5:         hsl(0, 0%, calc(var(--whiteLightness) - 10.2%));
+	--greyC4:         hsl(0, 0%, calc(var(--whiteLightness) - 23.14%));
+	--grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
+	
+	
+	
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: var(--greyE5);
+	font-size: 16px;
+	line-height: 17px;
+	font-family: 'SF UI Display', normal;
+}
+
+* {
+	color: var(--black);
+	box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+button {
+	padding: 0;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+}
+  
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+input[type="text"] {
+	font-family: 'SF UI Display', normal;
+	font-size: 16px;
+	line-height: 17px;
+	margin: 0;
+	padding-left: 15px;
+}
