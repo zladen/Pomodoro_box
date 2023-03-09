@@ -52,8 +52,8 @@ ul li::marker {
 }
 
 .timerWrapper {
-    min-width: 733px;
-    min-height: 507px;
+    width: 733px;
+    height: 507px;
     margin-left: 16px;
     background-color: var(--grayF4);
     display: flex;
@@ -132,10 +132,10 @@ ul li::marker {
     font-weight: 500;
     font-size: 16px;
     line-height: 17px;
-    color: #C4C4C4;
+    color: var(--greyC4);
     text-align: center;
     justify-content: center;
-    border: 2px solid #C4C4C4;
+    border: 2px solid var(--greyC4);
 }
 
 .btnAddTask {
@@ -154,4 +154,67 @@ ul li::marker {
 
 .btnStart:hover {
     background: var(--green41);
+}
+
+.btnPlus {
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+}
+
+.btnHover:hover {
+    circle {
+      fill: var(--green41);
+    }
+}
+
+.listTasks {
+    display: flex;
+    flex-direction: column-reverse;
+    list-style-type: none; 
+	counter-reset: num;
+	margin: 25px 0 0 0;
+	font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+}
+
+ol li {
+    display: flex;
+    align-items: center;
+	position: relative;	
+	margin: 0;
+    height: 50px;
+    width: 370px;  
+}
+
+ol li:before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: counter(num); 
+	counter-increment: num;
+	width: 25px;
+	height: 25px;
+	background: var(--greyE5);
+	color: var(--black);
+	text-align: center;
+	font-weight: 300;
+	border-radius: 50%;
+	border: 1px solid var(--greyC4);
+    margin-right: 10px;
+}
+
+li {
+    border-bottom: 1px solid var(--greyC4);
+}
+
+li:last-child {
+    border-top: 1px solid var(--greyC4);
+}
+
+.dividerLine {
+    height: 1px;
+    width: 100%;
+    background-color: var(--greyC4);
 }
