@@ -51,6 +51,10 @@ ul li::marker {
     color: var(--black);
 }
 
+input:not(:placeholder-shown) {
+    color: var(--black);
+}
+
 .timerWrapper {
     width: 733px;
     height: 507px;
@@ -162,12 +166,6 @@ ul li::marker {
     align-items: center;
 }
 
-.btnHover:hover {
-    circle {
-      fill: var(--green41);
-    }
-}
-
 .listTasks {
     display: flex;
     flex-direction: column-reverse;
@@ -205,11 +203,11 @@ ol li:before {
     margin-right: 10px;
 }
 
-li {
+ol li {
     border-bottom: 1px solid var(--greyC4);
 }
 
-li:last-child {
+ol li:last-child {
     border-top: 1px solid var(--greyC4);
 }
 

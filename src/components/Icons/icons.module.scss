@@ -1,0 +1,17 @@
+.btnPlusIcon:hover {
+    circle {
+      fill: var(--green41);
+    }
+}
+
+.staticLink:hover {
+	path {
+		fill: var(--red0F);
+	}
+
+	g {
+		path {
+			fill: var(--red0F);
+		}
+	} 
+}

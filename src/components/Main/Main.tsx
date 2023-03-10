@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Button } from '../Button/Button';
+import { EIcons, Icons } from '../Icons';
+import { Menu } from '../Menu';
 import styles from './main.module.scss'
 
 export function Main() {
@@ -42,13 +44,13 @@ export function Main() {
                             {items.map((item, index) => (
                                 <li key={index}>
                                     {item}
+                                    <Menu />   
                                 </li> 
                             ))}
                         </ol> 
                     </div>
                 </div> 
             </div>           
-
 
             <div className={styles.timerWrapper}>
                 <div className={styles.timerHeader}>
@@ -63,12 +65,7 @@ export function Main() {
                     <div className={styles.timerSeconds}>
                         <span id="seconds">00</span>
                     </div>
-                    <Button className={styles.btnPlus}>
-                        <svg className={styles.btnHover} width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="25" cy="25" r="25" fill="#C4C4C4"/>
-                            <path d="M26.2756 26.1321V33H23.7244V26.1321H17V23.7029H23.7244V17H26.2756V23.7029H33V26.1321H26.2756Z" fill="white"/>
-                        </svg>
-                    </Button>
+                    <Button icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} />
                 </div>
                 <span className={styles.timerTask}>Задача 1 - Сверстать сайт</span>
                 <div className={styles.btnTimer}>

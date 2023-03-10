@@ -16,9 +16,6 @@
 	--greyE5:         hsl(0, 0%, calc(var(--whiteLightness) - 10.2%));
 	--greyC4:         hsl(0, 0%, calc(var(--whiteLightness) - 23.14%));
 	--grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
-	
-	
-	
 }
 
 body {
@@ -66,4 +63,6 @@ input[type="text"] {
 	line-height: 17px;
 	margin: 0;
 	padding-left: 15px;
+	border: none;
+	outline: none;
 }
