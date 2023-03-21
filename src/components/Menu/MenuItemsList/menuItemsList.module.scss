@@ -9,6 +9,29 @@
     justify-content: space-evenly;
 }
 
+.triangle {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--greyC4);
+}
+
+.triangle::before {
+    content: "";
+    position: relative;
+    top: -16px;
+    left: -10px;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--white);
+}
+
 .buttonItem {
     display: flex;
     align-items: center;
@@ -34,3 +57,19 @@
     background: var(--grayF4);
 }
 
+.menuItemStatistic {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.menuItemStatistic:hover {
+    background: var(--grayF4);
+}
+
+.dropdown {
+    position: absolute;
+    right: -65px;
+    background-color: var(--white);
+    z-index: 1;
+}

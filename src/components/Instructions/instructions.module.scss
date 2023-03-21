@@ -1,0 +1,24 @@
+
+.title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.desc {
+    margin: 3px 0 25px 17px;
+}
+
+.descItems li::marker {
+    color:var(--red22);
+}
+
+.descItems {
+    font-weight: 400;
+    line-height: 33px;
+}
+
+input:not(:placeholder-shown) {
+    color: var(--black);
+}

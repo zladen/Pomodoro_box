@@ -6,3 +6,4 @@ export * from './ReductionIcon';
 export * from './DeleteIcon';
 export * from './PlusIcon';
 export * from './StatisticIcon';
+export * from './ArrowIcon';

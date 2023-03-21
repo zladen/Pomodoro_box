@@ -1,31 +1,31 @@
 import styles from './menuItemsList.module.scss';
 import { EIcons, Icons } from '../..//Icons';
 import { Button } from '../../Button/Button';
+import { Modal } from '../../Modal';
+import { SetStateAction, useState } from 'react';
 
-interface IMenuItemsProps {
-  postId?: string;
+export interface menuItem {
+	className: string;
+	label: string;
+	icon: JSX.Element;
+	onClick: () => void;
+}
+export interface Props {
+	menuItems: menuItem[];
 }
 
-export function MenuItemsList({postId}: IMenuItemsProps) {
-	return ( 
-		<ul id={postId} className={styles.menuItemsList}>
-
-			<li className={styles.menuItem} onClick={() => console.log('Увеличить')}>
-				<Button className={styles.buttonItem} icon={<Icons name={EIcons.plus}/>} label='Увеличить'/>
-			</li>
-
-			<li className={styles.menuItem} onClick={() => console.log('Уменьшить')}>
-				<Button className={styles.buttonItem} icon={<Icons name={EIcons.minus}/>} label='Уменьшить'/>
-			</li>
-
-			<li className={styles.menuItem} onClick={() => console.log('Редактировать')}>
-				<Button className={styles.buttonItem} icon={<Icons name={EIcons.edit}/>} label='Редактировать'/>
-			</li>
-
-			<li className={styles.menuItem} onClick={() => console.log('Удалить')}>
-				<Button className={styles.buttonItem} icon={<Icons name={EIcons.del}/>} label='Удалить'/>	
-			</li>
-			
-		</ul>
+export function MenuItemsList({ menuItems }: Props) {
+	
+	return (
+		<div className={styles.dropdown}>
+			<div className={styles.triangle}></div>
+			<ul className={styles.menuItemsList}>
+				{menuItems.map((item, index) => (
+					<li className={styles[item.className]} key={index} onClick={item.onClick}>
+						<Button className={styles.buttonItem} icon={item.icon} label={item.label} />
+					</li>
+				))}
+			</ul>
+		</div>
 	);
 }

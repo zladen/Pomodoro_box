@@ -18,12 +18,17 @@
 	--grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
 }
 
+#root {
+	height: auto;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	background-color: var(--greyE5);
 	font-size: 16px;
 	line-height: 17px;
+	font-weight: 300;
 	font-family: 'SF UI Display', normal;
 }
 
@@ -61,8 +66,12 @@ input[type="text"] {
 	font-family: 'SF UI Display', normal;
 	font-size: 16px;
 	line-height: 17px;
+	font-weight: 300;
 	margin: 0;
 	padding-left: 15px;
 	border: none;
 	outline: none;
+}
+.container {
+	padding: 0 80px;
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styles from './dropdown.module.scss';
 
 interface IDropdownProps {
-  button: React.ReactNode;
+  button?: React.ReactNode;
   children: React.ReactNode;
   isOpen?: boolean;
   onOpen?: () => void;
@@ -19,9 +19,28 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
 
 	const handleOpen = () => {
 		if (isOpen === undefined) {
-			setIsDropdownOpen(!isDropdownOpen)
+		  	setIsDropdownOpen(!isDropdownOpen);
+			if (!isDropdownOpen) {
+				onCloseAll();
+			}
+		} else {
+		  	setIsDropdownOpen(isOpen);
+			if (isOpen) {
+				onCloseAll();
+			}
 		}
 	}
+
+	const onCloseAll = () => {
+		const dropdowns = document.querySelectorAll(`.${styles.listContainer}`);
+		if (dropdowns) {
+			dropdowns.forEach(dropdown => {
+				if (dropdown.parentNode) {
+					dropdown.parentNode.removeChild(dropdown);
+				}
+			});
+		}
+	};
 
 	const menuNode = document.querySelector('#menu_root');
     if (!menuNode) return null;
@@ -50,6 +69,7 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
 		};
 
 	}, [isDropdownOpen]);
+
 	
 	return(
 		<div className={styles.container}>

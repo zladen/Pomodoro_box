@@ -1,5 +1,6 @@
-import { MenuIcon, IncreaseIcon, EditIcon, ReductionIcon, DeleteIcon, StatisticIcon } from '.';
-import { PlusIcon } from './PlusIcon';
+import { MenuIcon, IncreaseIcon, EditIcon, ReductionIcon, DeleteIcon, StatisticIcon, ArrowIcon, PlusIcon } from '.';
+import { TomatoIcon } from './TomatoIcon';
+
 
 export enum EIcons {
 	statistic = 'StatisticIcon',
@@ -8,13 +9,15 @@ export enum EIcons {
 	edit = 'EditIcon',
     del = 'DeleteIcon',
     menu = 'MenuIcon',
-	btnPlus = 'PlusIcon'
+	btnPlus = 'PlusIcon',
+	arrow = 'ArrowIcon',
+	tomato = 'TomatoIcon'
 }
 
 type TSizes = 16 | 17 | 24;
 
 interface IIconProps {
-    name: EIcons;
+    name?: EIcons;
     size?: TSizes;
 	className?: string;
 }
@@ -24,33 +27,30 @@ export function Icons(props: IIconProps) {
 
     switch (name) {
 		case EIcons.statistic:
-			return (
-				<StatisticIcon />
-			);
+			return <StatisticIcon />;
+
 		case EIcons.plus:
-			return (
-				<IncreaseIcon />
-			);
+			return <IncreaseIcon />;
+
 		case EIcons.minus:
-			return (
-				<ReductionIcon />
-			);
+			return <ReductionIcon />;
+				
 		case EIcons.edit:
-			return (
-				<EditIcon />
-			);
+			return <EditIcon />;
+				
 		case EIcons.del:
-			return (
-				<DeleteIcon />
-			);
+			return <DeleteIcon />;
+				
 		case EIcons.btnPlus:
-			return (
-				<PlusIcon />
-			);
+			return <PlusIcon />;
+				
 		case EIcons.menu:
-			return (
-				<MenuIcon />
-			);
+			return <MenuIcon />;
+				
+		case EIcons.arrow:
+			return <ArrowIcon />;
+		case EIcons.tomato:
+			return <TomatoIcon />;
 		default: 
 			return <></>
 	}

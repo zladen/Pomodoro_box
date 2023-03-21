@@ -1,0 +1,110 @@
+.timer {
+    width: 733px;
+    height: 507px;
+    background-color: var(--grayF4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timerHeader {
+    display: flex;
+    height: 55px;
+    width: 100%;
+    background-color: var(--greyC4);
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0 40px;
+}
+
+.timerTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--white);
+}
+
+.countTomato {
+    font-weight: 400;
+    color: var(--white);
+}
+
+.timerWrapper {
+    display: flex;
+    width: 100%;
+    height: 179px;
+    font-weight: 200;
+    font-size: 150px;
+    line-height: 179px;
+    margin-top: 70px;
+    padding-left: 178px;
+}
+
+.timerBlock {
+    display: flex;
+    
+}
+
+.timerDivider {
+    display: flex;
+    padding-bottom: 42px;
+    align-items: center;
+}
+
+.timerTask {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--grey99);
+    margin-bottom: 32px;
+}
+
+.btnTimer {
+    display: flex;
+    margin-bottom: 107px;
+}
+
+.btnStart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 145px;
+    height: 55px;
+    background: var(--green4F);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--white);
+    text-align: center;
+    justify-content: center;
+    margin-right: 17px;
+}
+
+.btnStop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 145px;
+    height: 55px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--greyC4);
+    text-align: center;
+    justify-content: center;
+    border: 2px solid var(--greyC4);
+}
+
+
+
+.btnStart:hover {
+    background: var(--green41);
+}
+
+.btnPlus {
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+}

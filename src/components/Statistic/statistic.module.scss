@@ -1,0 +1,46 @@
+.container {
+    height: 100%;
+    display: flex;
+    margin: 0 80px;
+    flex-direction: column;
+}
+
+.active {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 88px;
+}
+
+.activeTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.select {
+    width: 370px;
+    height: 55px;
+    font-family: 'SF UI Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    border: none;
+    outline: none;
+}
+
+.newButtonClass {
+    display: flex;
+    width: 370px;
+    height: 55px;
+    background: var(--grayF4);
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 22px 0 15px;
+    flex-direction: row-reverse;
+}
