@@ -1,0 +1,35 @@
+.itemTask {
+    display: flex;
+    align-items: center;
+	position: relative;	
+	margin: 0;
+    height: 50px;
+    width: 370px;
+    border-bottom: 1px solid var(--greyC4);
+    cursor: pointer;  
+}
+
+.textTask:hover {
+    padding: 5px 4px;
+    background-color: var(--grayF4);
+}
+
+.itemTask:before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: counter(num); 
+	counter-increment: num;
+	width: 25px;
+	height: 25px;
+	background: var(--greyE5);
+	color: var(--black);
+	text-align: center;
+	border-radius: 50%;
+	border: 1px solid var(--greyC4);
+    margin-right: 10px;
+}
+
+.itemTask:last-child {
+    border-top: 1px solid var(--greyC4);
+}

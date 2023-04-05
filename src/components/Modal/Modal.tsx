@@ -1,23 +1,24 @@
 import { Button } from '../Button/Button';
-import styles from './modal.module.scss'
 import { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { removeTask, RootState } from '../../store/reducers/tasksSlice';
+import styles from './modal.module.scss'
 
 export interface IModal {
     onClose?: () => void;
-    postId?: string;
+    id?: string;
 } 
 
-export function Modal(props: IModal) {
+export function Modal({id, onClose}: IModal) {
     const ref = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         function handleClick(event: MouseEvent) {
             if (event.target instanceof Node && !ref.current?.contains(event.target)) {
-                navigate('/modal');
+                navigate('/');
             }
         }
 
@@ -29,15 +30,39 @@ export function Modal(props: IModal) {
 
     }, []);
 
+    const handleClose = () => {
+        if (onClose) {
+            onClose();
+        }
+    };
+
+    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    const dispatch = useDispatch();
+
+	const handleRemoveTask = () => {
+        const task = tasks.find(task => task.id === id);
+        if (task) {
+            dispatch(removeTask({ id }));
+        }
+
+        handleClose();
+    }
+    
+
     const node = document.querySelector('#modal_root');
     if (!node) return null;
 
     return ReactDOM.createPortal((
-        <div className={styles.modal}>
-            <div className={styles.close}>&#9747;</div>
-            <span className={styles.modalText}>Удалить задачу?</span>
-			<Button className={styles.modalBtnDel} label='Удалить'/>
-            <Button className={styles.modalBtnСancel} label='Отмена'/>
-		</div>
+        <div className={styles.modalBackdrop}>
+            <div className={styles.modal}>
+                <div className={styles.modalСontent}>
+                    <span className={styles.close} onClick={handleClose}>&times;</span>
+                    <h3 className={styles.modalTitle}>Удалить задачу?</h3>
+                    <Button className={styles.modalBtnDel} onClick={handleRemoveTask} label='Удалить'/>
+                    <Button className={styles.modalBtnСancel} onClick={handleClose} label='Отмена'/>
+                </div>
+            </div>
+        </div>
+           
     ), node);
 }

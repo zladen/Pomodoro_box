@@ -59,6 +59,7 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
 				// console.log(pos);
 			}
 		}
+		
 		updatePos();
 		window.addEventListener('resize', updatePos);
 		window.addEventListener('scroll', updatePos);
@@ -70,13 +71,12 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
 
 	}, [isDropdownOpen]);
 
-	
 	return(
-		<div className={styles.container}>
+		<div className={styles.dropdownBtnContainer}>
 			<div ref={buttonRef} onClick={handleOpen}>{ button }</div>
 			{isDropdownOpen && ReactDOM.createPortal(
-				<div className={styles.listContainer} style={{top: `${position.top}px`, left: `${position.left}px`}}>
-					<div className={styles.list} onClick={() => setIsDropdownOpen(false)}>{children}</div>
+				<div className={styles.dropdownContainer} style={{top: `${position.top}px`, left: `${position.left}px`}}>
+					<div className={styles.dropdownListContainer} onClick={() => setIsDropdownOpen(false)}>{children}</div>
 				</div>,
 				menuNode,
 			)}

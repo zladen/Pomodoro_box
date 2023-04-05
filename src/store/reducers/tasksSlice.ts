@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { rootReducer } from '../store';
+import { nanoid } from 'nanoid';
 
 export type RootState = ReturnType<typeof rootReducer>
 
@@ -10,23 +11,27 @@ export interface Task {
 
 const tasksSlice = createSlice({
     name: 'tasks',
-    initialState: { items: [] as Task[] },
+    initialState: {
+        tasks: [] as Task[],
+    },
     reducers: {
         addTask(state, action) {
-            const newTask: Task = {
-                id: new Date().toISOString(),
-                name: action.payload.name
-            };
-            state.items.push(newTask);
+            const id = nanoid(8);
+            state.tasks.push({
+                id,
+                name: action.payload.name,
+            });
         },
         removeTask(state, action) {
-            state.items = state.items.filter(item => item.id !== action.payload.id);
+            state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
         }
     },
 });
 
 export const {addTask, removeTask} = tasksSlice.actions;
 export default tasksSlice.reducer;
+
+
 
 // export interface CounterState {
 //   	value: number

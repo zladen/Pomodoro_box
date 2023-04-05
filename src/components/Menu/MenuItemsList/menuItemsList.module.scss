@@ -9,7 +9,7 @@
     justify-content: space-evenly;
 }
 
-.triangle {
+.triangleMenu {
     width: 0;
     height: 0;
     position: absolute;
@@ -21,7 +21,7 @@
     border-bottom: 10px solid var(--greyC4);
 }
 
-.triangle::before {
+.triangleMenu::before {
     content: "";
     position: relative;
     top: -16px;
@@ -67,7 +67,7 @@
     background: var(--grayF4);
 }
 
-.dropdown {
+.dropdownMenu {
     position: absolute;
     right: -65px;
     background-color: var(--white);

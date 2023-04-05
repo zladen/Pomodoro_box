@@ -1,28 +1,28 @@
 import styles from './menuItemsList.module.scss';
-import { EIcons, Icons } from '../..//Icons';
 import { Button } from '../../Button/Button';
-import { Modal } from '../../Modal';
-import { SetStateAction, useState } from 'react';
-
 export interface menuItem {
 	className: string;
 	label: string;
 	icon: JSX.Element;
 	onClick: () => void;
+	taskId?: string;
+	id?: string;
 }
 export interface Props {
 	menuItems: menuItem[];
+	taskId?: string;
+	//id?: string;
 }
 
-export function MenuItemsList({ menuItems }: Props) {
-	
+export function MenuItemsList({ menuItems, taskId }: Props) {
+
 	return (
-		<div className={styles.dropdown}>
-			<div className={styles.triangle}></div>
+		<div className={styles.dropdownMenu}>
+			<div className={styles.triangleMenu}></div>
 			<ul className={styles.menuItemsList}>
 				{menuItems.map((item, index) => (
-					<li className={styles[item.className]} key={index} onClick={item.onClick}>
-						<Button className={styles.buttonItem} icon={item.icon} label={item.label} />
+					<li className={styles.menuItem} key={index} id={taskId}>
+						<Button className={styles.buttonItem} icon={item.icon} label={item.label} onClick={item.onClick}/>
 					</li>
 				))}
 			</ul>

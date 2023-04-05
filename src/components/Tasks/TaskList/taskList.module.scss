@@ -1,0 +1,7 @@
+.taskList {
+    display: flex;
+    flex-direction: column-reverse;
+    list-style-type: none; 
+	counter-reset: num;
+    margin-top: 25px;
+}
