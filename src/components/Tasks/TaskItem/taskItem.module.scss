@@ -33,3 +33,12 @@
 .itemTask:last-child {
     border-top: 1px solid var(--greyC4);
 }
+
+.editNameInput {
+    width: auto;
+    background: var(--greyC4);
+    padding: 0;
+    max-width: 280px;
+    min-width: 10px;
+    text-align: center;
+}

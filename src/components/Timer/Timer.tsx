@@ -8,7 +8,11 @@ import styles from "./timer.module.scss"
 import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { RootState } from "../../store/reducers/tasksSlice";
-import { Modal } from "../Modal";
+
+interface TimerProps {
+    nameTask: string;
+    id: string;
+}
 
 function useTimer(initialMinutes = 25, initialSeconds = 0, initialTomato = 1, initialPause = 1) {
     const [minutes, setMinutes] = useState(initialMinutes);
@@ -52,16 +56,21 @@ function useTimer(initialMinutes = 25, initialSeconds = 0, initialTomato = 1, in
     return { minutes, seconds, isRunning, startTimer, stopTimer, resetTimer };
 }
 
-export function Timer() {
+export function Timer({nameTask, id}: TimerProps) {
     //const count = useSelector((state: RootState) => state.counter.value)
     //const dispatch = useDispatch()
-    const [isModalOpened, setIsModalOpened] = useState(false);
-    const task = useSelector((state: RootState) => state.tasks.tasks[0]);
-    const { minutes, seconds, isRunning, startTimer, stopTimer, resetTimer } = useTimer();
+
+    const tasks = useSelector((state: RootState) => state.tasks.tasks);
     
+    const handleClick = () => {
+        tasks.filter((task) => task.id == id);
+        console.log(nameTask, id);
+    }
+
+    const { minutes, seconds, isRunning, startTimer, stopTimer, resetTimer } = useTimer();
 
     return (
-        <div className={styles.timer}>
+        <div id={id} className={styles.timer}>
             <div className={classNames(styles.timerHeader, { [styles.timerHeaderActive]: isRunning })}>
                 <h2 className={styles.timerTitle}>Сверстать сайт</h2>
                 <span id='counter' className={styles.countTomato}>Помидор 1</span>
@@ -85,10 +94,7 @@ export function Timer() {
                             id="seconds">{seconds.toString().padStart(2, "00")}
                         </span>
                     </div>      
-                    <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={() => {setIsModalOpened(true); }}/>
-                    {/* {isModalOpened && (
-                        <Modal onClose={() => { setIsModalOpened(false); }} />
-                    )} */}
+                    <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={handleClick}/>
                 </div>
             </div>
             

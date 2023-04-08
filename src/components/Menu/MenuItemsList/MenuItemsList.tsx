@@ -11,7 +11,6 @@ export interface menuItem {
 export interface Props {
 	menuItems: menuItem[];
 	taskId?: string;
-	//id?: string;
 }
 
 export function MenuItemsList({ menuItems, taskId }: Props) {
@@ -21,8 +20,8 @@ export function MenuItemsList({ menuItems, taskId }: Props) {
 			<div className={styles.triangleMenu}></div>
 			<ul className={styles.menuItemsList}>
 				{menuItems.map((item, index) => (
-					<li className={styles.menuItem} key={index} id={taskId}>
-						<Button className={styles.buttonItem} icon={item.icon} label={item.label} onClick={item.onClick}/>
+					<li className={styles.menuItem} key={index} >
+						<Button id={taskId} className={styles.buttonItem} icon={item.icon} label={item.label} onClick={item.onClick}/>
 					</li>
 				))}
 			</ul>

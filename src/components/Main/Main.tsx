@@ -10,7 +10,7 @@ export function Main() {
                 <Instructions />
                 <Tasks />
             </div>
-            <Timer />   
+            <Timer nameTask={''} id={''} />   
         </main>
     );  
 }
