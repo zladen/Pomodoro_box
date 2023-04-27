@@ -48,26 +48,32 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
         }
     }
 
+    // const onClick = () => {
+    //     console.log(id);
+    // }
+
     return (
-        <li id={id} className={styles.itemTask} >
-            {isEditing ? (
-                <span >
-                    <input
-                        className={styles.editNameInput}
-                        type="text"
-                        value={taskName}
-                        onChange={(e) => setTaskName(e.target.value)}
-                        style={{ width: taskName.length + "ch" }}
-                        ref={inputRef}
-                        onKeyDown={handleKeyDown}
-                    />
-                    {/* <button onClick={handleSaveNameTask}>Сохранить</button> */}
-                </span>
-            ) : (  
-                <span>{nameTask}</span> 
-            )}
-            <Menu taskId={id} onEditNameTask={handleEditNameTask}/> 
-        </li>   
+        <>
+            <li id={id} className={styles.itemTask} >
+                {isEditing ? (
+                    <span >
+                        <input
+                            className={styles.editNameInput}
+                            type="text"
+                            value={taskName}
+                            onChange={(e) => setTaskName(e.target.value)}
+                            style={{ width: taskName.length + "ch" }}
+                            ref={inputRef}
+                            onKeyDown={handleKeyDown}
+                        />
+                    </span>
+                ) : (  
+                    <span>{nameTask}</span> 
+                )}
+                <Menu taskId={id} onEditNameTask={handleEditNameTask}/> 
+            </li> 
+        </>
+        
     )
 }
 

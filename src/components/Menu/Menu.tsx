@@ -6,7 +6,7 @@ import { Button } from '../Button/Button';
 import { Modal } from '../Modal';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTime, editTask, RootState } from '../../store/reducers/tasksSlice';
+import { addTime, RootState } from '../../store/reducers/tasksSlice';
 
 
 interface IMenu {
@@ -32,6 +32,7 @@ export function Menu(props: IMenu) {
 				const updatedTask = {
 				...task,
 				time: task.time + 25,
+				tomato: 1 + (task.time / 25)
 			};
 			dispatch(addTime(updatedTask));
 		}
@@ -43,6 +44,7 @@ export function Menu(props: IMenu) {
 			const updatedTask = {
 				...task,
 				time: task.time - 25,
+				tomato: task.time / 25
 			};
 			dispatch(addTime(updatedTask));
 		}
@@ -56,10 +58,32 @@ export function Menu(props: IMenu) {
 	};
 
 	const menuItemsPomodoro = [
-		{ label: 'Увеличить', icon: <Icons name={EIcons.plus} />, onClick:() => handleAddTimeTask(), className: 'menuItem',  },
-		{ label: 'Уменьшить', icon: <Icons name={EIcons.minus} /> , onClick: () => handleShortTimeTask(), className: 'menuItem' },
-		{ label: 'Редактировать', icon: <Icons name={EIcons.edit} />, onClick:() => handleEditNameTask(), className: 'menuItem' },
-		{ label: 'Удалить', icon: <Icons name={EIcons.del} />, onClick: () => setIsModalOpened(true), className: 'menuItem' },
+		{ 
+			label: 'Увеличить', 
+			icon: <Icons name={EIcons.plus} />, 
+			onClick:() => handleAddTimeTask(), 
+			className: 'menuItem',  
+		},
+
+		{ 
+			label: 'Уменьшить', 
+			icon: <Icons name={EIcons.minus} />, 
+			onClick: () => handleShortTimeTask(), 
+			className: 'menuItem', 
+		},
+
+		{ 
+			label: 'Редактировать', 
+			icon: <Icons name={EIcons.edit} />, 
+			onClick:() => handleEditNameTask(), 
+			className: 'menuItem' 
+		},
+		{ 
+			label: 'Удалить', icon: 
+			<Icons name={EIcons.del} />, 
+			onClick: () => setIsModalOpened(true), 
+			className: 'menuItem' 
+		},
 	];
 
 	return (

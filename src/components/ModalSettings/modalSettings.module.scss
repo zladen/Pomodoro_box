@@ -1,0 +1,157 @@
+.settingContainer {
+    margin: 0 30px;
+}
+
+.modalSettings {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    top: 150px;
+    right: auto;
+    width: 30%;
+    height: 70%;
+    background: var(--white);
+    transition: all .5s ease;
+}
+
+.headerSettings {
+    width: 100%;
+    height: 68px;
+    background-color: var(--red22);
+}
+
+.modal.open {
+    right: 50%; /* устанавливаем желаемое значение */
+}
+
+.modalBackdrop {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.modalBackdrop::before {
+    content: '';
+	background: var(--greyE5);
+	position: fixed; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	opacity: 0.7;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+  
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modalСontent {
+    text-align: center;
+    z-index: 2;
+}
+
+.settingsForm {
+    margin-top: 20px;
+}
+
+.modalTitle {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 17px;
+    margin: 0;
+    color: white;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.modalBtnDel {
+    padding: 15px 50px;
+    gap: 10px;
+    width: 162px;
+    height: 55px;
+    left: 639px;
+    top: 491px;
+    background: var(--red22);
+    color: var(--white);
+}
+
+.modalBtnСancel {
+    font-weight: 300;
+    margin-top: 10px;
+    border-bottom: 1px solid;
+    padding-bottom: -1px;
+}
+
+.switch {
+    display: flex;
+    flex-direction: column;
+}
+
+.autoStartPomodoro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.settingsTime {
+    width: 60px;
+    height: 30px;
+    background: var(--grayF4);
+    color: var(--grey99);
+    border: none;
+    outline: none;
+    text-align: center;
+
+}
+
+.formSettings {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+}
+
+.itemForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.titleSetting {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.btnSave {
+    padding: 15px 50px;
+    width: 162px;
+    height: 55px;
+    background: var(--green4F);
+    color: var(--white);
+    text-align: center;
+}
+
+.btnBlock {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,116 +1,152 @@
-
-import { useDispatch, useSelector } from "react-redux";
-//import { increment } from "../../store/reducers/tasksSlice";
-//import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
 import { Button } from "../Button/Button";
 import { EIcons, Icons } from "../Icons";
 import styles from "./timer.module.scss"
-import { useState, useEffect } from "react";
 import classNames from "classnames";
 import { RootState } from "../../store/reducers/tasksSlice";
+import { useTimer } from "../../hooks/useTimer";
+import { useEffect } from "react";
 
-interface TimerProps {
-    nameTask: string;
-    id: string;
+export interface ITimer {
+    taskId: string
+    taskName: string;
 }
 
-function useTimer(initialMinutes = 25, initialSeconds = 0, initialTomato = 1, initialPause = 1) {
-    const [minutes, setMinutes] = useState(initialMinutes);
-    const [seconds, setSeconds] = useState(initialSeconds);
-    const [isRunning, setIsRunning] = useState(false);
-    const [tomato, setTomato] = useState(initialTomato);
-    const [pause, setPause] = useState(initialPause);
-
-    useEffect(() => {
-        let interval: string | number | NodeJS.Timeout | undefined;
-
-        if (isRunning) {
-        interval = setInterval(() => {
-            if (seconds > 0) {
-                setSeconds(seconds - 1);
-            } else if (minutes > 0) {
-                setMinutes(minutes - 1);
-                setSeconds(59);
-            } else {
-                clearInterval(interval);
-            }
-        }, 1000);
-    }
-
-    return () => clearInterval(interval);
-    }, [isRunning, minutes, seconds]);
-
-    const startTimer = () => {
-        setIsRunning(true);
-    };
-
-    const stopTimer = () => {
-        setIsRunning(false);
-    };
-
-    const resetTimer = () => {
-        setMinutes(initialMinutes);
-        setSeconds(initialSeconds);
-    };
-
-    return { minutes, seconds, isRunning, startTimer, stopTimer, resetTimer };
-}
-
-export function Timer({nameTask, id}: TimerProps) {
-    //const count = useSelector((state: RootState) => state.counter.value)
-    //const dispatch = useDispatch()
-
-    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+export function Timer({taskId, taskName}: ITimer) {
+    const defaulTime = useSelector((state: RootState) => state.settings);
+    const {pomodoro, shortBreak, longBreak} = defaulTime;
     
-    const handleClick = () => {
-        tasks.filter((task) => task.id == id);
-        console.log(nameTask, id);
-    }
+    const {minutes,
+        seconds,
+        isRunning,
+        isStopped,
+        isShortBreak,
+        isPaused,
+        isLongBreak,
+        counterShortBreak,
+        startTimer,
+        stopTimer,
+        //pauseTimer,
+        resetTimer} = useTimer(pomodoro, shortBreak, longBreak);
 
-    const { minutes, seconds, isRunning, startTimer, stopTimer, resetTimer } = useTimer();
+        useEffect(() => {
+            resetTimer();
+        }, [pomodoro, shortBreak, longBreak]);
 
     return (
-        <div id={id} className={styles.timer}>
-            <div className={classNames(styles.timerHeader, { [styles.timerHeaderActive]: isRunning })}>
-                <h2 className={styles.timerTitle}>Сверстать сайт</h2>
-                <span id='counter' className={styles.countTomato}>Помидор 1</span>
+        <div id={taskId} className={styles.timer} >
+            <div id="timer-header" className={classNames(styles.timerHeader, 
+                    {[styles.timerHeaderActive]: isRunning || isStopped},
+                    {[styles.timerHeaderBreak]: isShortBreak},
+                )}>
+                <h2 className={styles.timerTitle}>{taskName}</h2>
+                <span id='counter' className={styles.countTomato}>
+                    {/* {isResting ? `Перерыв 1` : `Помидор 1`} */}
+                    {isShortBreak ? `Перерыв 1` : `Помидор 1`}
+                    {/* {isResting ? `Перерыв ${1}` : (isPaused ? `Перерыв 1` : `Помидор ${1}`)} */}
+                    
+                </span>
             </div>
             <div className={styles.timerWrapper}>
-                <div className={styles.timerBlock}>
+                <div className={styles.timerContainer}>
+                    <div className={styles.timerBlock}>
                     <div className={styles.timeBlock}>
                         <span 
-                            className={classNames(styles.timerMinutes, {[styles.timerActive]: isRunning })} 
-                            id="minutes">{minutes.toString().padStart(2, "0")}
+                            className={classNames(styles.timerMinutes, 
+                                {[styles.timerActive]: isRunning && !isShortBreak}, 
+                                {[styles.timerActiveBreak]: isRunning && isShortBreak},
+                            )} 
+                            id="minutes">
+                                {minutes.toString().padStart(2, "0")}
                         </span>
                     </div>
                     <div className={styles.timerBlock}>
                         <span 
-                            className={classNames(styles.timerDivider, {[styles.timerActive]: isRunning })}>:
+                            className={classNames(styles.timerDivider, 
+                                {[styles.timerActive]: isRunning && !isShortBreak}, 
+                                {[styles.timerActiveBreak]: isRunning && isShortBreak},
+                            )}>:
                         </span>
                     </div>
                     <div className={styles.timeBlock}>
                         <span 
-                            className={classNames(styles.timerMinutes, {[styles.timerActive]: isRunning })} 
-                            id="seconds">{seconds.toString().padStart(2, "00")}
+                            className={classNames(styles.timerMinutes, 
+                                    {[styles.timerActive]: isRunning && !isShortBreak}, 
+                                    {[styles.timerActiveBreak]: isRunning && isShortBreak},  
+                                )} 
+                            id="seconds">
+                                {seconds.toString().padStart(2, "00")}
                         </span>
                     </div>      
-                    <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={handleClick}/>
+                    <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus}/>
+                </div>
+                <span className={styles.timerTask}>Задача 1 - {taskName}</span>
+                <div className={styles.btnBlock}>
+                    <div className={styles.btnTimer}>
+                        <Button 
+                            id="start-button"
+                            className={classNames(styles.btnStart, 
+                                {[styles.btnContinue]: isStopped && !isRunning},
+                            )}
+
+                            label={isRunning ? "Пауза" : (isStopped ? "Продолжить": "Старт")} 
+                            onClick={isRunning ? stopTimer : startTimer}
+                        />
+                        <Button 
+                            id="stop-button"
+                            className={classNames(styles.btnStop, 
+                                {[styles.btnStopActive]: isStopped && !isRunning || isRunning}, 
+                                {[styles.btnMade]: isStopped && !isRunning},
+                                {[styles.btnBreak]: isShortBreak},
+                                {[styles.btnBreakSkip]: isShortBreak && !isRunning}
+                            )}
+
+                            label={isShortBreak ? "Пропустить" : (isRunning ? "Стоп" : (isStopped ? "Сделано" : (isPaused ? "Пропустить" : "Стоп")))}
+                            onClick={() => {
+                                resetTimer();
+                                // Удалить классы активности из кнопки "Стоп"
+                                // document.getElementById("timer-header")?.classList.remove(styles.timerHeaderActive);
+                                // document.getElementById("start-button")?.classList.remove(styles.btnContinue);
+                                // document.getElementById("stop-button")?.classList.remove(styles.btnStopActive);
+                                // document.getElementById("stop-button")?.classList.remove(styles.btnMade);
+                            }}
+                        />
+                    </div>
+                </div>
                 </div>
             </div>
             
-            <span className={styles.timerTask}>Задача 1 - Сверстать сайт</span>
-            <div className={styles.btnTimer}>
+            {/* <span className={styles.timerTask}>Задача 1 - {taskName}</span> */}
+            {/* <div className={styles.btnTimer}>
                 <Button 
-                    className={styles.btnStart}
-                    label={isRunning ? "Пауза" : "Старт"}
+                    id="start-button"
+                    className={classNames(styles.btnStart, 
+                            {[styles.btnContinue]: isStopped && !isRunning},
+                        )}
+
+                    label= {isRunning ? "Пауза" : (isStopped ? "Продолжить": "Старт")} 
                     onClick={isRunning ? stopTimer : startTimer}
                 />
                 <Button 
-                    className={classNames(styles.btnStop, {[styles.btnStopActive]: isRunning })} 
-                    label="Стоп" 
-                    onClick={resetTimer}
+                    id="stop-button"
+                    className={classNames(styles.btnStop, 
+                        {[styles.btnStopActive]: isStopped && !isRunning || isRunning}, 
+                        {[styles.btnMade]: isStopped && !isRunning},
+                        {[styles.btnBreak]: isShortBreak},
+                        {[styles.btnBreakSkip]: isShortBreak && !isRunning}
+                    )}
+
+                    label={isShortBreak ? "Пропустить" : (isRunning ? "Стоп" : (isStopped ? "Сделано" : (isPaused ? "Пропустить" : "Стоп")))}
+                    onClick={() => {
+                        resetTimer();
+                        // Удалить классы активности из кнопки "Стоп"
+                        // document.getElementById("timer-header")?.classList.remove(styles.timerHeaderActive);
+                        // document.getElementById("start-button")?.classList.remove(styles.btnContinue);
+                        // document.getElementById("stop-button")?.classList.remove(styles.btnStopActive);
+                        // document.getElementById("stop-button")?.classList.remove(styles.btnMade);
+                    }}
                 />
-            </div>
+            </div> */}
         </div>
     )
 }

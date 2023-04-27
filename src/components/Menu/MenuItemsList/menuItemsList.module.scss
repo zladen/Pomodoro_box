@@ -43,6 +43,14 @@
     height: 36px;
 }
 
+.buttonItemShort {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    height: 36px;
+    color: var(--grey99);
+}
+
 .buttonItem > svg {
     margin-right: 10px;
 }

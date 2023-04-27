@@ -1,18 +1,9 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/reducers/tasksSlice';
-import TaskItem from '../TaskItem/TaskItem';
-import styles from './taskList.module.scss';
+import { useSelector } from "react-redux";
+import { RootState } from "../store/reducers/tasksSlice";
 
-
-export interface Props {
-    totalTaskCount: string;
-}
-
-const TaskList = () => {
+export const totalTime = () => {
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
     const totalTaskTime = tasks.reduce((total, task) => total + task.time, 0);
-    //console.log(totalTaskTime);
     const totalTaskCount = () => {
         const t = totalTaskTime;
         let hours = Math.floor( t / 60 );
@@ -47,20 +38,7 @@ const TaskList = () => {
         } else if (minutes && minutes >= 5) {
             result+= ` ${minutes} минут` 
         }
-
+        totalTaskCount();
         return result;
-    }  
-
-    return (
-        <>
-            <ol className={styles.taskList}>
-                {tasks.map((task, index) => (
-                    <TaskItem nameTask={task.name} key={index} id={task.id} />
-                ))}
-            </ol>
-            <div className={styles.taskTime}>{totalTaskCount()}</div>
-        </>
-    )
-}
-
-export default TaskList;
+    } 
+};

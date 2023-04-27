@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { removeTask, RootState } from '../../store/reducers/tasksSlice';
 import styles from './modal.module.scss'
+import Toggle from '../Toggle/Toggle';
 
 export interface IModal {
     onClose?: () => void;
@@ -48,7 +49,6 @@ export function Modal({id, onClose}: IModal) {
         handleClose();
     }
     
-
     const node = document.querySelector('#modal_root');
     if (!node) return null;
 

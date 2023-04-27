@@ -23,6 +23,10 @@
     background-color: var(--red22);
 }
 
+.timerHeaderBreak {
+    background: var(--green4F);
+}
+
 .timerTitle {
     font-weight: 700;
     font-size: 24px;
@@ -38,25 +42,38 @@
 .timerWrapper {
     display: flex;
     width: 100%;
-    height: 179px;
+    height: 100%;
     font-weight: 200;
     font-size: 150px;
     line-height: 179px;
-    margin-top: 70px;
-    padding-left: 178px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.timerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .timerActive {
     color: var(--red22);
 }
 
-.timerBlock {
-    display: flex;
+.timerActiveBreak {
+    color: var(--green4F);
 }
 
-.timeBlock {
-    width: 175px;
+.timerBlock {
+    display: flex;
+    align-items: center;
 }
+
+/* .timeBlock {
+    width: 175px;
+} */
 
 .timerMinutes {
     display: flex;
@@ -65,7 +82,7 @@
 
 .timerDivider {
     display: flex;
-    padding-bottom: 42px;
+    /* padding-bottom: 42px; */
     align-items: center;
 }
 
@@ -77,9 +94,11 @@
     margin-bottom: 32px;
 }
 
+.btnBlock {
+    display: flex;
+}
 .btnTimer {
     display: flex;
-    margin-bottom: 107px;
 }
 
 .btnStart {
@@ -118,8 +137,6 @@
     color: var(--red22);
 }
 
-
-
 .btnStart:hover {
     background: var(--green41);
 }
@@ -128,4 +145,34 @@
     display: flex;
     margin-left: 25px;
     align-items: center;
+}
+
+.btnContinue {
+    width: 196px;
+}
+
+.btnContinueBreak {
+    width: 196px;
+}
+
+.btnMade {
+    background: var(--red22);
+    width: 166px;
+    height: 55px;
+    color: var(--white);
+}
+
+.btnBreak {
+    width: 189px;
+}
+
+.btnBreakSkip {
+    width: 189px;
+    background: var(--red22);
+    color: var(--white);
+    border: none;
+}
+
+.btnContinueBreak {
+    width: 196px;
 }
