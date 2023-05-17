@@ -1,20 +1,26 @@
+import { I18nextProvider, useTranslation } from 'react-i18next';
 import styles from './instructions.module.scss'
+import i18n from '../../i18n';
 
 export function Instructions() {
+    const { t } = useTranslation();
     return (
         <>
-            <h2 className={styles.title}>Ура! Теперь можно начать работать:</h2>
-            <div className={styles.desc}>
-                <ul className={styles.descItems}>
-                    <li>Выберите категорию и напишите название текущей задачи</li>
-                    <li>Запустите таймер («помидор»)</li>
-                    <li> Работайте пока «помидор» не прозвонит</li>
-                    <li> Сделайте короткий перерыв (3-5 минут)</li>
-                    <li>Продолжайте работать «помидор» за «помидором», пока задачи 
-                        <br/> не будут выполнены. Каждые 4 «помидора» делайте длинный перерыв (15-30 минут).
-                    </li>
-                </ul>
-            </div>
+            <I18nextProvider i18n={i18n}>
+                <h2 className={styles.title}>{t("title_desc")}:</h2>
+                <div className={styles.desc}>
+                    <ul className={styles.descItems}>
+                        <li>{t("select_category")}</li>
+                        <li>{t("start_timer")}</li>
+                        <li>{t("work_timer")}</li>
+                        <li>{t("long_break_descr")}</li>
+                        <li>
+                            {t("keep_working1")}
+                            <br/>{t("keep_working2")}.
+                        </li>
+                    </ul>
+                </div>
+            </I18nextProvider>
         </>  
     )
 }

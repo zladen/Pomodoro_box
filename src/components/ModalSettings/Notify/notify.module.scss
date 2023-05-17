@@ -1,0 +1,24 @@
+.notify {
+    margin: 0 10%;
+}
+
+.soundsAlert {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.soundsItemList {
+    width: 50%;
+    height: 50px;
+    background: var(--grayF4);
+    border: none;
+    outline: none !important;;
+    font-family: 'sf ui display';
+    font-weight: 300;
+    font-size: 18px;
+    padding: 0 10px;
+}

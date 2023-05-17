@@ -6,12 +6,12 @@
     display: block;
     position: fixed;
     z-index: 2;
-    top: 150px;
+    top: 10%;
     right: auto;
-    width: 30%;
-    height: 70%;
+    width: 80vh;
+    height: 80vh;
     background: var(--white);
-    transition: all .5s ease;
+    transition: all 0.5s ease;
 }
 
 .headerSettings {
@@ -96,11 +96,6 @@
     padding-bottom: -1px;
 }
 
-.switch {
-    display: flex;
-    flex-direction: column;
-}
-
 .autoStartPomodoro {
     display: flex;
     align-items: center;
@@ -108,38 +103,6 @@
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 10px;
-}
-
-.settingsTime {
-    width: 60px;
-    height: 30px;
-    background: var(--grayF4);
-    color: var(--grey99);
-    border: none;
-    outline: none;
-    text-align: center;
-
-}
-
-.formSettings {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10%;
-}
-
-.itemForm {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
-.titleSetting {
-    font-size: 24px;
-    font-weight: 300;
-    text-align: center;
 }
 
 .btnSave {
@@ -153,5 +116,7 @@
 
 .btnBlock {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 150px;
 }
+

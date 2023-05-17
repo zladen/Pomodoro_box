@@ -48,10 +48,6 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
         }
     }
 
-    // const onClick = () => {
-    //     console.log(id);
-    // }
-
     return (
         <>
             <li id={id} className={styles.itemTask} >

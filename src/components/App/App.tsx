@@ -1,12 +1,13 @@
 import { Header } from "../Header"
-import { Main } from "../Main"
+import { Pomodoro } from "../Pomodoro"
 
 function App() {
+
 	return (
 		<>
 			<Header />
-			<Main />
-		</>
+			<Pomodoro />
+		</>	
 	)
 }
 

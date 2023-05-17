@@ -1,0 +1,50 @@
+    
+.application {    
+    margin: 0 10%;
+}
+
+#ligth {
+    background: white;
+}
+
+#dark .application {
+    background: black;
+}
+
+.soundsAlert {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    flex-direction: column;
+}
+
+.theme {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.locale {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+.localeItemList {
+    width: 180px;
+    height: 30px;
+    background: var(--grayF4);
+    border: none;
+    outline: none;
+}
+    

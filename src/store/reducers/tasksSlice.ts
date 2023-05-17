@@ -6,7 +6,9 @@ export type RootState = ReturnType<typeof rootReducer>
 export interface Task {
     id: string;
     name: string;
-    time: number;
+    pomodoro: number;
+    shortBreak: number;
+    longBreak: number;
 }
 
 const tasksSlice = createSlice({
@@ -21,17 +23,19 @@ const tasksSlice = createSlice({
             state.tasks.push({
                 id,
                 name: action.payload.name,
-                time: action.payload.time,
+                pomodoro: action.payload.pomodoro,
+                longBreak: action.payload.longBreak,
+                shortBreak: action.payload.shortBreak,
                 //tomato: action.payload.tomato,
             });
         },
 
         addTime(state, action) {
-            const { id, time } = action.payload;
-            const timeTotask = state.tasks.find(task => task.id === id);
+            const { id, pomodoro } = action.payload;
+            const timeToTask = state.tasks.find(task => task.id === id);
 
-            if (timeTotask) {
-                timeTotask.time = time;
+            if (timeToTask) {
+                timeToTask.pomodoro = pomodoro;
             } else {
                 console.error(`Task with id ${id} not found`);
             }
@@ -50,10 +54,19 @@ const tasksSlice = createSlice({
 
         removeTask(state, action) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
-        }
+        },
+
+        updateTask(state, action) {
+            state.tasks.forEach(task => {
+                task.pomodoro = action.payload.pomodoro;
+                task.shortBreak = action.payload.shortBreak;
+                task.longBreak = action.payload.longBreak;
+            });
+        },
     },
 });
 
-export const {addTask, removeTask, editTask, addTime} = tasksSlice.actions;
+
+export const {addTask, removeTask, editTask, addTime, updateTask} = tasksSlice.actions;
 export default tasksSlice.reducer;
 

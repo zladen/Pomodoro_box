@@ -68,7 +68,7 @@ export function useTimer(pomodoro = 0, shortBreak = 0, longBreak = 0, initialSec
         // console.log("Пауза", "isRunning:", isRunning, "isResting", isResting, "isStopped", isStopped, "isPaused", isPaused);
     };
 
-    console.log(isRunning, '- Работает', isStopped, '- Остановлен', isShortBreak, '- Перерыв', isPaused, '-На паузе');
+    //console.log(isRunning, '- Работает', isStopped, '- Остановлен', isShortBreak, '- Перерыв', isPaused, '-На паузе');
 
     const resetTimer = () => {
         setMinutes(pomodoro);

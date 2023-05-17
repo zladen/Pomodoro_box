@@ -1,0 +1,31 @@
+.titleSetting {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.formSettings {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+}
+
+.itemForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.settingsTime {
+    width: 60px;
+    height: 30px;
+    background: var(--grayF4);
+    color: var(--grey99);
+    border: none;
+    outline: none;
+    text-align: center;
+
+}

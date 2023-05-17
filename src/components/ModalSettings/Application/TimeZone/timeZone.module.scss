@@ -1,0 +1,21 @@
+.timeZone {
+    width: 50%;
+    height: 50px;
+    background: var(--grayF4);
+    border: none;
+    outline: none !important;
+    font-family: "sf ui display";
+    font-weight: 300;
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+.formatDate {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}

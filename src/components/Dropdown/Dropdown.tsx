@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom';
 import styles from './dropdown.module.scss';
 
 interface IDropdownProps {
-  button?: React.ReactNode;
-  children: React.ReactNode;
-  isOpen?: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
+	button?: React.ReactNode;
+	children: React.ReactNode;
+	isOpen?: boolean;
+	onOpen?: () => void;
+	onClose?: () => void;
+	language: string;
 }
 
 const NOOP = () => {};
 
-export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOOP}: IDropdownProps) {
+export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOOP, language}: IDropdownProps) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
 	useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
 	useEffect(() => isDropdownOpen ? onOpen() : onClose(), [isDropdownOpen]);

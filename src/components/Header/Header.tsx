@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { StatisticLink } from '../StatisticLink'
 import { Logo } from '../Logo'
 import styles from './header.module.scss'
-import { EIcons, Icons, SettingsIcon } from '../Icons'
+import { EIcons, Icons } from '../Icons'
 import { Button } from '../Button/Button'
-import { Link } from 'react-router-dom'
 import { ModalSetting } from '../ModalSettings/ModalSettings'
 
 export function Header() {
@@ -15,7 +14,7 @@ export function Header() {
     };
 
 	return (
-		<header className={styles.header}>
+        <header className={styles.header}>
             <div className={styles.container}>
                 <Logo />
                 <Button icon={<Icons name={EIcons.settings} />} onClick={onClick}/>
