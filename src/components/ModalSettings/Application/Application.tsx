@@ -4,6 +4,7 @@ import Toggle from '../../Toggle/Toggle'
 import { TimeZone } from './TimeZone/TimeZone'
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../i18n';
+import DarkMode, { Theme } from '../Theme/Theme';
 
 type ThemeContextType = {
     theme: string;
@@ -25,20 +26,18 @@ export const Application = () => {
     }
 
     return (
-        <ThemeContext.Provider value={{theme, toggleTheme}}>
-            <I18nextProvider i18n={i18n}>
-                <div className={styles.application} id={theme}>
-                    <div className={styles.soundsAlert}>
-                        <div className={styles.theme}>
-                            <label>{t("dark_theme")}</label>
-                            <Toggle toggled={theme === 'dark'} onChange={toggleTheme} />
-                        </div>
-                        <div className={styles.locale}> 
-                            <TimeZone />
-                        </div>
+        <I18nextProvider i18n={i18n}>
+            <div className={styles.application} id={theme}>
+                <div className={styles.soundsAlert}>
+                    <div className={styles.theme}>
+                        <label>{t("dark_theme")}</label>
+                        <Theme />
+                    </div>
+                    <div className={styles.locale}> 
+                        <TimeZone />
                     </div>
                 </div>
-            </I18nextProvider>
-        </ThemeContext.Provider>
+            </div>
+        </I18nextProvider>
     )
 }

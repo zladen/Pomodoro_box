@@ -3,10 +3,12 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import tasksReducer from "./reducers/tasksSlice";
 import settingsReducer from "./reducers/settingsSlice";
+import themeReduser from "./reducers/themeSlice";
  
 export const rootReducer = combineReducers({
     tasks: tasksReducer,
     settings: settingsReducer,
+    theme: themeReduser
 });
 
 const persistConfig = {

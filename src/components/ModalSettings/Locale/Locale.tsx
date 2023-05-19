@@ -12,7 +12,7 @@ export const Locale = () => {
     return (
         <select onChange={(e) => changeLanguage(e.target.value)} className={styles.timeZone} value={selectedLanguage}>
             <option value="en" key='en'>English</option>
-            <option value="ru" key='en'>Русский</option>
+            <option value="ru" key='ru'>Русский</option>
         </select>
     );
 };

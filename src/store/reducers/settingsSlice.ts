@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './tasksSlice';
-
 export interface Setting {
     pomodoro: number;
     shortBreak: number;

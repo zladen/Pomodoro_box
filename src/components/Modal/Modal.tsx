@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { removeTask, RootState } from '../../store/reducers/tasksSlice';
 import styles from './modal.module.scss'
-import Toggle from '../Toggle/Toggle';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 export interface IModal {
     onClose?: () => void;
@@ -13,6 +14,7 @@ export interface IModal {
 } 
 
 export function Modal({id, onClose}: IModal) {
+    const { t } = useTranslation();
     const ref = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -53,16 +55,17 @@ export function Modal({id, onClose}: IModal) {
     if (!node) return null;
 
     return ReactDOM.createPortal((
-        <div className={styles.modalBackdrop}>
-            <div className={styles.modal}>
-                <div className={styles.modalСontent}>
-                    <span className={styles.close} onClick={handleClose}>&times;</span>
-                    <h3 className={styles.modalTitle}>Удалить задачу?</h3>
-                    <Button className={styles.modalBtnDel} onClick={handleRemoveTask} label='Удалить'/>
-                    <Button className={styles.modalBtnСancel} onClick={handleClose} label='Отмена'/>
+        <I18nextProvider i18n={i18n}>
+            <div className={styles.modalBackdrop}>
+                <div className={styles.modal}>
+                    <div className={styles.modalСontent}>
+                        <span className={styles.close} onClick={handleClose}>&times;</span>
+                        <h3 className={styles.modalTitle}>{t("task_del")}</h3>
+                        <Button className={styles.modalBtnDel} onClick={handleRemoveTask} label={(t("label_del")) || ''}/>
+                        <Button className={styles.modalBtnСancel} onClick={handleClose} label={(t("label_cls")) || ''}/>
+                    </div>
                 </div>
             </div>
-        </div>
-           
+        </I18nextProvider>
     ), node);
 }
