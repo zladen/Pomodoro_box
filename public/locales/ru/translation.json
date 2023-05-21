@@ -25,7 +25,7 @@
     "label_pause": "Пауза",
     "label_continue": "Продолжить",
     "label_completed": "Сделано",
-    "label_Skip": "Пропустить",
+    "label_skip": "Пропустить",
     "label_del": "Удалить",
     "task_del": "Удалить задачу?",
     "task": "Задача",

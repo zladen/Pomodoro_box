@@ -1,6 +1,4 @@
 import styles from "./theme.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, switchTheme } from "../../../store/reducers/themeSlice";
 import { useCallback, useEffect } from "react";
 import { useTheme } from "../../../hooks/useTheme";
 
@@ -14,15 +12,15 @@ export const Theme = () => {
 
     const setDarkMode = useCallback(() => {
         setTheme("dark");
-      }, [setTheme]);
+    }, [setTheme]);
     
-      const setLightMode = useCallback(() => {
+    const setLightMode = useCallback(() => {
         setTheme("light");
-      }, [setTheme]);
+    }, [setTheme]);
     
-      const handleToggleTheme = useCallback((event: { target: { checked: boolean } }) => {
+    const handleToggleTheme = useCallback((event: { target: { checked: boolean } }) => {
         event.target.checked ? setDarkMode() : setLightMode();
-      }, [setDarkMode, setLightMode]);
+    }, [setDarkMode, setLightMode]);
 
     return (
         <div className={styles.darkMode}>

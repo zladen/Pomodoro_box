@@ -18,15 +18,15 @@
 	--grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
 	--body_background: #E5E5E5;
 	--text_color: #333333;
-	--background_header: #FFFFFF;
 	--background_modal: #FFFFFF;
+	--timer_header: #C4C4C4;
 }
 
 [data-theme='dark'] {
-	--body_background: #131722;
-	--background_header: #1D1E33;
+	--body_background: #1e1e2f;
+	--background_modal: #27293d;
 	--text_color: white;
-	--background_modal: #332E33;
+	--timer_header: #2b2e4c;
 }
 
 * {

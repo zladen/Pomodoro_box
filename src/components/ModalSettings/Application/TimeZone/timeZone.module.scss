@@ -11,6 +11,14 @@
     color: var(--black);
 }
 
+.timeZone option {
+    color: var(--black);
+    font-family: 'sf ui display';
+    font-weight: 300;
+    font-size: 18px;
+    padding: 0 10px;
+}
+
 .formatDate {
     width: 100%;
     display: flex;
