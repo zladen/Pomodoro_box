@@ -7,10 +7,13 @@ export const Locale = () => {
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
         setSelectedLanguage(language);
-    };    
+    };
     
     return (
-        <select onChange={(e) => changeLanguage(e.target.value)} className={styles.timeZone} value={selectedLanguage}>
+        <select 
+            onChange={(e) => changeLanguage(e.target.value)} 
+            className={styles.timeZone} 
+            value={selectedLanguage}>
             <option value="en" key='en'>English</option>
             <option value="ru" key='ru'>Русский</option>
         </select>

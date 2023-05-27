@@ -17,11 +17,11 @@ export const TaskForm = ({handleAddTask, handleInputChange, inputValue, handleKe
     return (
         <I18nextProvider i18n={i18n}>
             <input 
-            className={styles.nameTask} 
-            type="text" placeholder={t('task_name') || ''} 
-            value={inputValue} 
-            onChange={handleInputChange} 
-            onKeyDown={handleKeyDown}
+                className={styles.nameTask} 
+                type="text" placeholder={t('task_name') || ''} 
+                value={inputValue} 
+                onChange={handleInputChange} 
+                onKeyDown={handleKeyDown}
             />
             <Button 
                 onClick={handleAddTask} 

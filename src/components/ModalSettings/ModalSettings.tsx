@@ -60,17 +60,17 @@ export function ModalSetting({onClose}: IModalSetting) {
                         <h3 className={styles.modalTitle}>{t("settings")}</h3>
                     </div>
                     <Navbar onTabClick={handleTabClick} activeTab={activeTab}/>
-                    {activeTab === 'timer' && (
-                        <TimerSetting />
-                    )}
+                        {activeTab === 'timer' && (
+                            <TimerSetting />
+                        )}
 
-                    {activeTab === 'notify' && (
-                        <Notify />
-                    )}
+                        {activeTab === 'notify' && (
+                            <Notify />
+                        )}
 
-                    {activeTab === 'app' && (
-                        <Application />
-                    )}
+                        {activeTab === 'app' && (
+                            <Application />
+                        )}
                     
                     <div className={styles.btnBlock}>
                         <Button className={styles.btnSave} label={t("label_cls") || ''} onClick={handleClose}/>

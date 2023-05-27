@@ -29,3 +29,22 @@
     text-align: center;
 
 }
+
+
+.timeZone {
+    width: 50%;
+    height: 50px;
+    background: var(--grayF4);
+    border: none;
+    outline: none !important;
+    font-family: "sf ui display";
+    font-weight: 300;
+    font-size: 18px;
+    padding: 0 10px;
+    color: var(--black);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(src/assets/arrowUp.svg) no-repeat right var(--grayF4);
+    background-position: right 10px center;
+}

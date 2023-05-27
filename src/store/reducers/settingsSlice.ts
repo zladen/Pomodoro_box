@@ -3,8 +3,6 @@ export interface Setting {
     pomodoro: number;
     shortBreak: number;
     longBreak: number;
-    // autoStartPomodoro: boolean;
-    autoStartBreak: boolean;
     isWorking: boolean;
     isPaused: boolean;
     isShortBreak: boolean;
@@ -20,7 +18,6 @@ export interface SettingPayload {
     pomodoro?: number;
     shortBreak?: number;
     longBreak?: number;
-    //autoStartPomodoro?: boolean;
     autoStartBreak?: boolean;
 }
 
@@ -28,8 +25,6 @@ export const defaultSettings: Setting = {
     pomodoro: 25,
     shortBreak: 5,
     longBreak: 15,
-    //autoStartPomodoro: false,
-    autoStartBreak: false,
 
     isWorking: false,
     isPaused: false,
@@ -52,8 +47,6 @@ const settingsSlice = createSlice({
             const { pomodoro, 
                     shortBreak, 
                     longBreak, 
-                    // autoStartPomodoro, 
-                    autoStartBreak, 
                     useDefaultSettings 
                 } = action.payload;
 
@@ -72,18 +65,11 @@ const settingsSlice = createSlice({
                 : longBreak 
                 ?? defaultSettings.longBreak;
 
-            // state.autoStartPomodoro = autoStartPomodoro
-            //     ?? defaultSettings.autoStartPomodoro;
-        
-            state.autoStartBreak = autoStartBreak
-                ?? defaultSettings.autoStartBreak;
-
              //Сохранение состояния таймера
             state.isWorking = false;
             state.isPaused = false;
             state.isShortBreak = false;
             state.isLongBreak = false;
-            //state.autoStartBreak = false;
             state.counterShortBreak = 0;
             state.counterPomodoro = 1;
             state.minutes = pomodoro ?? defaultSettings.pomodoro;

@@ -9,7 +9,6 @@ export const Theme = () => {
         document.body.setAttribute("data-theme", theme);
     }, [theme]);
     
-
     const setDarkMode = useCallback(() => {
         setTheme("dark");
     }, [setTheme]);

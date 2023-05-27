@@ -31,3 +31,60 @@
     font-size: 18px;
     padding: 0 10px;
 }
+
+.o-field {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.6rem;
+    min-height: 3rem;
+}
+
+.c-label {
+    font-weight: 700;
+    width: 18em;
+    margin-right: 2rem;
+}
+
+.u-flex1 {
+    flex: 1;
+}
+.u-flex {
+    display: flex!important;
+}
+
+.u-w100 {
+    width: 100%!important;
+}
+button, input {
+    overflow: visible;
+}
+
+
+input, button, select, optgroup, textarea {
+    margin: 0;
+    line-height: inherit;
+    color: inherit;
+    font: inherit;
+}
+
+.u-bold {
+    font-weight: 500;
+}
+
+.u-flex--align-center {
+    align-items: center;
+}
+.u-flex {
+    display: flex!important;
+}
+.u-ml3 {
+    margin-left: 1rem!important;
+}
+
+.switchSoundAlerts {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

@@ -1,56 +1,38 @@
 import moment from 'moment';
 import 'moment-timezone';
 import styles from './timeZone.module.scss';
-import { useState } from 'react';
 import Locale from '../../Locale/Locale';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../../i18n';
-
-// export const TimeZone = () => {
-//     //const zones = moment().tz("Russia/Moscow");
-//     //console.log(zones);
-//     const timeZones = moment.tz.names().map((timeZone) => {
-//         const formattedOffset = moment().tz(timeZone).format('Z');
-//         const city = timeZone.split('/')[1];
-//         return { offset: formattedOffset, city: city, id: timeZone };
-//     });
-
-//     timeZones.sort((a, b) => parseFloat(a.offset) - parseFloat(b.offset));
-
-//     return (
-//         <select className={styles.timeZone}>
-//             {timeZones.map(timeZone => (
-//                 <option key={timeZone.id} value={timeZone.id}>{`(UTC${timeZone.offset}) ${timeZone.city}`}</option>
-//             ))}
-//         </select>
-//     );
-// };
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, setDate, setTime, setTimeZone } from '../../../../store/reducers/configSlice';
 
 export const TimeZone = () => {
     const { t } = useTranslation();
-    const [defaultZone, setDefaultZone] = useState("Europe/Moscow");
-    const [defaultFormatDate, setDefaultFormatDate] = useState("DD.MM.YYYY");
-    const [defaultFormatTime, setDefaultFormatTime] = useState("24");
+    const config = useSelector((state: RootState) => state.config);
+    const {timezone, date, time} = config;
+    const dispatch = useDispatch();
 
-    //let selectedTimeZone = moment.tz.guess();
-
-    //let formats = moment.localeData().longDateFormat();
-    //console.log(formats);
-
-    //console.log(moment().format('DD.MM.YYYY'));
-
-    const defaultTimeZone = moment.tz.setDefault(defaultZone);
     const timeZones = moment.tz.names().map((timeZone) => {
         const formattedOffset = moment().tz(timeZone).format('Z');
         const city = timeZone.split('/')[1];
-        //console.log(formattedOffset);
-        // if (!city) {
-        //     return null;
-        // }
+
         return { offset: formattedOffset, city: city, id: timeZone };
-    }).filter((tz) => tz !== null);
+    }).filter((tz) => tz.offset && tz.city && tz.id && !tz.city.includes('GMT'));
 
     timeZones.sort((a, b) => parseFloat(a.offset) - parseFloat(b.offset));
+
+    const handleTimeZoneChange = (e: { target: { value: string; }; }) => {
+        dispatch(setTimeZone(e.target.value));
+    };
+
+    const handleDateChange = (e: { target: { value: string; }; }) => {
+        dispatch(setDate(e.target.value));
+    };
+
+    const handleTimeChange = (e: { target: { value: string; }; }) => {
+        dispatch(setTime(e.target.value));
+    };
 
     return (
         <I18nextProvider i18n={i18n}>
@@ -61,7 +43,11 @@ export const TimeZone = () => {
 
             <div className={styles.formatDate}>
                 <label>{t("time_zone")}</label>
-                <select className={styles.timeZone} defaultValue={defaultZone}>
+                <select className={styles.timeZone} 
+                   defaultValue={timezone}
+                   onChange={handleTimeZoneChange} 
+    
+                >
                     {timeZones.map(timeZone => (
                         <option key={timeZone.id} value={timeZone.id}>{`(UTC${timeZone.offset}) ${timeZone.city}`}</option>
                     ))}
@@ -70,7 +56,11 @@ export const TimeZone = () => {
             
             <div className={styles.formatDate}>
                 <label>{t("date_format")}</label>
-                <select  className={styles.timeZone} defaultValue={defaultFormatDate}>
+                <select 
+                    className={styles.timeZone}
+                    onChange={handleDateChange} 
+                    defaultValue={date}
+                >
                     <option value="MM/DD/YYYY">MM/DD/YYYY</option>
                     <option value="MM-DD-YYYY">MM-DD-YYYY</option>
                     <option value="DD/MM/YYYY">DD/MM/YYYY</option>
@@ -82,9 +72,13 @@ export const TimeZone = () => {
             
             <div className={styles.formatDate}>
                 <label>{t("time_format")}</label>        
-                <select  className={styles.timeZone} defaultValue={defaultFormatTime}>
-                    <option value="12">12</option>
-                    <option value="24">24</option>
+                <select  
+                    className={styles.timeZone} 
+                    defaultValue={time}
+                    onChange={handleTimeChange}   
+                >
+                    <option value="hh:mmA">12</option>
+                    <option value="HH:mm">24</option>
                 </select>
             </div>
         </I18nextProvider>

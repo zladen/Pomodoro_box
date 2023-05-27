@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "../Button/Button";
-import { EIcons, Icons } from "../Icons";
 import styles from "./timer.module.scss"
 import classNames from "classnames";
-import { RootState } from "../../store/reducers/tasksSlice";
-import { start, stop, pause } from "../../store/reducers/settingsSlice";
-import { useTick } from "../../hooks/useTick";
 import { I18nextProvider, useTranslation } from "react-i18next";
+import { useTick } from "../../hooks/useTick";
 import i18n from "../../i18n";
+import { RootState } from "../../store/reducers/tasksSlice";
+import { Button } from "../Button/Button";
+import { EIcons, Icons } from "../Icons";
+import { pause, start, stop } from "../../store/reducers/settingsSlice";
 
 export interface ITimer {
     taskId: string
@@ -17,7 +17,15 @@ export interface ITimer {
 export function Timer({taskId, taskName}: ITimer) {
     const { t } = useTranslation();
     useTick();
-    const { isShortBreak, isLongBreak, isWorking, isPaused, seconds, minutes, counterShortBreak, counterPomodoro } = useSelector((state: RootState) => state.settings);
+    const { isShortBreak, 
+            isLongBreak, 
+            isWorking, 
+            isPaused, 
+            seconds, 
+            minutes, 
+            counterShortBreak, 
+            counterPomodoro } 
+            = useSelector((state: RootState) => state.settings);
     const dispatch = useDispatch();
 
     //console.log(minutes);

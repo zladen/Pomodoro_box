@@ -14,12 +14,6 @@ interface INavbar {
 
 export const Navbar = ({onTabClick, activeTab}: INavbar) => {
     const { t } = useTranslation();
-    const [active, setActive] = useState('timer');
-
-    const handleItemClick = (item: string) => {
-        setActive(item);
-        console.log('click');
-    }
 
     return (
         <div className={styles.cNav}> 
