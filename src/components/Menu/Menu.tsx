@@ -3,10 +3,10 @@ import { Dropdown } from '../Dropdown';
 import { MenuItemsList } from './MenuItemsList';
 import { EIcons, Icons } from '../Icons';
 import { Button } from '../Button/Button';
-import { Modal } from '../Modal';
-import { useState, useTransition } from 'react';
+import { ModalRemoveTask } from '../ModalRemoveTask';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTime, RootState } from '../../store/reducers/tasksSlice';
+import { updateTime, RootState } from '../../store/reducers/tasksSlice';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -23,11 +23,9 @@ interface IMenu {
 export function Menu(props: IMenu) {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const { t } = useTranslation();
-	//const lang = i18next.t.bind(i18next);
 
-	const tasks = useSelector((state: RootState) => state.tasks.tasks);
-	const pomodoro = useSelector((state: RootState) => state.settings.pomodoro)
-	//const tomato = useSelector((state: RootState) => state.tasks.tomato)
+	const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
+	const pomodoro = useSelector((state: RootState) => state.config.pomodoro)
 	const dispatch = useDispatch();
 	const id = props.taskId;
 
@@ -36,27 +34,24 @@ export function Menu(props: IMenu) {
 		if (task) {
 				const updatedTask = {
 				...task,
-				pomodoro: task.pomodoro + pomodoro,
-				//counterPomodoro: task.workTime / pomodoro,
+				duration: task.duration + (pomodoro / 60),
 			};
-			dispatch(addTime(updatedTask));
+			dispatch(updateTime(updatedTask));
 		}
 	}
 
 	const handleShortTimeTask = () => {
 		const task = tasks.find((task) => task.id === id);
-		if (task && task.pomodoro > pomodoro) {
+		if (task && task.duration > pomodoro) {
 			const updatedTask = {
 				...task,
-				pomodoro: task.pomodoro - pomodoro,
-				//tomato: task.time / pomodoro
+				duration: task.duration - (pomodoro / 60),
 			};
-			dispatch(addTime(updatedTask));
+			dispatch(updateTime(updatedTask));
 		}
 	}
 
 	const handleEditNameTask = () => {
-		// вызываем проп onEditNameTask
 		if (props.onEditNameTask) {
 		  	props.onEditNameTask();
 		}
@@ -98,13 +93,12 @@ export function Menu(props: IMenu) {
 				language={i18next.language}
 			>	
 				<MenuItemsList 
-					// menuItems={props.menuItems} 
 					menuItems={menuItemsPomodoro}
 					taskId={props.taskId} 
 				/>	
 			</Dropdown>
 			{isModalOpened && (
-                <Modal id={props.taskId} onClose={() => { setIsModalOpened(false); }} />
+                <ModalRemoveTask id={props.taskId} onClose={() => { setIsModalOpened(false); }} />
             )}
 		</div>
 	);

@@ -14,15 +14,14 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
     const [taskName, setTaskName] = useState(nameTask);
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
-    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (taskName.length === 0) {
-            setTaskName(nameTask);
-        }
-        if (taskName.length > maxLength) {
-            setTaskName(taskName.slice(0, maxLength));
+        if (typeof taskName !== 'undefined') {
+            if (taskName.length > maxLength) {
+                setTaskName(taskName.slice(0, maxLength));
+            }
         }
     }, [taskName, nameTask, maxLength]);
 

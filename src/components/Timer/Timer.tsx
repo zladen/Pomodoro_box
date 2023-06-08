@@ -1,13 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./timer.module.scss"
 import classNames from "classnames";
 import { I18nextProvider, useTranslation } from "react-i18next";
-import { useTick } from "../../hooks/useTick";
 import i18n from "../../i18n";
-import { RootState } from "../../store/reducers/tasksSlice";
 import { Button } from "../Button/Button";
 import { EIcons, Icons } from "../Icons";
-import { pause, start, stop } from "../../store/reducers/settingsSlice";
+import { useTick } from "../../hooks/useTick";
 
 export interface ITimer {
     taskId: string
@@ -16,66 +13,40 @@ export interface ITimer {
 
 export function Timer({taskId, taskName}: ITimer) {
     const { t } = useTranslation();
-    useTick();
-    const { isShortBreak, 
-            isLongBreak, 
-            isWorking, 
-            isPaused, 
-            seconds, 
-            minutes, 
-            counterShortBreak, 
-            counterPomodoro } 
-            = useSelector((state: RootState) => state.settings);
-    const dispatch = useDispatch();
+    const { state, mode, minutes, seconds, series, clickStart, clickPause, clickStopped, counterShort, counterPomodoros } = useTick();
+    const min = minutes.toString().padStart(2, "0");
+    const sec = seconds.toString().padStart(2, "00");
+    const handleAddMinutes = () => {
+        
+    }
 
-    //console.log(minutes);
     return (
         <I18nextProvider i18n={i18n}>
             <div id={taskId} className={styles.timer} >
                 <div id="timer-header" className={classNames(styles.timerHeader, 
-                        {[styles.timerHeaderActive]: isWorking || isPaused},
-                        {[styles.timerHeaderBreak]: isShortBreak || isLongBreak},
+                        {[styles.timerHeaderActive]: state == 'started' || state == 'paused'},
+                        {[styles.timerHeaderBreak]: mode == 'short' || mode == 'long'},
                     )}>
                     <h2 className={styles.timerTitle}>{taskName}</h2>
                     <span id='counter' className={styles.countTomato}>
-                        {/* {isResting ? `Перерыв 1` : `Помидор 1`} */}
-                        {isShortBreak ? `${t("break")} ${counterShortBreak}` : `${t("tomato")} ${counterPomodoro}`}
-                        {/* {isResting ? `Перерыв ${1}` : (isPaused ? `Перерыв 1` : `Помидор ${1}`)} */}
-                        
+                        {/* {mode == "short" ? `${t("break")} 1` : `${t("tomato")} ${series}`} */}
+                        {mode === "long" || mode === "short" && state !== 'paused' ? `${t("break")} ${counterShort}` : `${t("tomato")} ${counterPomodoros}`}
                     </span>
                 </div>
                 <div className={styles.timerWrapper}>
                     <div className={styles.timerContainer}>
                         <div className={styles.timerBlock}>
                         <div className={styles.timeBlock}>
-                            <span 
+                            <div 
                                 className={classNames(styles.timerMinutes, 
-                                    {[styles.timerActive]: isWorking && !isShortBreak}, 
-                                    {[styles.timerActiveBreak]: isWorking && isShortBreak},
+                                    {[styles.timerActive]: state == 'started' && mode !== 'short'}, 
+                                    {[styles.timerActiveBreak]: state == 'started' && mode == 'short' || mode == 'long'},
                                 )} 
-                                id="minutes">
-                                    {minutes.toString().padStart(2, "0")}
-                            </span>
+                                id="clock">
+                                    {min}:{sec}
+                            </div>
                         </div>
-                        <div className={styles.timerBlock}>
-                            <span 
-                                className={classNames(styles.timerDivider, 
-                                    {[styles.timerActive]: isWorking && !isShortBreak}, 
-                                    {[styles.timerActiveBreak]: isWorking && isShortBreak},
-                                )}>:
-                            </span>
-                        </div>
-                        <div className={styles.timeBlock}>
-                            <span 
-                                className={classNames(styles.timerMinutes, 
-                                        {[styles.timerActive]: isWorking && !isShortBreak}, 
-                                        {[styles.timerActiveBreak]: isWorking && isShortBreak},  
-                                    )} 
-                                id="seconds">
-                                    {seconds.toString().padStart(2, "00")}
-                            </span>
-                        </div>      
-                        <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus}/>
+                        <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={handleAddMinutes}/>
                     </div>
                     <span className={styles.timerTask}>{t("task")} 1 - {taskName}</span>
                         <div className={styles.btnBlock}>
@@ -83,34 +54,28 @@ export function Timer({taskId, taskName}: ITimer) {
                                 <Button 
                                     id="start-button"
                                     className={classNames(styles.btnStart, 
-                                        {[styles.btnContinue]: isPaused && !isWorking},
+                                        {[styles.btnContinue]: state == 'paused'},
                                     )}
 
-                                    label={(isWorking ? t("label_pause") : (isPaused ? t("label_continue") : t("label_start"))) || ''} 
-                                    onClick={isWorking ? () => dispatch(pause()) : () => dispatch(start())}
+                                    label={(state == 'started' ? t("label_pause") : (state == 'paused' ? t("label_continue") : t("label_start"))) || ''} 
+                                    onClick={state == 'started' ? clickPause : clickStart}
                                 />
+
                                 <Button 
                                     id="stop-button"
                                     className={classNames(styles.btnStop, 
-                                        {[styles.btnStopActive]: isPaused && !isWorking || isWorking}, 
-                                        {[styles.btnMade]: isPaused && !isWorking},
-                                        {[styles.btnBreak]: isShortBreak},
-                                        {[styles.btnBreakSkip]: isShortBreak && !isWorking}
+                                        {[styles.btnStopActive]: state == 'started'}, 
+                                        {[styles.btnMade]: state == 'paused'},
+                                        //{[styles.btnBreak]: mode == 'short' || 'long'},
+                                        {[styles.btnBreakSkip]: mode == 'short' && state == 'paused'}
                                     )}
 
-                                    label={(isShortBreak ? t("label_skip") 
-                                        : (isWorking ? t("label_stop") 
-                                        : (isPaused ? t("label_completed") 
-                                        : (isPaused ? t("label_skip") 
+                                    label={(mode == 'short' ? t("label_skip") 
+                                        : (state == 'started' ? t("label_stop") 
+                                        : (state == 'paused' ? t("label_completed") 
+                                        : (state == 'paused' ? t("label_skip") 
                                         : t("label_stop") )))) || ''}
-                                    onClick={() => {
-                                        () => dispatch(stop());
-                                        // Удалить классы активности из кнопки "Стоп"
-                                        // document.getElementById("timer-header")?.classList.remove(styles.timerHeaderActive);
-                                        // document.getElementById("start-button")?.classList.remove(styles.btnContinue);
-                                        // document.getElementById("stop-button")?.classList.remove(styles.btnStopActive);
-                                        // document.getElementById("stop-button")?.classList.remove(styles.btnMade);
-                                    }}
+                                    onClick={clickStopped}
                                 />
                             </div>
                         </div>
@@ -118,7 +83,5 @@ export function Timer({taskId, taskName}: ITimer) {
                 </div>
             </div>
         </I18nextProvider>
-        
     )
 }
-

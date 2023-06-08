@@ -3,10 +3,9 @@ import styles from './application.module.scss'
 import { TimeZone } from './TimeZone/TimeZone'
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../i18n';
-import { Theme } from '../Theme/Theme';
+import { Theme } from '../Application/Theme/Theme';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers/configSlice';
-//import { RootState } from '../../../store/reducers/#themeSlice';
 
 export const Application = () => {
     const { t } = useTranslation();

@@ -21,7 +21,13 @@ export function MenuItemsList({ menuItems, taskId }: Props) {
 			<ul className={styles.menuItemsList}>
 				{menuItems.map((item, index) => (
 					<li className={styles.menuItem} key={index} >
-						<Button id={taskId} className={styles.buttonItem} icon={item.icon} label={item.label} onClick={item.onClick}/>
+						<Button 
+							id={taskId} 
+							className={styles.buttonItem} 
+							icon={item.icon} 
+							label={item.label} 
+							onClick={item.onClick}
+						/>
 					</li>
 				))}
 			</ul>

@@ -1,21 +1,27 @@
-import { useCallback } from "react";
 import styles from "./switch.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducers/tasksSlice";
+import { useSystemNotify } from "../../hooks/useSystemNotify";
 
 interface ISwitch {
     label: string;
     htmlFor: string;
     id: string;
     value?: boolean | string;
-    action: (newValue: boolean | string) => void;
+    action: (newValue: boolean) => void;
 }; 
 
 export const Switch = (props: ISwitch) => {
     const { label, htmlFor, id, value } = props;
+    const { notify } = useSelector((state: RootState) => state.config);
+    const { systemNotify } = useSystemNotify();
     
-    const handleSwitch = (event: { target: { checked: boolean | string } }) => {
+    const handleSwitch = (event: { target: { checked: boolean } }) => {
         const newValue = event.target.checked;
         props.action(newValue);
-        console.log(newValue);
+        if (notify) {
+            systemNotify("Настройки сохранены");
+        }
     }
 
     const checked = typeof value === "string" ? value == "true" : value;

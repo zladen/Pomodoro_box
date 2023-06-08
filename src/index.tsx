@@ -8,9 +8,10 @@ import { Statistic } from './components/Statistic';
 import store, { persistor } from './store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Modal } from './components/Modal';
+import { ModalRemoveTask } from './components/ModalRemoveTask';
 import { ModalSetting } from './components/ModalSettings/ModalSettings';
 import { Layout } from './components/Layout';
+import { ModalPopup } from './components/ModalPopup/ModalPopup';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
@@ -21,8 +22,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                         <Layout>
                             <Routes>
                                 <Route path="/" element={<App/>} />
-                                <Route path='/' element={<Modal />} />
+                                <Route path='/' element={<ModalRemoveTask />} />
                                 <Route path='/' element={<ModalSetting />} />
+                                <Route path='/' element={<ModalPopup />} />
                                 <Route path='/statistic' element={<Statistic />} />
                                 <Route path="*" element={<Page404 />} />
                             </Routes>

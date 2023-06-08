@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers/tasksSlice';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './taskList.module.scss';
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 
@@ -12,12 +11,12 @@ export interface Props {
 
 export const TaskList = () => {
     const { t } = useTranslation();
-    const tasks = useSelector((state: RootState) => state.tasks.tasks);
-    const totalTaskTime = tasks.reduce((total, task) => total + task.pomodoro, 0);
+    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
+    const totalTasksTime = tasks.reduce((total, task) => total + task.duration, 0);
+
     const totalTaskCount = () => {
-        const tm = totalTaskTime;
-        let hours = Math.floor( tm / 60 );
-        let minutes = Math.floor( tm % 60 );
+        let hours = Math.floor( totalTasksTime / 60 );
+        let minutes = Math.floor( totalTasksTime % 60 );
 
         let result = "";
         if (hours == 1 || hours == 21) {
@@ -56,7 +55,7 @@ export const TaskList = () => {
         <>
             <ol className={styles.taskList}>
                 {tasks.map((task, index) => (
-                    <TaskItem nameTask={task.name} key={index} id={task.id} />
+                    <TaskItem key={index} id={task.id} nameTask={task.name} />
                 ))}
             </ol>
             <div className={styles.taskTime}>{totalTaskCount()}</div>

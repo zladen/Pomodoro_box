@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, addTask, updateTask } from "../../store/reducers/tasksSlice";
+import { RootState, Task, addTask, updateTask, updateTime } from "../../store/reducers/tasksSlice";
 import TaskForm from "./TaskForm/TaskForm";
 import TaskList from "./TaskList/TaskList";
 import styles from './tasks.module.scss'
 
 export function Tasks() {
-    const pomodoro = useSelector((state: RootState) => state.settings.pomodoro);
-    const shortBreak = useSelector((state: RootState) => state.settings.shortBreak);
-    const longBreak = useSelector((state: RootState) => state.settings.longBreak);
+    const config = useSelector((state: RootState) => state.config);
+    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
+    const {pomodoro} = config;
     const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
-        dispatch(updateTask({
-            pomodoro,
-            shortBreak,
-            longBreak,
-        }));
-    }, [dispatch, pomodoro, shortBreak, longBreak]);
+        tasks.forEach(task => {
+            const updatedPomodoro = {
+                ...task,
+                duration: pomodoro / 60,
+            };
+            dispatch(updateTime(updatedPomodoro));
+        });
+    }, [dispatch, pomodoro, tasks]);
+
 
     const handleAddTask = () => {
+        const duration = pomodoro / 60
         if (inputValue.trim().length) {
-            dispatch(addTask({ name: inputValue, pomodoro, shortBreak, longBreak }));
+            dispatch(addTask({ name: inputValue, duration }));
             setInputValue('');
         }
     }

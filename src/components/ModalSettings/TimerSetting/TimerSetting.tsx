@@ -74,40 +74,7 @@ export const TimerSetting = () => {
 
     return (
         <>
-            <div className={styles.formSettings} > {/* onSubmit={handleSubmit(onSubmit)} */}
-                {/* <div className={styles.itemForm}>
-                    <label>{t("tomato")}</label>
-                    <input
-                        className={styles.settingsTime}
-                        {...register("pomodoro")}
-                        placeholder='25'
-                        onChange={(e) =>
-                            dispatch(settings({ pomodoro: +e.target.value }))  // обновление значени�� в Redux при изменении
-                        }
-                    />
-                </div>
-
-                <div className={styles.itemForm}>
-                    <label>{t("short_break")}</label>
-                    <input className={styles.settingsTime} 
-                        {...register("shortBreak")}
-                        placeholder="5"
-                        onChange={(e) =>
-                            dispatch(settings({ shortBreak: +e.target.value }))  // обновление значени�� в Redux при изменении
-                        }
-                    />
-                </div>
-                
-                <div className={styles.itemForm}>
-                    <label>{t("long_break")}</label>
-                    <input className={styles.settingsTime} 
-                        {...register("longBreak")}
-                        placeholder="15"
-                        onChange={(e) =>
-                            dispatch(settings({ longBreak: +e.target.value }))  // обновление значени�� в Redux при изменении
-                        }
-                    />
-                </div> */}
+            <div className={styles.formSettings}>
                 <Field 
                     label={t("tomato")} 
                     id={'data-pomodoro'} 

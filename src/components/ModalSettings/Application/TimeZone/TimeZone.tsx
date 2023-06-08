@@ -6,11 +6,14 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../../i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setDate, setTime, setTimeZone } from '../../../../store/reducers/configSlice';
+import { useSystemNotify } from '../../../../hooks/useSystemNotify';
 
 export const TimeZone = () => {
     const { t } = useTranslation();
     const config = useSelector((state: RootState) => state.config);
     const {timezone, date, time} = config;
+    const { notify } = useSelector((state: RootState) => state.config);
+    const { systemNotify } = useSystemNotify();
     const dispatch = useDispatch();
 
     const timeZones = moment.tz.names().map((timeZone) => {
@@ -24,14 +27,23 @@ export const TimeZone = () => {
 
     const handleTimeZoneChange = (e: { target: { value: string; }; }) => {
         dispatch(setTimeZone(e.target.value));
+        if (notify) {
+            systemNotify('Настройки сохранены');
+        }
     };
 
     const handleDateChange = (e: { target: { value: string; }; }) => {
         dispatch(setDate(e.target.value));
+        if (notify) {
+            systemNotify('Настройки сохранены');
+        }
     };
 
     const handleTimeChange = (e: { target: { value: string; }; }) => {
         dispatch(setTime(e.target.value));
+        if (notify) {
+            systemNotify('Настройки сохранены');
+        }
     };
 
     return (

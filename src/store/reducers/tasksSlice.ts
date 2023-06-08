@@ -6,67 +6,58 @@ export type RootState = ReturnType<typeof rootReducer>
 export interface Task {
     id: string;
     name: string;
-    pomodoro: number;
-    shortBreak: number;
-    longBreak: number;
+    duration: number;
+}
+  
+export interface TasksState {
+    tasks: {
+        [taskId: string]: Task;
+    };
 }
 
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: {
-        tasks: [] as Task[],
-    },
+        tasks: {},
+    } as TasksState,
 
     reducers: {
         addTask(state, action) {
             const id = nanoid(8);
-            state.tasks.push({
+            const newTask = {
                 id,
                 name: action.payload.name,
-                pomodoro: action.payload.pomodoro,
-                longBreak: action.payload.longBreak,
-                shortBreak: action.payload.shortBreak,
-                //tomato: action.payload.tomato,
-            });
+                duration: action.payload.duration,
+                // short: action.payload.short,
+                // long: action.payload.long,
+            };
+            state.tasks[id] = newTask;
         },
 
-        addTime(state, action) {
-            const { id, pomodoro } = action.payload;
-            const timeToTask = state.tasks.find(task => task.id === id);
-
-            if (timeToTask) {
-                timeToTask.pomodoro = pomodoro;
-            } else {
-                console.error(`Task with id ${id} not found`);
-            }
+        updateTime(state, action) {
+            const { id, duration } = action.payload;
+            state.tasks[id].duration = duration;
         },
 
         editTask(state, action) {
             const { id, name } = action.payload;
-            const editTaskName = state.tasks.find(task => task.id === id);
-
-            if (editTaskName) {
-                editTaskName.name = name;
-            } else {
-                console.error(`Task with id ${id} not found`);
-            }
+            state.tasks[id].name = name;
         },
 
         removeTask(state, action) {
-            state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
+            delete state.tasks[action.payload.id];
         },
 
         updateTask(state, action) {
-            state.tasks.forEach(task => {
-                task.pomodoro = action.payload.pomodoro;
-                task.shortBreak = action.payload.shortBreak;
-                task.longBreak = action.payload.longBreak;
-            });
+            const { id, duration } = action.payload;
+            state.tasks[id] = {
+                ...state.tasks[id],
+                duration: duration ?? state.tasks[id].duration,
+            };
         },
     },
 });
 
-
-export const {addTask, removeTask, editTask, addTime, updateTask} = tasksSlice.actions;
+export const {addTask, removeTask, editTask, updateTime, updateTask } = tasksSlice.actions;
 export default tasksSlice.reducer;
 

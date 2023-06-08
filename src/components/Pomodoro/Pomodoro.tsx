@@ -6,9 +6,13 @@ import styles from './pomodoro.module.scss'
 import { RootState } from '../../store/reducers/tasksSlice';
 
 export function Pomodoro() {
-    const lastTask = useSelector((state: RootState) => state.tasks.tasks.slice(-1)[0]);
+    const lastTask = useSelector((state: RootState) => {
+        const taskIds = Object.keys(state.tasks.tasks);
+        const lastTaskId = taskIds.length > 0 ? taskIds[taskIds.length - 1] : null;
+        return state.tasks.tasks[lastTaskId || ''];
+    });
+
     const { id, name } = lastTask ?? {};
-    //console.log(lastTask);
     return (
         <main className={styles.container}>
             <div>

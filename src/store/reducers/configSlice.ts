@@ -23,7 +23,6 @@ export interface ConfigState {
     notify: boolean
     notify_duration: number
     playAlarmSound: boolean | string
-    playTickTockSound: boolean | string
     playTickTockSoundWhileBreaks: boolean
     pomodoro: number
     rating: boolean    
@@ -39,13 +38,13 @@ export interface ConfigState {
     volume: number
 }
 
-const initialState: ConfigState = {
+export const initialState: ConfigState = {
     value: false,
     alerts: false,
     soundAlerts: false,
-    autoStartBreak: false,
+    autoStartBreak: true,
     autoStartIfTodo: true,  
-    autoStartPomodoro: false,
+    autoStartPomodoro: true,
     date: "DD.MM.YYYY",
     clear: true,
     complete: true,
@@ -59,7 +58,6 @@ const initialState: ConfigState = {
     notify: false,
     notify_duration: 3000,
     playAlarmSound: false,
-    playTickTockSound: false,
     playTickTockSoundWhileBreaks: false,
     pomodoro: 1500,
     rating: true,
@@ -133,10 +131,6 @@ const configSlice = createSlice({
             state.playAlarmSound = action.payload
         },
 
-        setTickTockSound(state, action) {
-            state.playTickTockSound = action.payload
-        },
-
         setNotify(state, action) {
             state.notify = action.payload
         },
@@ -150,6 +144,7 @@ const configSlice = createSlice({
         },
     },
 });
+export const selectPomodoro = (state: RootState): number => state.config.pomodoro;
 
 export const {
     setSoundAlerts,
@@ -164,7 +159,6 @@ export const {
     setLongBreak,
     setDelay,
     setAlarmSound,
-    setTickTockSound,
     setNotify,
     setAlerts,
     setRemains,

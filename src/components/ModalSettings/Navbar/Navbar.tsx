@@ -2,11 +2,6 @@ import React, { useState } from 'react'
 import styles from './navbar.module.scss';
 import { useTranslation } from 'react-i18next';
 
-// interface INavbar {
-//     activeTab: string;
-//     onTabClick: (tab: string) => void;
-// }
-
 interface INavbar {
     onTabClick: (tab: string) => void;
     activeTab: string;
@@ -17,17 +12,17 @@ export const Navbar = ({onTabClick, activeTab}: INavbar) => {
 
     return (
         <div className={styles.cNav}> 
-            <div data-test="timer-config-timer"
+            <div data-setting="timer-config-timer"
                 onClick={() => onTabClick('timer')} 
                 className={`${styles.cNavItem} ${activeTab === 'timer' && styles.cNavItemActive}`}> 
                 {t("timer")} 
             </div> 
-            <div data-test="timer-config-notify" 
+            <div data-setting="timer-config-notify" 
                 onClick={() => onTabClick('notify')}
                 className={`${styles.cNavItem} ${activeTab === 'notify' && styles.cNavItemActive}`} > 
                 {t("notify")} 
             </div> 
-            <div data-test="timer-config-app" 
+            <div data-setting="timer-config-app" 
                 className={`${styles.cNavItem} ${activeTab === 'app' && styles.cNavItemActive}`} 
                 onClick={() => onTabClick('app')}> 
                 {t("app")} 

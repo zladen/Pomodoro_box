@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { removeTask, RootState } from '../../store/reducers/tasksSlice';
-import styles from './modal.module.scss'
+import styles from './modalRemoveTask.module.scss'
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
 
@@ -13,7 +13,7 @@ export interface IModal {
     id?: string;
 } 
 
-export function Modal({id, onClose}: IModal) {
+export function ModalRemoveTask({id, onClose}: IModal) {
     const { t } = useTranslation();
     const ref = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ export function Modal({id, onClose}: IModal) {
         }
     };
 
-    const tasks = useSelector((state: RootState) => state.tasks.tasks);
+    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
     const dispatch = useDispatch();
 
 	const handleRemoveTask = () => {
