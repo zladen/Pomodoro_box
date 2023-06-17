@@ -4,12 +4,11 @@ import { MenuItemsList } from './MenuItemsList';
 import { EIcons, Icons } from '../Icons';
 import { Button } from '../Button/Button';
 import { ModalRemoveTask } from '../ModalRemoveTask';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTime, RootState } from '../../store/reducers/tasksSlice';
+import { RootState, updateTask, updateTime } from '../../store/reducers/tasksSlice';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
-
 
 interface IMenu {
 	buttonClass?: string;
@@ -28,26 +27,25 @@ export function Menu(props: IMenu) {
 	const pomodoro = useSelector((state: RootState) => state.config.pomodoro)
 	const dispatch = useDispatch();
 	const id = props.taskId;
-
-	const handleAddTimeTask = () => {
-		const task = tasks.find((task) => task.id === id);
+	const task = tasks.find((task) => task.id === id);
+	
+	const handleAddPomodoro = () => {
 		if (task) {
-				const updatedTask = {
+				const updated = {
 				...task,
 				duration: task.duration + (pomodoro / 60),
 			};
-			dispatch(updateTime(updatedTask));
+			dispatch(updateTask(updated));
 		}
 	}
 
-	const handleShortTimeTask = () => {
-		const task = tasks.find((task) => task.id === id);
-		if (task && task.duration > pomodoro) {
-			const updatedTask = {
+	const handleShortPomodoro = () => {
+		if (task && task.duration > pomodoro / 60) {
+			const updated = {
 				...task,
 				duration: task.duration - (pomodoro / 60),
 			};
-			dispatch(updateTime(updatedTask));
+			dispatch(updateTask(updated));
 		}
 	}
 
@@ -61,14 +59,14 @@ export function Menu(props: IMenu) {
 		{ 
 			label: t("incr"), 
 			icon: <Icons name={EIcons.plus} />, 
-			onClick:() => handleAddTimeTask(), 
+			onClick:() => handleAddPomodoro(), 
 			className: 'menuItem',  
 		},
 
 		{ 
 			label: t("decr"), 
 			icon: <Icons name={EIcons.minus} />, 
-			onClick: () => handleShortTimeTask(), 
+			onClick: () => handleShortPomodoro(), 
 			className: 'menuItem', 
 		},
 

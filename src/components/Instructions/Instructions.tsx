@@ -7,7 +7,7 @@ export function Instructions() {
     return (
         <>
             <I18nextProvider i18n={i18n}>
-                <h2 className={styles.title}>{t("title_desc")}:</h2>
+                <h2 className={styles.title}>{t("title_desc")}</h2>
                 <div className={styles.desc}>
                     <ul className={styles.descItems}>
                         <li>{t("select_category")}</li>

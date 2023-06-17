@@ -1,0 +1,32 @@
+.dropdownMenuBtn {
+    padding: 0;
+    position: relative;
+    order: 2;
+    display: flex;
+    align-items: center;
+    flex: 0 0;
+    top: unset;
+    right: unset;
+    margin: 0 0 0 auto;
+}
+
+.menuButton {
+    width: 31px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 31px;
+    align-self: center;
+    transform: unset;
+}
+.menuButton:active {
+    background-color: rgba(51, 51, 51, 0.1);
+}
+
+.closeButton {
+    background-color: var(--greyD9);
+    padding: 12px 23px;
+    border-radius: 0 0 3px 3px;
+    width: 100%;
+}

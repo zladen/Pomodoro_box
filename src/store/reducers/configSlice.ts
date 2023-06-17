@@ -56,7 +56,7 @@ export const initialState: ConfigState = {
     long: 900,
     notifications: 10,
     notify: false,
-    notify_duration: 3000,
+    notify_duration: 0,
     playAlarmSound: false,
     playTickTockSoundWhileBreaks: false,
     pomodoro: 1500,
@@ -142,6 +142,10 @@ const configSlice = createSlice({
         setRemains(state, action) {
             state.remains = action.payload
         },
+
+        setNotifyDuration(state, action) {
+            state.notify_duration = action.payload
+        },
     },
 });
 export const selectPomodoro = (state: RootState): number => state.config.pomodoro;
@@ -162,5 +166,6 @@ export const {
     setNotify,
     setAlerts,
     setRemains,
+    setNotifyDuration,
 } = configSlice.actions;
 export default configSlice.reducer;

@@ -1,12 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import styles from './timerSetting.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers/tasksSlice';
-// import { useForm } from 'react-hook-form';
-// import { settings } from '../../../store/reducers/settingsSlice';
 import { useTranslation } from 'react-i18next';
 import Switch from '../../Switch/Switch';
-import { setAutoStartBreak, setAutoStartPomodoro, setDelay, setLongBreak, setPomodoro, setShortBreak } from '../../../store/reducers/configSlice';
+import { 
+    setAutoStartBreak, 
+    setAutoStartPomodoro, 
+    setDelay, setLongBreak, 
+    setPomodoro, 
+    setShortBreak } from '../../../store/reducers/configSlice';
 import { Field } from '../Field/Field';
 
 export const TimerSetting = () => {

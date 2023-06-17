@@ -42,7 +42,6 @@ const timerSlice = createSlice({
 
         stoppedTimer: (state, action) => {
             state.state = action.payload;
-            //state.seconds = 0;
         },
 
         setDuration: (state, action) => {

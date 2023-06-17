@@ -12,9 +12,10 @@
 	--blue:           #C5F1FF;
 	--green4F:        #A8B64F;
 	--green41:        #899441;
-	--grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4.31%));
-	--greyE5:         hsl(0, 0%, calc(var(--whiteLightness) - 10.2%));
-	--greyC4:         hsl(0, 0%, calc(var(--whiteLightness) - 23.14%));
+	--grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+	--greyCE:         hsl(0, 0%, calc(var(--whiteLightness) - 7%));
+	--greyE5:         hsl(0, 0%, calc(var(--whiteLightness) - 10%));
+	--greyC4:         hsl(0, 0%, calc(var(--whiteLightness) - 23%));
 	--grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
 	--body_background: #E5E5E5;
 	--text_color: #333333;

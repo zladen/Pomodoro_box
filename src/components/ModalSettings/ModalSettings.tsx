@@ -39,6 +39,7 @@ export function ModalSetting({onClose}: IModalSetting) {
     }, []);
 
     const handleClose = () => {
+        navigate('/');
         if (onClose) {
             onClose();
         }

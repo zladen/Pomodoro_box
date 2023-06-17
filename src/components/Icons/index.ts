@@ -7,6 +7,5 @@ export * from './DeleteIcon';
 export * from './PlusIcon';
 export * from './StatisticIcon';
 export * from './ArrowIcon';
-export * from './TomatoIcon';
 export * from './CloseIcon';
 export * from './SettingsIcon'

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 import App from './components/App/App'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Page404 } from './components/Page404';
-import { Statistic } from './components/Statistic';
+import { Statistic } from './pages/Statistic';
 import store, { persistor } from './store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                             <Routes>
                                 <Route path="/" element={<App/>} />
                                 <Route path='/' element={<ModalRemoveTask />} />
-                                <Route path='/' element={<ModalSetting />} />
+                                <Route path='/settings' element={<ModalSetting />} />
                                 <Route path='/' element={<ModalPopup />} />
                                 <Route path='/statistic' element={<Statistic />} />
                                 <Route path="*" element={<Page404 />} />

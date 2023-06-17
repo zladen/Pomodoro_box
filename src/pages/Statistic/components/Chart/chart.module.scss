@@ -1,0 +1,17 @@
+.chartContainer {
+    width: 66.11vw;
+    height: 46vh;
+    background: var(--grayF4);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+}
+
+.chart {
+    height: 100%;
+    width: 100%;
+}
+
+

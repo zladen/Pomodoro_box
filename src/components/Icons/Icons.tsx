@@ -6,7 +6,6 @@ import { MenuIcon,
 		 StatisticIcon, 
 		 ArrowIcon, 
 		 PlusIcon, 
-		 TomatoIcon, 
 		 CloseIcon, 
 		 SettingsIcon } from '.';
 
@@ -19,7 +18,6 @@ export enum EIcons {
     menu = 'MenuIcon',
 	btnPlus = 'PlusIcon',
 	arrow = 'ArrowIcon',
-	tomato = 'TomatoIcon',
 	close = 'CloseIcon',
 	settings = 'SettingsIcon',
 }
@@ -59,9 +57,6 @@ export function Icons(props: IIconProps) {
 				
 		case EIcons.arrow:
 			return <ArrowIcon />;
-
-		case EIcons.tomato:
-			return <TomatoIcon />;
 
 		case EIcons.close:
 			return <CloseIcon />;

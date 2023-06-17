@@ -1,0 +1,19 @@
+.scaleXWrapper {
+    width: 100%;
+    height: 4.98vh;
+    display: flex;
+    font-size: 1.5rem;
+    background: var(--greyCE);
+    align-items: center;
+}
+
+.scaleX {
+    width: 47.56vw;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5.55vw;
+}
+
+.scaleDays {
+    color: var(--grey99);
+}

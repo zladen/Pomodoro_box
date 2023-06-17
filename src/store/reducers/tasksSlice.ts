@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { rootReducer } from '../store';
 import { nanoid } from 'nanoid';
 
@@ -28,8 +28,6 @@ const tasksSlice = createSlice({
                 id,
                 name: action.payload.name,
                 duration: action.payload.duration,
-                // short: action.payload.short,
-                // long: action.payload.long,
             };
             state.tasks[id] = newTask;
         },

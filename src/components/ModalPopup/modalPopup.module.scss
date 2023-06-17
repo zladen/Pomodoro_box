@@ -5,9 +5,14 @@
     top: 5%;
     right: 5%;
     width: 25%;
-    height: 15%;
+    height: 5%;
+    background-color: var(--green4F);
+    overflow: hidden;
+    box-shadow: rgba(0,0,0,.298039) 0 0 5px 0;
+}
+
+.modalPopupBreak {
     background-color: var(--red22);
-    border-radius: 20px;
 }
 
 .modalBackdrop {

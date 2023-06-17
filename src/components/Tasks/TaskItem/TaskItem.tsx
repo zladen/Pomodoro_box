@@ -65,7 +65,7 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
                 ) : (  
                     <span>{nameTask}</span> 
                 )}
-                <Menu taskId={id} onEditNameTask={handleEditNameTask}/> 
+                <Menu taskId={id} onEditNameTask={handleEditNameTask} /> 
             </li> 
         </>
         

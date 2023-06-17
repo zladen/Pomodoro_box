@@ -11,7 +11,6 @@ import rynda from '../assets/sounds/rynda.mp3';
 import shutdown_xp from '../assets/sounds/shutdown_xp.mp3';
 import zero from '../assets/sounds/zero.mp3';
 
-
 export const useSoundAlerts = () => {
     const config = useSelector((state: RootState) => state.config);
     const { playAlarmSound } = config;   

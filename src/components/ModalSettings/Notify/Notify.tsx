@@ -3,25 +3,20 @@ import styles from '../../ModalSettings/TimerSetting/timerSetting.module.scss'
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../i18n';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setAlarmSound, setAlerts, setRemains } from '../../../store/reducers/configSlice';
+import { RootState, setAlarmSound, setAlerts, setNotifyDuration, setRemains } from '../../../store/reducers/configSlice';
 import Switch from '../../Switch/Switch';
 import { useSoundAlerts } from '../../../hooks/useSoundAlerts';
 import { useSystemNotify } from '../../../hooks/useSystemNotify';
+import { useShowAlerts } from '../../../hooks/useShowAlerts';
 
 export const Notify = () => {
     const { t } = useTranslation();
     const {handlePlaySound, handlePlaySoundChange} = useSoundAlerts();
-    const {handleNotify} = useSystemNotify();
+    const { handleNotify } = useSystemNotify();
+    const { handleAlerts } = useShowAlerts();
     const config = useSelector((state: RootState) => state.config);
-    const { playAlarmSound, notify, alerts, remains } = config;
+    const { playAlarmSound, notify, alerts, remains, notify_duration } = config;
     const dispatch = useDispatch();
-
-    const handleAlerts = useCallback(
-        (newValue: string | boolean) => {
-            dispatch(setAlerts(newValue));
-        },
-        [dispatch]
-    );
 
     const handleRemains = useCallback(
         (newValue: string | boolean) => {
@@ -29,6 +24,11 @@ export const Notify = () => {
         },
         [dispatch]
     );
+
+    const handleNotifyDuration = (e: { target: { value: string; }; }) => {
+        const newValue = parseInt(e.target.value);
+        dispatch(setNotifyDuration(newValue));
+    };
 
     useEffect(() => {
         if (playAlarmSound === true) {
@@ -80,14 +80,31 @@ export const Notify = () => {
                     action={handleNotify}
                     value={notify}
                 />
-
-                <Switch 
-                    label={'Включить всплывающие окна'} 
-                    htmlFor={'alerts'} 
-                    id={'alerts'} 
-                    action={handleAlerts}
-                    value={alerts}
-                />
+                <div className={styles.soundsAlert}>
+                    <Switch 
+                        label={'Включить всплывающие окна'} 
+                        htmlFor={'alerts'} 
+                        id={'alerts'} 
+                        action={handleAlerts}
+                        value={alerts}
+                    />
+                    {alerts && (
+                        <div className={styles.showMenu}>
+                            <label htmlFor="alerts" className={styles.labelMenu}>Прятать оповещения</label>
+                            <select 
+                                className={styles.timeZone} 
+                                onChange={handleNotifyDuration}
+                                value={notify_duration}
+                            >
+                                <option value="0">Никогда</option>
+                                <option value="2000">через 2 секунды</option>
+                                <option value="3000">через 3 секунды</option>
+                                <option value="5000">через 5 секунд</option>
+                            </select>
+                        </div>  
+                    )}
+                </div>
+                
 
             </div>
         </I18nextProvider>  

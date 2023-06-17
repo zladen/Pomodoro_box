@@ -20,7 +20,7 @@ export function Tasks() {
             };
             dispatch(updateTime(updatedPomodoro));
         });
-    }, [dispatch, pomodoro, tasks]);
+    }, [dispatch, pomodoro]);
 
 
     const handleAddTask = () => {

@@ -15,9 +15,20 @@ import {
 } from '../store/reducers/timerSlice';
 import { useSoundAlerts } from './useSoundAlerts';
 import { useSystemNotify } from './useSystemNotify';
+import { useShowAlerts } from './useShowAlerts';
 
 export function useTick() {
-    const { pomodoro, short, long, autoStartBreak, autoStartPomodoro, delay, notify, remains } = useSelector((state: RootState) => state.config);
+    const { 
+        pomodoro, 
+        short, 
+        long, 
+        autoStartBreak, 
+        autoStartPomodoro, 
+        delay, 
+        notify, 
+        remains, 
+        alerts 
+    } = useSelector((state: RootState) => state.config);
     const { state, mode, duration, series, started, endtime } = useSelector((state: RootState) => state.timer);
     const initialMinutes = duration / 1000 / 60;
     const [minutes, setMinutes] = useState(initialMinutes);
@@ -26,16 +37,17 @@ export function useTick() {
     const [counterPomodoros, setCounterPomodoros] = useState(1);
     const { playAlarmSoundOnTickEnd } = useSoundAlerts();
     const { systemNotify } = useSystemNotify();
+    const { showAlertModal } = useShowAlerts();
+
 
     const dispatch = useDispatch();
 
     let intervalId: number | NodeJS.Timeout | undefined;
 
-
     useEffect(() => {
         const initialMinutes = duration / 1000 / 60;
         setMinutes(initialMinutes);
-    }, [duration]);
+    }, [mode, duration]);
 
     useEffect(() => {
 
@@ -67,13 +79,17 @@ export function useTick() {
                 if (remains) {
                     playAlarmSoundOnTickEnd();
                 }
+
+                if (notify && minutes !== 0) {
+                    systemNotify("До завершения меньше одной минуты");
+                }
             }
 
             if (mode === "pomodoro" && minutes === 0 && seconds === 0) {
                 if (notify) {
                     systemNotify("Помидор закончился, начинаем перерыв");
                 }
-                
+
                 playAlarmSoundOnTickEnd();
                 setCounterPomodoros((prevValue) => prevValue + 1);
                 if (counterShort % delay === 0) {
@@ -90,6 +106,7 @@ export function useTick() {
                 if (notify) {
                     systemNotify("Перерыв закончился, начинаем помидор");
                 }
+
                 playAlarmSoundOnTickEnd();
                 if (mode === "short") {
                     setСounterShort((prevValue) => prevValue + 1);
@@ -119,8 +136,32 @@ export function useTick() {
     }
 
     const clickStopped = () => {
-        dispatch(stoppedTimer('stopped'))
-        clearInterval(intervalId);
+        if (state === 'paused' && mode === 'pomodoro') {
+            setCounterPomodoros(prev => prev + 1);
+            dispatch(stoppedTimer('stopped'));
+            clearInterval(intervalId);
+            setMinutes(initialMinutes);
+            setSeconds(0);
+        } else if (mode === 'short' || mode === 'long') {
+            dispatch(setMode("pomodoro"));
+            dispatch(stoppedTimer('stopped'));
+            clearInterval(intervalId);
+            setMinutes(initialMinutes);
+            setSeconds(0);
+        } else {
+            dispatch(stoppedTimer('stopped'));
+            clearInterval(intervalId);
+            setMinutes(initialMinutes);
+            setSeconds(0);
+            setСounterShort(1);
+            setCounterPomodoros(1);
+        }
+        
+    }
+
+    const clickMinutes = () => {
+        let addMinutes = minutes + 1;
+        setMinutes(addMinutes);
     }
 
     return {
@@ -132,6 +173,7 @@ export function useTick() {
         clickStart,
         clickPause,
         clickStopped,
+        clickMinutes,
         counterShort,
         counterPomodoros
     };

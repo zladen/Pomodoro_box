@@ -1,0 +1,23 @@
+
+
+.titleBlock {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.data {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+} 
+
+.icon {
+    display: flex;
+}
+
+.dataDay {
+    font-weight: 400;
+    font-size: 4rem;
+}

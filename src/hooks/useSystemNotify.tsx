@@ -22,7 +22,7 @@ export const useSystemNotify = () => {
     const handleNotify = useCallback(
         (newValue: string | boolean) => {
             dispatch(setNotify(newValue));
-            if (newValue === true) {
+            if (newValue) {
                 systemNotify("Настройки сохранены");
             }
         },

@@ -1,0 +1,76 @@
+.statistic {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.tomato {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 296px;
+    min-height: 179px;
+    background: var(--grayF4);
+    margin-top: 32px;
+}
+
+.schedule {
+    min-width: 65.375vw; 
+    min-height: 36.797vh;
+    background: var(--grayF4);
+}
+
+.statisticChart {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.blockStopped {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 28.13vw;
+    height: 17.48vh;
+    background: var(--grayF4);
+    padding: 25px;
+    justify-content: space-between;
+    align-items: center;   
+}
+
+.dayWeek {
+    display: flex;
+    flex-direction: row;
+    width: 20.56vw;
+    height: 25.39vh;
+    background: var(--grayF4);
+    padding: 25px;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.countTomato {
+    display: flex;
+    flex-direction: row;
+    width: 20.56vw;
+    height: 17.48vh;
+    background: var(--grayF4);
+    padding: 25px;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.activeWorks {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

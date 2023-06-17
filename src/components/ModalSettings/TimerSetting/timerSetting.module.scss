@@ -48,3 +48,23 @@
     background: url(src/assets/arrowUp.svg) no-repeat right var(--grayF4);
     background-position: right 10px center;
 }
+
+.timeZone option {
+    font-weight: 300;
+    font-size: 18px;
+    padding: 0 10px;
+    color: var(--black);
+}
+
+.showMenu {
+    display: flex;
+    flex-direction: column;
+}
+
+.labelMenu {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+}

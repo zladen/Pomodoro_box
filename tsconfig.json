@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/components/infoBlock"],
+  "include": ["src", "src/pages/Statistic/components/infoBlock"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

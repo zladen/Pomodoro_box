@@ -13,13 +13,10 @@ export interface ITimer {
 
 export function Timer({taskId, taskName}: ITimer) {
     const { t } = useTranslation();
-    const { state, mode, minutes, seconds, series, clickStart, clickPause, clickStopped, counterShort, counterPomodoros } = useTick();
+    const { state, mode, minutes, seconds, series, clickStart, clickPause, clickStopped, clickMinutes, counterShort, counterPomodoros } = useTick();
     const min = minutes.toString().padStart(2, "0");
     const sec = seconds.toString().padStart(2, "00");
-    const handleAddMinutes = () => {
-        
-    }
-
+    
     return (
         <I18nextProvider i18n={i18n}>
             <div id={taskId} className={styles.timer} >
@@ -46,7 +43,7 @@ export function Timer({taskId, taskName}: ITimer) {
                                     {min}:{sec}
                             </div>
                         </div>
-                        <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={handleAddMinutes}/>
+                        <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={clickMinutes}/>
                     </div>
                     <span className={styles.timerTask}>{t("task")} 1 - {taskName}</span>
                         <div className={styles.btnBlock}>
@@ -64,7 +61,7 @@ export function Timer({taskId, taskName}: ITimer) {
                                 <Button 
                                     id="stop-button"
                                     className={classNames(styles.btnStop, 
-                                        {[styles.btnStopActive]: state == 'started'}, 
+                                        {[styles.btnStopActive]: state == 'started' || state == 'stopped'}, 
                                         {[styles.btnMade]: state == 'paused'},
                                         //{[styles.btnBreak]: mode == 'short' || 'long'},
                                         {[styles.btnBreakSkip]: mode == 'short' && state == 'paused'}

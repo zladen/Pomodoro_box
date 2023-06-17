@@ -1,0 +1,25 @@
+.bar {
+    height: 41.5vh;
+    width: 58.47vw;
+    position: absolute;
+    display: flex;
+    cursor: pointer;
+}
+
+.barWrapper {
+    width: 50.76vw;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 4vw;
+}
+
+.column {
+    width: 5.34vw;
+    height: 100%;
+    background: var(--red79);
+}
+
+.activeClass {
+    background: var(--red22);
+}
+
