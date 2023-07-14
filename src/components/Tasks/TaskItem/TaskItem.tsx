@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, editTask } from '../../../store/reducers/tasksSlice';
+import { editTask } from '../../../store/reducers/tasksSlice';
 import { Menu } from '../../Menu';
+import { selectTasksArray } from '../Tasks';
 import styles from './taskItem.module.scss';
 
 export interface TaskItemProps {
@@ -14,7 +15,7 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
     const [taskName, setTaskName] = useState(nameTask);
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
-    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
+    const tasks = useSelector(selectTasksArray);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {

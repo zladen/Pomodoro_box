@@ -4,22 +4,29 @@ import { Tasks } from '../Tasks';
 import { Timer } from '../Timer/Timer';
 import styles from './pomodoro.module.scss'
 import { RootState } from '../../store/reducers/tasksSlice';
+import { createSelector } from '@reduxjs/toolkit';
+
+const selectTasksState = (state: RootState) => state.tasks.tasks;
+export const selectLastTask = createSelector(
+    selectTasksState,
+    (tasks) => {
+        const taskIds = Object.keys(tasks);
+        const lastTaskId = taskIds.length > 0 ? taskIds[taskIds.length - 1] : null;
+        return tasks[lastTaskId || ''];
+    }
+);
 
 export function Pomodoro() {
-    const lastTask = useSelector((state: RootState) => {
-        const taskIds = Object.keys(state.tasks.tasks);
-        const lastTaskId = taskIds.length > 0 ? taskIds[taskIds.length - 1] : null;
-        return state.tasks.tasks[lastTaskId || ''];
-    });
+    const lastTask = useSelector(selectLastTask);
+    const { id, descr } = lastTask ?? {};
 
-    const { id, name } = lastTask ?? {};
     return (
         <main className={styles.container}>
             <div>
                 <Instructions />
                 <Tasks />
             </div>
-            <Timer taskId={id} taskName={name}/> 
+            <Timer taskId={id} taskDescr={descr}/> 
         </main>
     );  
 }

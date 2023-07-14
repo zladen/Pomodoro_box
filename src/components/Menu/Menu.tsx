@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, updateTask, updateTime } from '../../store/reducers/tasksSlice';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { selectTasksArray } from '../Tasks';
 
 interface IMenu {
 	buttonClass?: string;
@@ -22,9 +23,7 @@ interface IMenu {
 export function Menu(props: IMenu) {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const { t } = useTranslation();
-
-	const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
-	const pomodoro = useSelector((state: RootState) => state.config.pomodoro)
+	const tasks = useSelector(selectTasksArray);
 	const dispatch = useDispatch();
 	const id = props.taskId;
 	const task = tasks.find((task) => task.id === id);
@@ -33,17 +32,17 @@ export function Menu(props: IMenu) {
 		if (task) {
 				const updated = {
 				...task,
-				duration: task.duration + (pomodoro / 60),
+				duration: task.duration + 1,
 			};
 			dispatch(updateTask(updated));
 		}
 	}
 
 	const handleShortPomodoro = () => {
-		if (task && task.duration > pomodoro / 60) {
+		if (task && task.duration >= 2) {
 			const updated = {
 				...task,
-				duration: task.duration - (pomodoro / 60),
+				duration: task.duration - 1,
 			};
 			dispatch(updateTask(updated));
 		}

@@ -6,22 +6,23 @@ interface IDataBlock {
     icon?: React.ReactNode;
     title?: string;
     className?: string;
+    value?: number;
 }
 
 
-export function DataBlock({data, icon, title, className}: IDataBlock) {
+export function DataBlock({data, icon, title, className, value}: IDataBlock) {
     
-    return (
-        <>
-            <div className={className}>
+    return ( 
+        <div className={className}>
+            <div className={styles.wrapper}>
                 <div className={styles.data}>
-                    <label className={styles.titleBlock}>{title}</label>
-                    <span className={styles.dataDay}>{data}</span>
+                    <div className={styles.titleBlock}>{title}</div>
+                    <div className={styles.dataDay}>{value}</div>
                 </div>
                 <div className={styles.icon}>
                     {icon}
                 </div>
             </div>
-        </>
+        </div>
     )
 }

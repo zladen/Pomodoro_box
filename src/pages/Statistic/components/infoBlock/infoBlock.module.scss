@@ -16,12 +16,6 @@
     margin-top: 32px;
 }
 
-.schedule {
-    min-width: 65.375vw; 
-    min-height: 36.797vh;
-    background: var(--grayF4);
-}
-
 .statisticChart {
     display: flex;
     width: 100%;
@@ -42,9 +36,9 @@
     width: 28.13vw;
     height: 17.48vh;
     background: var(--grayF4);
-    padding: 25px;
-    justify-content: space-between;
-    align-items: center;   
+    /* padding: 25px; */
+    justify-content: center;
+    align-items: center;
 }
 
 .dayWeek {

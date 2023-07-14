@@ -8,15 +8,25 @@ import { useTick } from "../../hooks/useTick";
 
 export interface ITimer {
     taskId: string
-    taskName: string;
+    taskDescr: string;
 }
 
-export function Timer({taskId, taskName}: ITimer) {
+export function Timer({taskId, taskDescr}: ITimer) {
     const { t } = useTranslation();
-    const { state, mode, minutes, seconds, series, clickStart, clickPause, clickStopped, clickMinutes, counterShort, counterPomodoros } = useTick();
+    const { 
+        state, 
+        mode, 
+        minutes, 
+        seconds, 
+        series, 
+        clickStart, 
+        clickPause, 
+        clickStopped, 
+        clickMinutes, 
+        counterShort, 
+    } = useTick();
     const min = minutes.toString().padStart(2, "0");
     const sec = seconds.toString().padStart(2, "00");
-    
     return (
         <I18nextProvider i18n={i18n}>
             <div id={taskId} className={styles.timer} >
@@ -24,10 +34,10 @@ export function Timer({taskId, taskName}: ITimer) {
                         {[styles.timerHeaderActive]: state == 'started' || state == 'paused'},
                         {[styles.timerHeaderBreak]: mode == 'short' || mode == 'long'},
                     )}>
-                    <h2 className={styles.timerTitle}>{taskName}</h2>
+                    <h2 className={styles.timerTitle}>{taskDescr}</h2>
                     <span id='counter' className={styles.countTomato}>
                         {/* {mode == "short" ? `${t("break")} 1` : `${t("tomato")} ${series}`} */}
-                        {mode === "long" || mode === "short" && state !== 'paused' ? `${t("break")} ${counterShort}` : `${t("tomato")} ${counterPomodoros}`}
+                        {mode === "long" || mode === "short" && state !== 'paused' ? `${t("break")} ${counterShort}` : `${t("tomato")} ${series}`}
                     </span>
                 </div>
                 <div className={styles.timerWrapper}>
@@ -45,7 +55,7 @@ export function Timer({taskId, taskName}: ITimer) {
                         </div>
                         <Button id='inc' icon={<Icons name={EIcons.btnPlus} />} className={styles.btnPlus} onClick={clickMinutes}/>
                     </div>
-                    <span className={styles.timerTask}>{t("task")} 1 - {taskName}</span>
+                    <span className={styles.timerTask}>{t("task")} 1 - {taskDescr}</span>
                         <div className={styles.btnBlock}>
                             <div className={styles.btnTimer}>
                                 <Button 

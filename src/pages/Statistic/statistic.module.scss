@@ -88,8 +88,13 @@
     flex-direction: row-reverse;
 }
 
-.blockMenu {
-    height: 5.37vh;
+.selectContainer {
+    /* height: 5.37vh; */
     width: 25.70vw;
     background: var(--grayF4);
+}
+
+.Select {
+    margin: auto;
+    width: 100%;
 }

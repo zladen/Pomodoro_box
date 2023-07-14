@@ -26,7 +26,7 @@ export interface ConfigState {
     playTickTockSoundWhileBreaks: boolean
     pomodoro: number
     rating: boolean    
-    remains: boolean
+    remains_minute: boolean
     report_daily: false
     report_time: number
     report_weekly: false
@@ -61,7 +61,7 @@ export const initialState: ConfigState = {
     playTickTockSoundWhileBreaks: false,
     pomodoro: 1500,
     rating: true,
-    remains: false,
+    remains_minute: false,
     report_daily: false,
     report_time: 8,
     report_weekly: false,
@@ -140,7 +140,7 @@ const configSlice = createSlice({
         },
 
         setRemains(state, action) {
-            state.remains = action.payload
+            state.remains_minute = action.payload
         },
 
         setNotifyDuration(state, action) {
@@ -148,7 +148,6 @@ const configSlice = createSlice({
         },
     },
 });
-export const selectPomodoro = (state: RootState): number => state.config.pomodoro;
 
 export const {
     setSoundAlerts,

@@ -14,7 +14,7 @@ i18n
         debug: false,
         fallbackLng: 'ru',
         interpolation: {
-        escapeValue: false, 
+            escapeValue: false, 
         }
     });
 

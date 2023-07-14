@@ -1,12 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { rootReducer } from '../store';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
+import { createTransform } from 'redux-persist';
 
 export type RootState = ReturnType<typeof rootReducer>
+
 export interface Task {
     id: string;
-    name: string;
+    descr: string;
     duration: number;
+    created: number;
 }
   
 export interface TasksState {
@@ -23,10 +26,11 @@ const tasksSlice = createSlice({
 
     reducers: {
         addTask(state, action) {
-            const id = nanoid(8);
+            const id = customAlphabet('1234567890abcdef', 10)();
             const newTask = {
                 id,
-                name: action.payload.name,
+                created: action.payload.created,
+                descr: action.payload.descr,
                 duration: action.payload.duration,
             };
             state.tasks[id] = newTask;
@@ -38,8 +42,8 @@ const tasksSlice = createSlice({
         },
 
         editTask(state, action) {
-            const { id, name } = action.payload;
-            state.tasks[id].name = name;
+            const { id, descr } = action.payload;
+            state.tasks[id].descr = descr;
         },
 
         removeTask(state, action) {

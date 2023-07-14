@@ -6,25 +6,31 @@ export type RootState = ReturnType<typeof rootReducer>
 export interface TimerState {
     duration: number
     endtime: number
-    mode: string,
-    remains: number
-    resumed: number
+    mode: string
+    remains: number | null
+    resumed: number | null
     series: number 
     started: number
     stopped: number    
     state: string
+    interruptions: number,
+    paused: number,
+    pausedTime: number,
 }
 
 export const initialState: TimerState = {
     duration: 0,
     endtime: 0,
     mode: 'pomodoro',
-    remains: 0,
-    resumed: 0,
-    series: 1, 
+    remains: null,
+    resumed: null,
+    series: 0, 
     started: 0,
     stopped: 0,    
     state: '',
+    interruptions: 0,
+    paused: 0,
+    pausedTime: 0,
 };
 
 const timerSlice = createSlice({
@@ -32,15 +38,7 @@ const timerSlice = createSlice({
     initialState,
     reducers: {
 
-        startedTimer: (state, action) => {
-            state.state = action.payload;
-        },
-
-        pausedTimer: (state, action) => {
-            state.state = action.payload;
-        },
-
-        stoppedTimer: (state, action) => {
+        stateTimer: (state, action) => {
             state.state = action.payload;
         },
 
@@ -71,19 +69,37 @@ const timerSlice = createSlice({
         setSeries: (state, action) => {
             state.series = action.payload;
         },
+
+        setStopped: (state, action) => {
+            state.stopped = action.payload;
+        },
+
+        setInterruptions: (state, action) => {
+            state.interruptions = action.payload
+        },
+
+        setPaused: (state, action) => {
+            state.paused = action.payload;
+        },
+
+        setPausedTime: (state, action) => {
+            state.pausedTime = action.payload;
+        },
     },
 });
 
 export const {
-    startedTimer, 
-    pausedTimer, 
-    stoppedTimer, 
+    stateTimer,
     setDuration, 
     setStarted, 
     setEndTime, 
     setRemains, 
     setResumed, 
     setMode, 
-    setSeries
+    setSeries,
+    setStopped,
+    setInterruptions,
+    setPaused,
+    setPausedTime
 } = timerSlice.actions;
 export default timerSlice.reducer;

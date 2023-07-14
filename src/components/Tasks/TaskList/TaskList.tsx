@@ -3,7 +3,7 @@ import { RootState } from '../../../store/reducers/tasksSlice';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './taskList.module.scss';
 import { useTranslation } from 'react-i18next';
-
+import { selectTasksArray } from '../Tasks';
 
 export interface Props {
     totalTaskCount: string;
@@ -11,12 +11,15 @@ export interface Props {
 
 export const TaskList = () => {
     const { t } = useTranslation();
-    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
-    const totalTasksTime = tasks.reduce((total, task) => total + task.duration, 0);
+    const tasks = useSelector(selectTasksArray);
+    const durationTask = tasks.reduce((total, task) => total + task.duration, 0);
+    const pomodoro = useSelector((state: RootState) => state.config.pomodoro);
+    const pomodoroTask = (pomodoro * durationTask) / 60;
+    
 
     const totalTaskCount = () => {
-        let hours = Math.floor( totalTasksTime / 60 );
-        let minutes = Math.floor( totalTasksTime % 60 );
+        let hours = Math.floor( pomodoroTask / 60 );
+        let minutes = Math.floor( pomodoroTask % 60 );
 
         let result = "";
         if (hours == 1 || hours == 21) {
@@ -55,7 +58,7 @@ export const TaskList = () => {
         <>
             <ol className={styles.taskList}>
                 {tasks.map((task, index) => (
-                    <TaskItem key={index} id={task.id} nameTask={task.name} />
+                    <TaskItem key={index} id={task.id} nameTask={task.descr} />
                 ))}
             </ol>
             <div className={styles.taskTime}>{totalTaskCount()}</div>

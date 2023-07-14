@@ -91,7 +91,7 @@ export const useShowAlerts = () => {
         setShowAlert(true);
     }
 
-   console.log(showAlert);
+   //console.log(showAlert);
 
     useEffect(() => {
         if (alerts) {

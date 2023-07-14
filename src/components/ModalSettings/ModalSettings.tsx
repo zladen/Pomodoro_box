@@ -67,10 +67,10 @@ export function ModalSetting({onClose}: IModalSetting) {
                         {activeTab === 'app' && (
                             <Application />
                         )}
+                    <div className={styles.btnBlock}>
+                        <Button className={styles.btnSave} label={t("label_cls") || ''} onClick={handleClose}/>
+                    </div>
                 </div> 
-                <div className={styles.btnBlock}>
-                    <Button className={styles.btnSave} label={t("label_cls") || ''} onClick={handleClose}/>
-                </div>
             </div>   
         </I18nextProvider>        
     ), node);

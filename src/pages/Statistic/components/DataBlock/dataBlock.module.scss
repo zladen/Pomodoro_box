@@ -21,3 +21,11 @@
     font-weight: 400;
     font-size: 4rem;
 }
+
+.wrapper {
+    height: 12.2vh;
+    width: 23.89vw;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}

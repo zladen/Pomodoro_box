@@ -15,5 +15,10 @@
 }
 
 .scaleDays {
+    cursor: pointer;
     color: var(--grey99);
+}
+
+.activeClass {
+    color: var(--red22);
 }

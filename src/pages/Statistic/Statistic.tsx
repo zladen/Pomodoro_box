@@ -1,11 +1,13 @@
 import { Header } from "../../components/Header";
-import { Menu } from "../../components/Menu";
-import { Dropdown } from "./components/Dropdown";
+import Select from "./components/Select/Select";
 import { InfoBlock } from "./components/infoBlock";
-
 import styles from './statistic.module.scss'
 
 export function Statistic() {
+
+    // const handleSelect = (item: any) => {
+    //     console.log('Selected Item', item);
+    // }
     
     return (
         <>
@@ -13,8 +15,15 @@ export function Statistic() {
             <div className={styles.container}>
                 <div className={styles.active}>
                     <h1 className={styles.title}>Ваша активность</h1>
-                    <div className={styles.blockMenu}>
-
+                    <div className={styles.selectContainer}>
+                        <Select
+                            data={[
+                                { id: 'thisWeek', value: 'Эта неделя' },
+                                { id: 'pastWeek', value: 'Прошедшая неделя' },
+                                { id: 'twoWeeksAgo', value: '2 недели назад' },
+                            ]}
+                            //onSelect={handleSelect}
+                        />
                     </div>
                 </div>
                 <InfoBlock/>

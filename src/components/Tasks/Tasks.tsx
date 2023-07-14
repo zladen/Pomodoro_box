@@ -4,29 +4,28 @@ import { RootState, Task, addTask, updateTask, updateTime } from "../../store/re
 import TaskForm from "./TaskForm/TaskForm";
 import TaskList from "./TaskList/TaskList";
 import styles from './tasks.module.scss'
+import { createSelector } from "@reduxjs/toolkit";
+
+export const selectTasks = (state: RootState) => state.tasks.tasks;
+
+export const selectTasksArray = createSelector(
+    selectTasks,
+    tasks => Object.values(tasks)
+);
 
 export function Tasks() {
     const config = useSelector((state: RootState) => state.config);
-    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
+    const tasks = useSelector(selectTasksArray);
     const {pomodoro} = config;
     const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState('');
 
-    useEffect(() => {
-        tasks.forEach(task => {
-            const updatedPomodoro = {
-                ...task,
-                duration: pomodoro / 60,
-            };
-            dispatch(updateTime(updatedPomodoro));
-        });
-    }, [dispatch, pomodoro]);
-
 
     const handleAddTask = () => {
-        const duration = pomodoro / 60
+        //const duration = pomodoro / 60;
+        const duration = 1;
         if (inputValue.trim().length) {
-            dispatch(addTask({ name: inputValue, duration }));
+            dispatch(addTask({ descr: inputValue, duration, created: Date.now() }));
             setInputValue('');
         }
     }
