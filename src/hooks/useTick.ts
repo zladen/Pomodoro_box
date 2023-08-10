@@ -19,7 +19,7 @@ import { useSoundAlerts } from './useSoundAlerts';
 import { useSystemNotify } from './useSystemNotify';
 import { useShowAlerts } from './useShowAlerts';
 import { setCompleted } from '../store/reducers/historySlice';
-import { selectLastTask } from '../components/Pomodoro';
+import { selectLastTask } from '../features/PomodoroPage/Pomodoro';
 
 export function useTick() {
     const { 

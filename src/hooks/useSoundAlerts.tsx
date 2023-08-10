@@ -2,14 +2,14 @@ import { useCallback, useEffect } from 'react'
 import { Howl } from 'howler';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setAlarmSound } from '../store/reducers/configSlice';
-import beep from '../assets/sounds/beep.mp3';
-import сuckoo from '../assets/sounds/сuckoo.mp3';
-import bugle from '../assets/sounds/bugle.mp3';
-import marimba from '../assets/sounds/marimba.mp3';
-import police from '../assets/sounds/police.mp3';
-import rynda from '../assets/sounds/rynda.mp3';
-import shutdown_xp from '../assets/sounds/shutdown_xp.mp3';
-import zero from '../assets/sounds/zero.mp3';
+import beep from '../lib/assets/sounds/beep.mp3';
+import сuckoo from '../lib/assets/sounds/сuckoo.mp3';
+import bugle from '../lib/assets/sounds/bugle.mp3';
+import marimba from '../lib/assets/sounds/marimba.mp3';
+import police from '../lib/assets/sounds/police.mp3';
+import rynda from '../lib/assets/sounds/rynda.mp3';
+import shutdown_xp from '../lib/assets/sounds/shutdown_xp.mp3';
+import zero from '../lib/assets/sounds/zero.mp3';
 
 export const useSoundAlerts = () => {
     const config = useSelector((state: RootState) => state.config);
