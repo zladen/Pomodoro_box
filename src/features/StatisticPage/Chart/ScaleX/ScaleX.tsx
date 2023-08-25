@@ -2,7 +2,7 @@ import styles from './scaleX.module.scss'
 import classNames from 'classnames';
 import { IBar } from '../Bar/Bar';
 
-export const ScaleX = ({ activeBar, onClick, days }: IBar) => {
+export const ScaleX = ({ activeBar, onClick }: IBar) => {
     return (
         <div className={styles.scaleXWrapper}>
             <div className={styles.scaleX}>

@@ -1,17 +1,15 @@
-import { EIcons, Icons } from '../Icons';
 import styles from './dataBlock.module.scss'
 
-interface IDataBlock {
+export interface IDataBlock {
     data?: string;
     icon?: React.ReactNode;
     title?: string;
     className?: string;
-    value?: number;
+    value?: string | number;
 }
 
 
-export function DataBlock({data, icon, title, className, value}: IDataBlock) {
-    
+export function DataBlock({icon, title, className, value}: IDataBlock) {
     return ( 
         <div className={className}>
             <div className={styles.wrapper}>

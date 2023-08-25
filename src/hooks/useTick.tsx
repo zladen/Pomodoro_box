@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { RootState, updateTask, updateTime } from '../store/reducers/tasksSlice';
+import { RootState } from '../store/reducers/configSlice';
 import { 
     setDuration, 
     setEndTime, 

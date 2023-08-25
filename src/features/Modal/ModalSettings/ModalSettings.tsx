@@ -25,17 +25,21 @@ export function ModalSetting({onClose}: IModalSetting) {
 
     const handleBackdropClick = (event: React.MouseEvent) => {
         if (event.target === event.currentTarget) {
-            navigate('.'); // Возвращаемся на текущий маршрут (закрываем /settings)
+            navigate('.');
         }
     };
     
+    // const handleClose = () => {
+    //     navigate('.');
+    //     if (onClose) {
+    //         onClose();
+    //     }
+    // };
     const handleClose = () => {
-        navigate('.');
-        if (onClose) {
-            onClose();
-        }
+        if (onClose) onClose();
+        navigate(location.pathname.replace('/settings', '')); // Удаление "/settings" из текущего пути
     };
-   
+
     const node = document.querySelector('#modal_root');
     if (!node) return null;
 

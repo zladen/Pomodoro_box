@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { rootReducer } from '../store';
 
 export type RootState = ReturnType<typeof rootReducer>
-
 export interface ConfigState {
     value: boolean
     alerts: boolean

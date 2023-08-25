@@ -58,5 +58,15 @@
     "long_break": "Long break",
     "timer": "Timer",
     "notify": "Notify",
-    "app": "Application"
+    "app": "Application",
+    "working_on_tasks": "You've been working on tasks for",
+    "no_data": "No data",
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wed": "Wednesday",
+    "thu": "Thursday",
+    "fri": "Friday",
+    "sat": "Saturday",
+    "sun": "Sunday"
+
 }

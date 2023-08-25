@@ -1,10 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { rootReducer } from '../store';
+import { createSlice } from '@reduxjs/toolkit'
 import { customAlphabet } from 'nanoid';
-import { createTransform } from 'redux-persist';
-
-export type RootState = ReturnType<typeof rootReducer>
-
 export interface Task {
     id: string;
     descr: string;

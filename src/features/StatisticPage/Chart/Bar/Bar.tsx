@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './bar.module.scss';
 import classNames from 'classnames';
+import { WeekDaysResult } from '../../../../constants';
 
 export interface IBar {
     activeBar: string;
     onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-    days: { 
-        day: string; 
-        tomatoes: number;
-        stops: number;
-    }[];
+    days: WeekDaysResult;
 }
 
 export const Bar = ({activeBar, onClick, days}: IBar) => {
-    // Найдите максимальное количество помидоров среди всех дней
-    const maxTomatoes = Math.max(...days.map(day => day.tomatoes));
-    const barHeight = 41.5; // Высота вашего контейнера столбика
+    const maxTomatoes = Math.max(...Object.values(days).map(day => day.tomatoes));
+    const barHeight = 41.5;
     const columnHeight = (tomatoes: number) => (tomatoes / maxTomatoes) * barHeight;
-    //const columnHeight = (tomatoes: number) => barHeight - (tomatoes / maxTomatoes) * barHeight;
 
     return (
         <div className={styles.bar}>
             <div className={styles.barWrapper}>
-            {days.map(day => (
-                <div
-                    key={day.day}
-                    id={day.day}
-                    onClick={onClick}
-                    className={classNames(styles.column, { [styles.activeClass]: day.day === activeBar })}
-                    style={{ height: `${columnHeight(day.tomatoes)}vh` }}
-                />
-            ))}
+                {Object.entries(days).map(([dayKey, dayData]) => (
+                    <div
+                        key={dayKey}
+                        id={dayKey}
+                        onClick={onClick}
+                        className={classNames(
+                            styles.column, 
+                            { 
+                                [styles.activeClass]: dayKey === activeBar,
+                                [styles.barNoData]: dayData.tomatoes === 0  // если нет данных, применяем стиль emptyBar
+                            }
+                        )}
+                        style={{ height: dayData.tomatoes !== 0 ? `${columnHeight(dayData.tomatoes)}vh` : 'auto' }}
+                    />
+                ))}
             </div>
         </div>
     )

@@ -1,0 +1,54 @@
+.cardTomatoesData {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.cardTomatoesDataIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.cardTomatoesDataValue {
+    color: var(--grey99);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 33px;
+    margin-left: 15px;
+}
+
+.cardTomatoesDescr {
+    width: 100%;
+    background: var(--red22);
+    display: flex;
+    width: 100%;
+    height: 4.98vh;
+    background: var(--red22);
+    color: var(--white);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 33px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardTomatoesText {
+    display: flex;
+    width: 100%;
+    height: 4.98vh;
+    background: var(--red22);
+    color: var(--white);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 33px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

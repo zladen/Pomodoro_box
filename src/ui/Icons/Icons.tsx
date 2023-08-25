@@ -13,6 +13,7 @@
 		PausedIcon, 
 		StoppedIcon, 
 		TomatoIcon,
+		TomatoesIcon
 	} from '.';
 
 export enum EIcons {
@@ -30,6 +31,7 @@ export enum EIcons {
 	paused = 'PausedIcon',
 	stopped = 'StoppedIcon',
 	tomato = 'TomatoIcon',
+	tomatoes = 'TomatoesIcon'
 }
 
 type TSizes = 16 | 17 | 24;
@@ -85,6 +87,9 @@ export function Icons(props: IIconProps) {
 
 		case EIcons.stopped:
 			return <StoppedIcon />;
+
+		case EIcons.tomatoes:
+			return <TomatoesIcon />;
 			
 		default: 
 			return <></>

@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, Task, addTask, updateTask, updateTime } from "../../../store/reducers/tasksSlice";
+import { RootState } from "../../../store/reducers/configSlice";
+import { addTask } from "../../../store/reducers/tasksSlice";
 import TaskForm from "./TaskForm/TaskForm";
 import TaskList from "./TaskList/TaskList";
 import styles from './tasks.module.scss'
@@ -14,15 +15,10 @@ export const selectTasksArray = createSelector(
 );
 
 export function Tasks() {
-    const config = useSelector((state: RootState) => state.config);
-    const tasks = useSelector(selectTasksArray);
-    const {pomodoro} = config;
     const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState('');
 
-
     const handleAddTask = () => {
-        //const duration = pomodoro / 60;
         const duration = 1;
         if (inputValue.trim().length) {
             dispatch(addTask({ descr: inputValue, duration, created: Date.now() }));

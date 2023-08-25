@@ -7,26 +7,13 @@ import {
     PAUSE, 
     PERSIST, 
     PURGE, 
-    REGISTER, 
-    createTransform
+    REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import tasksReducer from "./reducers/tasksSlice";
 import configReduser from "./reducers/configSlice";
 import timerReduser from "./reducers/timerSlice";
 import historyReduser from "./reducers/historySlice";
-
-// const customTransform = createTransform(
-//     (inboundState, key) => {
-//         //console.log(inboundState)
-//         return JSON.parse(JSON.stringify(inboundState));
-//     },
-//     (outboundState, key) => {
-//         console.log(outboundState)
-//         return outboundState;
-//     },
-//     { whitelist: ['tasks'] }
-// );
 
 export const rootReducer = combineReducers({
     tasks: persistReducer({

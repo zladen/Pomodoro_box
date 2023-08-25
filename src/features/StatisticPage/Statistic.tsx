@@ -1,14 +1,20 @@
+import { useState } from "react";
 import { Header } from "../../features/Common/Header";
 import Select from "../../ui/Select/Select";
 import { InfoBlock } from "./infoBlock";
 import styles from './statistic.module.scss'
+import { IntervalTimeProps, intervalTime } from "../../constants";
+import { useStatistic } from "../../hooks/useStatistic";
+
 
 export function Statistic() {
+    const [selectedInterval, setSelectedInterval] = useState<IntervalTimeProps>({ id: 'thisWeek', value: 'Эта неделя' });
+    const { tasksGroupedByDay } = useStatistic({ selectedInterval });
 
-    // const handleSelect = (item: any) => {
-    //     console.log('Selected Item', item);
-    // }
-    
+    const handleIntervalChange = (selected: IntervalTimeProps) => {
+        setSelectedInterval(selected);
+    };
+
     return (
         <>
             <Header />
@@ -17,16 +23,12 @@ export function Statistic() {
                     <h1 className={styles.title}>Ваша активность</h1>
                     <div className={styles.selectContainer}>
                         <Select
-                            data={[
-                                { id: 'thisWeek', value: 'Эта неделя' },
-                                { id: 'pastWeek', value: 'Прошедшая неделя' },
-                                { id: 'twoWeeksAgo', value: '2 недели назад' },
-                            ]}
-                            //onSelect={handleSelect}
+                            intervalTime={intervalTime}
+                            onSelect={handleIntervalChange}
                         />
                     </div>
                 </div>
-                <InfoBlock/>
+                <InfoBlock selectedInterval={selectedInterval} tasksData={tasksGroupedByDay} />
             </div>
         </>
     )

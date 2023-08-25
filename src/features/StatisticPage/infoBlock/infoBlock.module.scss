@@ -22,7 +22,6 @@
     justify-content: space-between;
 }
 
-
 .blockStopped {
     margin-top: 32px;
     display: flex;
@@ -36,35 +35,62 @@
     width: 28.13vw;
     height: 17.48vh;
     background: var(--grayF4);
-    /* padding: 25px; */
     justify-content: center;
     align-items: center;
 }
 
-.dayWeek {
+.cardWorkTime {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 20.56vw;
     height: 25.39vh;
     background: var(--grayF4);
     padding: 25px;
-    justify-content: space-between;
-    align-items: center; 
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-.countTomato {
+.cardTomatoes {
     display: flex;
-    flex-direction: row;
     width: 20.56vw;
     height: 17.48vh;
     background: var(--grayF4);
-    padding: 25px;
-    justify-content: space-between;
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
 }
 
 .activeWorks {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.cardFocus {
+    display: flex;
+    flex-direction: row;
+    width: 28.13vw;
+    height: 17.48vh;
+    justify-content: center;
+    align-items: center;
+    background: #FFDDA9;
+}
+
+.cardPaused {
+    display: flex;
+    flex-direction: row;
+    width: 28.13vw;
+    height: 17.48vh;
+    justify-content: center;
+    align-items: center;
+    background: #DFDCFE;
+}
+
+.cardStopped {
+    display: flex;
+    flex-direction: row;
+    width: 28.13vw;
+    height: 17.48vh;
+    justify-content: center;
+    align-items: center;
+    background: #C5F1FF;
 }

@@ -3,7 +3,8 @@ import { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { removeTask, RootState } from '../../../store/reducers/tasksSlice';
+import { RootState } from '../../../store/reducers/configSlice';
+import { removeTask } from '../../../store/reducers/tasksSlice';
 import styles from './modalRemoveTask.module.scss'
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../lib/i18n';
@@ -17,6 +18,8 @@ export function ModalRemoveTask({id, onClose}: IModal) {
     const { t } = useTranslation();
     const ref = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const task = useSelector((state: RootState) => state.tasks.tasks);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         function handleClick(event: MouseEvent) {
@@ -39,15 +42,10 @@ export function ModalRemoveTask({id, onClose}: IModal) {
         }
     };
 
-    const tasks = useSelector((state: RootState) => Object.values(state.tasks.tasks));
-    const dispatch = useDispatch();
-
 	const handleRemoveTask = () => {
-        const task = tasks.find(task => task.id === id);
         if (task) {
             dispatch(removeTask({ id }));
         }
-
         handleClose();
     }
     

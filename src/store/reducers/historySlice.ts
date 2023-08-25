@@ -1,28 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { rootReducer } from '../store';
 import { customAlphabet } from 'nanoid';
-
-export type RootState = ReturnType<typeof rootReducer>
 
 export interface Task {
     id: string;
     descr: string;
     duration: number;
     created: number;
+    started: number;
     interruptions: number;
     pausedTime: number;
 }
   
 export interface TasksState {
-    data: {
-        [taskId: string]: Task;
-    };
+    data:  Task[];
+    
 }
 
 const historySlice = createSlice({
     name: 'history',
     initialState: {
-        data: {},
+        data: [],
     } as TasksState,
 
     reducers: {
@@ -37,7 +34,7 @@ const historySlice = createSlice({
                 interruptions: action.payload.interruptions,
                 pausedTime: action.payload.pausedTime
             };
-            state.data[id] = newPomodoro;
+            state.data.push(newPomodoro);
         },
     },
 });
