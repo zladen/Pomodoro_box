@@ -21,7 +21,7 @@
 }
 
 .modal.open {
-    right: 50%; /* устанавливаем желаемое значение */
+    right: 50%;
 }
 
 .modalBackdrop {
@@ -107,16 +107,17 @@
 
 .btnSave {
     padding: 15px 50px;
-    width: 162px;
-    height: 55px;
+    width: 14.25vw;
+    height: 5.37vh;
     background: var(--green4F);
     color: var(--white);
-    text-align: center;
+    font-size: 16px;
 }
 
 .btnBlock {
-    display: flex;
-    justify-content: center;
-    z-index: 2;
+    position: absolute;
+    bottom: 3.9vh; 
+    left: 50%;
+    transform: translateX(-50%);
 }
 

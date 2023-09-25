@@ -1,11 +1,9 @@
 import React from 'react'
 import { Button } from '../../../../ui/Button/Button'
 import styles from './taskForm.module.scss';
-import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n from '../../../../lib/i18n';
+import { useTranslation } from 'react-i18next';
 
 export interface ITaskFormProps {
-    
     handleAddTask: () => void;
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,9 +13,9 @@ export interface ITaskFormProps {
 export const TaskForm = ({handleAddTask, handleInputChange, inputValue, handleKeyDown}: ITaskFormProps) => {
     const { t } = useTranslation();
     return (
-        <I18nextProvider i18n={i18n}>
+        <>
             <input 
-                className={styles.nameTask} 
+                className={`${styles.nameTask} task-enter`} 
                 type="text" placeholder={t('task_name') || ''} 
                 value={inputValue} 
                 onChange={handleInputChange} 
@@ -28,7 +26,7 @@ export const TaskForm = ({handleAddTask, handleInputChange, inputValue, handleKe
                 className={styles.btnAddTask} 
                 label={t("label_add") || ''}
             />
-         </I18nextProvider>
+        </>
     )
 }
 

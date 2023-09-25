@@ -13,6 +13,8 @@ export interface TimerState {
     interruptions: number,
     paused: number,
     pausedTime: number,
+    currentTaskId: string | null;
+    breaks: number;
 }
 
 export const initialState: TimerState = {
@@ -28,6 +30,8 @@ export const initialState: TimerState = {
     interruptions: 0,
     paused: 0,
     pausedTime: 0,
+    currentTaskId: '',
+    breaks: 1
 };
 
 const timerSlice = createSlice({
@@ -82,6 +86,17 @@ const timerSlice = createSlice({
         setPausedTime: (state, action) => {
             state.pausedTime = action.payload;
         },
+
+        setBreaks: (state, action) => {
+            state.breaks = action.payload;
+        },
+        
+        // setCurrentTaskId(state, action) {
+        //     state.currentTaskId = action.payload;
+        // },
+        // clearCurrentTaskId(state) {
+        //     state.currentTaskId = null;
+        // },
     },
 });
 
@@ -97,6 +112,9 @@ export const {
     setStopped,
     setInterruptions,
     setPaused,
-    setPausedTime
+    setPausedTime,
+    setBreaks
+    // setCurrentTaskId,
+    // clearCurrentTaskId
 } = timerSlice.actions;
 export default timerSlice.reducer;

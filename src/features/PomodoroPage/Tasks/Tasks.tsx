@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RootState } from "../../../store/reducers/configSlice";
 import { addTask } from "../../../store/reducers/tasksSlice";
 import TaskForm from "./TaskForm/TaskForm";
-import TaskList from "./TaskList/TaskList";
+import TaskList from "../Tasks/TaskList/TaskList";
 import styles from './tasks.module.scss'
 import { createSelector } from "@reduxjs/toolkit";
 

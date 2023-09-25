@@ -1,4 +1,3 @@
-import styles from './icons.module.scss'
 
 export const TomatoesIcon = () => {
     return (

@@ -57,7 +57,6 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
 					top: pos.top + 37,
 					left: pos.left + 30,
 				})
-				// console.log(pos);
 			}
 		}
 		

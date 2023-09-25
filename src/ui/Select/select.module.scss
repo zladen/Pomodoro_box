@@ -35,7 +35,7 @@ $height: 46px;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-        background: var(--grayF4);
+        background: var(--background_modal);
         border-bottom: 1px solid #DEDEDE;
         font-weight: 400;
         padding: 0 1.47vw;
@@ -74,6 +74,7 @@ $height: 46px;
         font-weight: 400;
         align-items: center;
         padding-left: 1.47vw;
+        background: var(--background_modal);
 
         &.selected {
             background-color: bisque;

@@ -82,3 +82,19 @@
     background-color: var(--white);
     z-index: 1;
 }
+
+.disabled {
+    color: var(--grey99);
+}
+
+.disabledIcon {
+	path {
+		fill: var(--greyC4);
+	}
+
+	g {
+		path {
+			fill: var(--greyC4);
+		}
+	} 
+}

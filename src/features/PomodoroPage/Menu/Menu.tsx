@@ -4,66 +4,36 @@ import { MenuItemsList } from './MenuItemsList';
 import { EIcons, Icons } from '../../../ui/Icons';
 import { Button } from '../../../ui/Button/Button';
 import { ModalRemoveTask } from '../../Modal/ModalRemoveTask';
-import { useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, updateTask, updateTime } from '../../../store/reducers/tasksSlice';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { selectTasksArray } from '../Tasks';
+import { useMenu } from '../../../hooks/useMenu';
 
-interface IMenu {
-	buttonClass?: string;
-	nameIcon?: EIcons;
-	buttonLabel?: string;
-	onClick?: () => void;
+interface IMenuItemsProps {
 	taskId?: string;
 	onEditNameTask?: () => void;
 }
 
-export function Menu(props: IMenu) {
-	const [isModalOpened, setIsModalOpened] = useState(false);
+export function Menu(props: IMenuItemsProps) {
 	const { t } = useTranslation();
-	const tasks = useSelector(selectTasksArray);
-	const dispatch = useDispatch();
-	const id = props.taskId;
-	const task = tasks.find((task) => task.id === id);
-	
-	const handleAddPomodoro = () => {
-		if (task) {
-				const updated = {
-				...task,
-				duration: task.duration + 1,
-			};
-			dispatch(updateTask(updated));
-		}
-	}
 
-	const handleShortPomodoro = () => {
-		if (task && task.duration >= 2) {
-			const updated = {
-				...task,
-				duration: task.duration - 1,
-			};
-			dispatch(updateTask(updated));
-		}
-	}
-
-	const handleEditNameTask = () => {
-		if (props.onEditNameTask) {
-		  	props.onEditNameTask();
-		}
-	};
+	const { 
+		isModalOpened, 
+		setIsModalOpened, 
+		handleAddPomodoro, 
+		handleShortPomodoro, 
+		handleEditNameTask
+	} = useMenu(props);
 
 	const menuItemsPomodoro = [
 		{ 
-			label: t("incr"), 
+			label: t("zoom_in"), 
 			icon: <Icons name={EIcons.plus} />, 
-			onClick:() => handleAddPomodoro(), 
+			onClick: () => handleAddPomodoro(), 
 			className: 'menuItem',  
 		},
 
 		{ 
-			label: t("decr"), 
+			label: t("zoom_out"), 
 			icon: <Icons name={EIcons.minus} />, 
 			onClick: () => handleShortPomodoro(), 
 			className: 'menuItem', 
@@ -72,7 +42,7 @@ export function Menu(props: IMenu) {
 		{ 
 			label: t("edit"), 
 			icon: <Icons name={EIcons.edit} />, 
-			onClick:() => handleEditNameTask(), 
+			onClick: () => handleEditNameTask(), 
 			className: 'menuItem' 
 		},
 		{ 

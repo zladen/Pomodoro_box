@@ -21,6 +21,7 @@
 	--text_color: #333333;
 	--background_modal: #FFFFFF;
 	--timer_header: #C4C4C4;
+	--lineChart: #333333;
 }
 
 [data-theme='dark'] {
@@ -28,6 +29,7 @@
 	--background_modal: #27293d;
 	--text_color: white;
 	--timer_header: #2b2e4c;
+	--lineChart: #C4C4C4;
 }
 
 * {

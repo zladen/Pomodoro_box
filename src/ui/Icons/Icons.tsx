@@ -4,7 +4,7 @@
 		EditIcon, 
 		ReductionIcon, 
 		DeleteIcon, 
-		StatisticIcon, 
+		StatisticsIcon, 
 		ArrowIcon, 
 		PlusIcon, 
 		CloseIcon, 
@@ -13,11 +13,12 @@
 		PausedIcon, 
 		StoppedIcon, 
 		TomatoIcon,
-		TomatoesIcon
+		TomatoesIcon,
+		LogoIcon
 	} from '.';
 
 export enum EIcons {
-	statistic = 'StatisticIcon',
+	statistics = 'StatisticIcon',
     plus = "IncreaseIcon",
     minus = 'ReductionIcon',
 	edit = 'EditIcon',
@@ -31,29 +32,27 @@ export enum EIcons {
 	paused = 'PausedIcon',
 	stopped = 'StoppedIcon',
 	tomato = 'TomatoIcon',
-	tomatoes = 'TomatoesIcon'
+	tomatoes = 'TomatoesIcon',
+	logo = 'LogoIcon'
 }
 
-type TSizes = 16 | 17 | 24;
-
-interface IIconProps {
+export interface IIconProps {
     name?: EIcons;
-    size?: TSizes;
-	className?: string;
+	className?: string | undefined;
 }
 
 export function Icons(props: IIconProps) {
-    const { name, size, className } = props;
+    const { name, className } = props;
 
     switch (name) {
-		case EIcons.statistic:
-			return <StatisticIcon />;
+		case EIcons.statistics:
+			return <StatisticsIcon />;
 
 		case EIcons.plus:
 			return <IncreaseIcon />;
 
 		case EIcons.minus:
-			return <ReductionIcon />;
+			return <ReductionIcon className={className}/>;
 				
 		case EIcons.edit:
 			return <EditIcon />;
@@ -76,7 +75,7 @@ export function Icons(props: IIconProps) {
 		case EIcons.settings:
 			return <SettingsIcon />;
 
-			case EIcons.tomato:
+		case EIcons.tomato:
 			return <TomatoIcon />;
 
 		case EIcons.focus:
@@ -90,6 +89,9 @@ export function Icons(props: IIconProps) {
 
 		case EIcons.tomatoes:
 			return <TomatoesIcon />;
+
+		case EIcons.logo:
+			return <LogoIcon />;
 			
 		default: 
 			return <></>

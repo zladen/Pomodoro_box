@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { RootState } from '../store/reducers/configSlice';
 import { 
+    setBreaks,
+    // clearCurrentTaskId,
+    // setCurrentTaskId,
     setDuration, 
     setEndTime, 
     setInterruptions, 
@@ -17,11 +20,22 @@ import {
 } from '../store/reducers/timerSlice';
 import { useSoundAlerts } from './useSoundAlerts';
 import { useSystemNotify } from './useSystemNotify';
-import { useShowAlerts } from './useShowAlerts';
 import { setCompleted } from '../store/reducers/historySlice';
 import { selectLastTask } from '../features/PomodoroPage/Pomodoro';
+import { useMenu } from './useMenu';
 
-export function useTick() {
+interface UseTimerProps {
+	taskId?: string;
+}
+
+const STARTED = 'started';
+const PAUSED = 'paused';
+const STOPPED = 'stopped';
+const POMODORO = 'pomodoro';
+const SHORT = 'short';
+const LONG = 'long';
+
+export function useTimer({taskId}: UseTimerProps) {
     const { 
         pomodoro, 
         short, 
@@ -29,9 +43,8 @@ export function useTick() {
         autoStartBreak, 
         autoStartPomodoro, 
         delay, 
-        notify, 
+        notify,
         remains_minute, 
-        alerts 
     } = useSelector((state: RootState) => state.config);
 
     const { 
@@ -45,8 +58,11 @@ export function useTick() {
         resumed,
         interruptions, 
         paused,
-        pausedTime 
+        pausedTime, 
+        breaks 
     } = useSelector((state: RootState) => state.timer);
+
+    const { handleCompletePomodoro } = useMenu({taskId});
 
     const lastTask = useSelector(selectLastTask);
     const { descr } = lastTask ?? {};
@@ -64,42 +80,52 @@ export function useTick() {
     }
 
     const [initialSeconds, initialMinutes] = initialTime();
+    const [minutes, setMinutes] = useState(initialMinutes);
+    const [seconds, setSeconds] = useState(initialSeconds);
 
     useEffect(() => {
         setMinutes(initialMinutes);
         setSeconds(initialSeconds);
-    }, [mode, duration, resumed, series]);
-  
-    const [minutes, setMinutes] = useState(initialMinutes);
-    const [seconds, setSeconds] = useState(initialSeconds);
-    const [counterShort, setСounterShort] = useState(1);
+    }, [duration]);
+    
+    //const [counterBreak, setCounterBreak] = useState(1);
     const { playAlarmSoundOnTickEnd } = useSoundAlerts();
     const { systemNotify } = useSystemNotify();
-    const { showAlertModal } = useShowAlerts();
     const dispatch = useDispatch();
-
     const intervalIdRef = useRef<number | NodeJS.Timeout>();
 
     useEffect(() => {
-        
-        if (mode === "pomodoro") {
+        if (mode === POMODORO) {
             dispatch(setDuration(pomodoro * 1000));
+            if (remains !== null) {
+                dispatch(setRemains(pomodoro * 1000));
+            }
         }
 
-        if (mode === 'short') {
+        if (mode === SHORT) {
             dispatch(setDuration(short * 1000))
+            if (remains !== null) {
+                dispatch(setRemains(short * 1000));
+            }
         }
 
-        if (mode === 'long') {
+        if (mode === LONG) {
             dispatch(setDuration(long * 1000))
+            if (remains !== null) {
+                dispatch(setRemains(long * 1000));
+            }
         }
+    }, [mode, pomodoro, short, long, remains]);
+
+    
+    useEffect(() => {
 
         if (state === 'started') {
             intervalIdRef.current = setInterval(() => {
-                setSeconds((prevValue) => prevValue > 0 ? prevValue - 1 : 59);
+                setSeconds((prevValue) => prevValue > 0 ? prevValue - 1 : 9);
                 setMinutes((prevValue) => prevValue > 0 && seconds === 0 ? prevValue - 1 : prevValue);
             }, 1000);
-        } 
+        }
             
         return () => clearInterval(intervalIdRef.current);
     }, [state, pomodoro, short, long, minutes, seconds]);
@@ -113,59 +139,86 @@ export function useTick() {
         dispatch(setInterruptions(0));
         dispatch(setPausedTime(0));
     }
-    
+
+    const handlePomodoroEnd = () => {
+        dispatch(setCompleted({ descr, duration: 1, created: Date.now() }));
+        dispatch(setSeries(series + 1));
+        resetTimer();
+
+        if (notify) {
+            systemNotify("Помидор закончился, начинаем перерыв");
+        }
+        playAlarmSoundOnTickEnd();
+
+        if (breaks > 0 && breaks % delay === 0) { 
+            dispatch(setMode(LONG));
+        } else {
+            dispatch(setMode(SHORT));
+        }
+        if (!autoStartBreak) {
+            dispatch(stateTimer(PAUSED));
+        }  
+    };
+
+    const handleBreakEnd = () => {
+        resetTimer();
+        if (notify) {
+            systemNotify("Перерыв закончился, начинаем помидор");
+        }
+        playAlarmSoundOnTickEnd();
+        if (mode === SHORT || LONG) {
+            //setCounterBreak((prevValue) => prevValue + 1);
+            dispatch(setBreaks(breaks + 1));
+        }
+        dispatch(setMode(POMODORO)); 
+        if (!autoStartPomodoro) {
+            dispatch(stateTimer(PAUSED));
+        } 
+    };
+
     useEffect(() => {
-        if (state === "started") {
+        if (state === STARTED) {
+            // Срабатывает звуковой сигнал и уведомление, если осталась 1 минута
             if (minutes <= 1 && seconds === 0) {
                 if (remains_minute) {
                     playAlarmSoundOnTickEnd();
                 }
-
+    
                 if (notify && minutes !== 0) {
                     systemNotify("До завершения меньше одной минуты");
                 }
             }
 
-            if (mode === "pomodoro" && minutes === 0 && seconds === 0) {
-                //dispatch(setSeries(series + 1))
-
-                dispatch(setCompleted({ descr, duration: 1, created: Date.now() }));
-                resetTimer();
-                if (notify) {
-                    systemNotify("Помидор закончился, начинаем перерыв");
+            if (minutes === 0 && seconds === 0) {
+                if (mode === POMODORO) {
+                    handlePomodoroEnd();
+                    handleCompletePomodoro();
+                } else if (mode === SHORT || mode === LONG) {
+                    handleBreakEnd();
                 }
-
-                playAlarmSoundOnTickEnd();
-                if (counterShort % delay === 0) {
-                    dispatch(setMode("long"));
-                    setСounterShort(0);
-                } else {
-                    dispatch(setMode("short"))
-                }
-                if (!autoStartBreak) {
-                    dispatch(stateTimer("paused"));
-                }  
-
-            } else if ((mode === "short" || mode === "long") && minutes === 0 && seconds === 0) {
-                resetTimer();
-                if (notify) {
-                    systemNotify("Перерыв закончился, начинаем помидор");
-                }
-
-                playAlarmSoundOnTickEnd();
-                if (mode === "short") {
-                    setСounterShort((prevValue) => prevValue + 1);
-                }
-                dispatch(setMode("pomodoro")); 
-                if (!autoStartPomodoro) {
-                    dispatch(stateTimer("paused"));
-                } 
             }
         }
-    }, [seconds, minutes]);
+    }, [state, minutes, seconds]); 
+
+    useEffect(() => {
+        // Если lastTask не определен или является пустым объектом
+        if (!lastTask || Object.keys(lastTask).length === 0) {
+            // Возвращаем таймер в исходное состояние
+            dispatch(stateTimer(''));
+            resetTimer(); // Вызываем функцию сброса таймера
+            dispatch(setMode(POMODORO));
+            dispatch(setSeries(0));
+            dispatch(setBreaks(1));
+            //setCounterBreak(1);
+            clearInterval(intervalIdRef.current); // Очищаем текущий интервал
+            setMinutes(Math.floor(duration / 1000 / 60));
+            setSeconds(Math.floor((duration / 1000) % 60));
+        }
+    }, [lastTask]);
 
     const clickStart = () => {
-        dispatch(stateTimer('started'));
+        dispatch(stateTimer(STARTED));
+        // dispatch(setCurrentTaskId(taskId));
         const nowTime = Date.now();
         if (started === 0) {
             if (series === 0) {
@@ -179,30 +232,30 @@ export function useTick() {
             dispatch(setResumed(nowTime));
             dispatch(setEndTime(nowTime + roundedRemains));
             dispatch(setPausedTime(pausedTime + (nowTime - paused)));  
-
         }
     }
 
     const clickPause = () => {
-        dispatch(stateTimer('paused'));
+        dispatch(stateTimer(PAUSED));
         dispatch(setPaused(Date.now()));
         dispatch(setRemains(endtime - Date.now()));
         dispatch(setInterruptions(interruptions + 1));
     }
 
     const clickStopped = () => {
-        dispatch(stateTimer('stopped'));
+        dispatch(stateTimer(STOPPED));
+        //dispatch(clearCurrentTaskId());
         resetTimer();
         clearInterval(intervalIdRef.current);
-        setMinutes(initialMinutes);
-        setSeconds(initialSeconds);
+        setMinutes(Math.floor(duration / 1000 / 60));
+        setSeconds(Math.floor((duration / 1000) % 60));
         
-
-        if (state === 'pomodoro') {
+        if (state === POMODORO) {
             dispatch(setStopped(Date.now()));
         }
 
-        if (mode === 'pomodoro' && state === 'paused') {
+        if (mode === POMODORO && state === PAUSED) {
+            handleCompletePomodoro()
             dispatch(setSeries(series + 1));
             dispatch(setCompleted({ 
                 descr, 
@@ -212,10 +265,14 @@ export function useTick() {
                 interruptions: interruptions,
                 pausedTime: pausedTime + (Date.now() - paused)
             }));
-        } else if (mode === 'short' || mode === 'long') {
+
+        } else if (mode === SHORT || mode === LONG) {
+            dispatch(setBreaks(breaks + 1));
             dispatch(setMode("pomodoro"));
-        } else if (mode === 'pomodoro' && series > 0) {
-            setСounterShort(1);
+        } else if (mode === POMODORO && state === STOPPED) {
+            return
+        } else if (mode === POMODORO && series > 0) {
+            //setCounterBreak(1);
             dispatch(setSeries(series - 1));
         }
     }
@@ -231,10 +288,11 @@ export function useTick() {
         minutes,
         seconds,
         series,
+        breaks,
         clickStart,
         clickPause,
         clickStopped,
         clickMinutes,
-        counterShort,
+        //counterBreak,
     };
 }

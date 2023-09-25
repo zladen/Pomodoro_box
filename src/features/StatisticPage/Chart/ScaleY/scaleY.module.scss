@@ -3,7 +3,7 @@
     height: 100%;
     display: flex;
     font-size: 1.5rem;
-    background: var(--grayF4);
+    background: var(--background_modal);
     justify-content: space-between;
     flex-direction: row-reverse;
 }
@@ -33,7 +33,7 @@
 }
 
 .line {
-    background: var(--black);
+    background: var(--lineChart);
     height: 0.1vh;
     opacity: 0.2;
 }

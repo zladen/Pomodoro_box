@@ -1,3 +1,5 @@
+import { TFunction } from 'i18next';
+
 export type WeekDaysResult = {
     [key: string]: {
         tomatoes: number;
@@ -7,7 +9,12 @@ export type WeekDaysResult = {
         totalTime: number;
     };
 };
+export interface IntervalTimeProps {
+    id: string;
+    value: string;
+}
 
+export const daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 export const defaultStatisticData: WeekDaysResult = {
     'mon': { tomatoes: 0, focus: 0, paused: 0, stopped: 0, totalTime: 0 },
     'tue': { tomatoes: 0, focus: 0, paused: 0, stopped: 0, totalTime: 0 },
@@ -18,13 +25,10 @@ export const defaultStatisticData: WeekDaysResult = {
     'sun': { tomatoes: 0, focus: 0, paused: 0, stopped: 0, totalTime: 0 }
 };
 
-export interface IntervalTimeProps {
-    id: string;
-    value: string;
+export function getIntervalTime(t: TFunction): IntervalTimeProps[] {
+    return [
+        { id: 'thisWeek', value: t("this_week") },
+        { id: 'lastWeek', value: t("last_week") },
+        { id: 'twoWeeksAgo', value: t("two_weeks_ago") },
+    ];
 }
-
-export const intervalTime: IntervalTimeProps[] = [
-    { id: 'thisWeek', value: 'Эта неделя' },
-    { id: 'lastWeek', value: 'Прошедшая неделя' },
-    { id: 'twoWeeksAgo', value: '2 недели назад' },
-];

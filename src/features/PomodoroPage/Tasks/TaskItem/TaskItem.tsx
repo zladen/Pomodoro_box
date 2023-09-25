@@ -4,6 +4,7 @@ import { editTask } from '../../../../store/reducers/tasksSlice';
 import { Menu } from '../../Menu';
 import { selectTasksArray } from '../Tasks';
 import styles from './taskItem.module.scss';
+import { motion } from 'framer-motion';
 
 export interface TaskItemProps {
     nameTask: string;
@@ -18,13 +19,19 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
     const tasks = useSelector(selectTasksArray);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const listItemVariants = {
+        hidden: { opacity: 0, y: -10 },
+        visible: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: 10 }
+    };
+
     useEffect(() => {
         if (typeof taskName !== 'undefined') {
             if (taskName.length > maxLength) {
                 setTaskName(taskName.slice(0, maxLength));
             }
         }
-    }, [taskName, nameTask, maxLength]);
+    }, [taskName, maxLength]);
 
     const handleEditNameTask = () => {
     	setIsEditing(true);
@@ -35,7 +42,7 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
 		if (task) {
 			const updatedTask = {
 				...task,
-				name: taskName,
+				descr: taskName,
 			};
 			dispatch(editTask(updatedTask));
 			setIsEditing(false);
@@ -50,7 +57,13 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
 
     return (
         <>
-            <li id={id} className={styles.itemTask} >
+            <motion.li id={id} className={styles.itemTask} 
+                key={id}
+                variants={listItemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+            >
                 {isEditing ? (
                     <span >
                         <input
@@ -67,7 +80,7 @@ export const TaskItem = ({nameTask, id, maxLength = 100}: TaskItemProps) => {
                     <span>{nameTask}</span> 
                 )}
                 <Menu taskId={id} onEditNameTask={handleEditNameTask} /> 
-            </li> 
+            </motion.li> 
         </>
         
     )

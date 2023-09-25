@@ -53,17 +53,17 @@ export function ModalRemoveTask({id, onClose}: IModal) {
     if (!node) return null;
 
     return ReactDOM.createPortal((
-        <I18nextProvider i18n={i18n}>
-            <div className={styles.modalBackdrop}>
-                <div className={styles.modal}>
-                    <div className={styles.modalСontent}>
-                        <span className={styles.close} onClick={handleClose}>&times;</span>
-                        <h3 className={styles.modalTitle}>{t("task_del")}</h3>
-                        <Button className={styles.modalBtnDel} onClick={handleRemoveTask} label={(t("label_del")) || ''}/>
-                        <Button className={styles.modalBtnСancel} onClick={handleClose} label={(t("label_cls")) || ''}/>
-                    </div>
+        
+        <div className={styles.modalBackdrop}>
+            <div className={styles.modal}>
+                <div className={styles.modalСontent}>
+                    <span className={styles.close} onClick={handleClose}>&times;</span>
+                    <h3 className={styles.modalTitle}>{t("task_del")}</h3>
+                    <Button className={styles.modalBtnDel} onClick={handleRemoveTask} label={(t("label_del")) || ''}/>
+                    <Button className={styles.modalBtnСancel} onClick={handleClose} label={(t("label_cls")) || ''}/>
                 </div>
             </div>
-        </I18nextProvider>
+        </div>
+
     ), node);
 }

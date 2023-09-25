@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import styles from './field.module.scss'
-import { RootState } from '../../../../store/reducers/tasksSlice';
+import { RootState } from '../../../../store/reducers/configSlice';
 import { useSystemNotify } from '../../../../hooks/useSystemNotify';
 
 interface IField {

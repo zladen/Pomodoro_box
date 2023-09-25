@@ -10,3 +10,16 @@
     margin-top: 20px;
     color: var(--grey99);
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.task-enter {
+    animation: fadeIn 0.5s forwards;
+}

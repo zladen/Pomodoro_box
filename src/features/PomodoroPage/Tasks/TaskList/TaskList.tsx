@@ -1,24 +1,30 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/reducers/configSlice';
-import { selectTasksArray } from '../Tasks';
-import { formatedDuration } from '../../../../utils/helpers/formatedDuration';
+import { selectTasksArray } from '../../Tasks';
+import { universalFormatter } from '../../../../utils/helpers/universalFormatter';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './taskList.module.scss';
+import { useTranslation } from 'react-i18next';
+import { AnimatePresence } from 'framer-motion';
+
 
 export const TaskList = () => {
+    const { t } = useTranslation();
     const tasks = useSelector(selectTasksArray);
     const durationTask = tasks.reduce((total, task) => total + task.duration, 0);
     const pomodoro = useSelector((state: RootState) => state.config.pomodoro);
-    const pomodoroTask = (pomodoro * durationTask) * 60000;
+    const pomodoroTask = (pomodoro * durationTask) * 1000;
 
     return (
         <>
             <ol className={styles.taskList}>
-                {tasks.map((task, index) => (
-                    <TaskItem key={index} id={task.id} nameTask={task.descr} />
-                ))}
+                <AnimatePresence>
+                    {tasks.map((task, index) => (
+                        <TaskItem key={index} id={task.id} nameTask={task.descr} />   
+                    ))}
+                </AnimatePresence>
             </ol>
-            <div className={styles.taskTime}>{formatedDuration(pomodoroTask)}</div>
+            <div className={styles.taskTime}>{universalFormatter(pomodoroTask, 'totalTime', t)}</div>
         </>
     )
 }

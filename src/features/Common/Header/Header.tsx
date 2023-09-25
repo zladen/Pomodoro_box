@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { StatisticLink } from './StatisticLink'
-import { Logo } from './Logo'
+import { useState } from 'react'
+import { StatisticsLink } from './StatisticLink/StatistiсLink'
+import { Logo } from './Logo/Logo'
 import styles from './header.module.scss'
 import { EIcons, Icons } from '../../../ui/Icons'
 import { Button } from "../../../ui/Button/Button";
@@ -26,7 +26,7 @@ export function Header() {
             <div className={styles.container}>
                 <Logo />
                 <Button icon={<Icons name={EIcons.settings} />} onClick={handleSettingsClick}/>
-                <StatisticLink />
+                <StatisticsLink />
                 {isModalSettingOpened && (
                     <ModalSetting onClose={() => { setIsModalSettingOpened(false) }} />
                 )}

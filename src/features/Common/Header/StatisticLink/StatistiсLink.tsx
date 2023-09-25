@@ -1,14 +1,16 @@
-import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { EIcons, Icons } from '../../../../ui/Icons/Icons';
+import styles from './StatisticLink.module.scss'
+import { useTranslation } from 'react-i18next';
 
-
-// Картинка и ссылка должны менять цвет при наведении.
-export const StatisticLink = () => {
+export const StatisticsLink = () => {
+    const { t } = useTranslation();
     return (
-        <Link to="/statistic">
-            <Icons name={EIcons.statistic} />
+        <Link to="/statistics">
+            <div className={styles.statisticsLink}>
+                <Icons name={EIcons.statistics} />
+                <span className={styles.statisticsLinkText}>{t("statistics")}</span>
+            </div>
         </Link>
     );  
 }
-

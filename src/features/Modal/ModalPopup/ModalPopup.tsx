@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './modalPopup.module.scss'
 import classNames from "classnames";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducers/tasksSlice";
+import { RootState } from "../../../store/reducers/configSlice";
 export interface IModal {
     onClose?: () => void;
     id?: string;

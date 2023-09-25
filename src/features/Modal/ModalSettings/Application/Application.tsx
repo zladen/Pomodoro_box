@@ -19,18 +19,16 @@ export const Application = () => {
     };
 
     return (
-        <I18nextProvider i18n={i18n}>
-            <div className={styles.application} >
-                <div className={styles.soundsAlert}>
-                    <div className={styles.theme}>
-                        <label>{labelTheme()}</label>
-                        <Theme />
-                    </div>
-                    <div className={styles.locale}> 
-                        <TimeZone />
-                    </div>
+        <div className={styles.application} >
+            <div className={styles.soundsAlert}>
+                <div className={styles.theme}>
+                    <label>{labelTheme()}</label>
+                    <Theme />
+                </div>
+                <div className={styles.locale}> 
+                    <TimeZone />
                 </div>
             </div>
-        </I18nextProvider>
+        </div>
     )
 }

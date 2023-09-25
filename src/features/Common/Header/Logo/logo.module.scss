@@ -2,7 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover {
+        .headerLogoText {
+          color: var(--red0F);
+        }
+    
+        svg path,
+        svg g path {
+          fill: var(--red0F);
+        }
+    }
 }
+
 
 .headerLogoText {
     display: flex;

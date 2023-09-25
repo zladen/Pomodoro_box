@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/reducers/tasksSlice";
-import { useTick } from "./useTick";
+import { useTick } from "./useTimer";
 import { useCallback, useEffect, useState } from "react";
 import { ModalPopup } from "../features/ModalPopup/ModalPopup";
 import { setAlerts } from "../store/reducers/configSlice";

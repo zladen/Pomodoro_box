@@ -2,7 +2,7 @@ import styles from "./theme.module.scss";
 import { useCallback, useEffect } from "react";
 import { useTheme } from "../../../../../hooks/useTheme";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../../store/reducers/tasksSlice";
+import { RootState } from "../../../../../store/reducers/configSlice";
 import { useSystemNotify } from "../../../../../hooks/useSystemNotify";
 
 export const Theme = () => {

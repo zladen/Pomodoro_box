@@ -2,7 +2,7 @@ import i18n from "i18next";
 import styles from "./locale.module.scss"
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/reducers/tasksSlice";
+import { RootState } from "../../../../store/reducers/configSlice";
 import { useSystemNotify } from "../../../../hooks/useSystemNotify";
 
 export const Locale = () => {

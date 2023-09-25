@@ -11,6 +11,7 @@ export interface CardWorkTimeProps {
 
 export function CardWorkTime({title, className, value}: CardWorkTimeProps) {
     const { t } = useTranslation();
+
     return ( 
         <I18nextProvider i18n={i18n}>
             <div className={className}>

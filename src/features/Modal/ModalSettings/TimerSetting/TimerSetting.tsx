@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import styles from './timerSetting.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../store/reducers/tasksSlice';
+import { RootState } from '../../../../store/reducers/configSlice';
 import { useTranslation } from 'react-i18next';
 import Switch from '../../../../ui/Switch/Switch';
 import { 

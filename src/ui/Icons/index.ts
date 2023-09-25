@@ -5,7 +5,7 @@ export * from './EditIcon';
 export * from './ReductionIcon';
 export * from './DeleteIcon';
 export * from './PlusIcon';
-export * from './StatisticIcon';
+export * from './StatisticsIcon';
 export * from './ArrowIcon';
 export * from './CloseIcon';
 export * from './SettingsIcon'
@@ -14,3 +14,4 @@ export * from './FocusIcon';
 export * from './PausedIcon';
 export * from './StoppedIcon';
 export * from './TomatoesIcon';
+export * from './LogoIcon';
