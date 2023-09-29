@@ -3,3 +3,13 @@
     flex-wrap: wrap;
     flex-direction: column;
 }
+
+.alert {
+    background-color: var(--red22); // Красный цвет
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+    width: 370px;
+}

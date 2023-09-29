@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { RootState } from '../store/reducers/configSlice';
 import { 
     setBreaks,
-    // clearCurrentTaskId,
-    // setCurrentTaskId,
     setDuration, 
     setEndTime, 
+    setIndex, 
     setInterruptions, 
     setMode, 
+    setNumberTask, 
     setPaused, 
     setPausedTime, 
     setRemains, 
@@ -59,10 +59,14 @@ export function useTimer({taskId}: UseTimerProps) {
         interruptions, 
         paused,
         pausedTime, 
-        breaks 
+        indexTask,
+        breaks, 
+        numberTask
     } = useSelector((state: RootState) => state.timer);
 
-    const { handleCompletePomodoro } = useMenu({taskId});
+
+
+    const { handleCompletePomodoro, tasks } = useMenu({taskId});
 
     const lastTask = useSelector(selectLastTask);
     const { descr } = lastTask ?? {};
@@ -88,7 +92,6 @@ export function useTimer({taskId}: UseTimerProps) {
         setSeconds(initialSeconds);
     }, [duration]);
     
-    //const [counterBreak, setCounterBreak] = useState(1);
     const { playAlarmSoundOnTickEnd } = useSoundAlerts();
     const { systemNotify } = useSystemNotify();
     const dispatch = useDispatch();
@@ -167,9 +170,11 @@ export function useTimer({taskId}: UseTimerProps) {
         }
         playAlarmSoundOnTickEnd();
         if (mode === SHORT || LONG) {
-            //setCounterBreak((prevValue) => prevValue + 1);
             dispatch(setBreaks(breaks + 1));
+            // const totalNumberOfTasks = tasks.length; // где tasks - это массив всех ваших задач.
+			// dispatch(setIndex(totalNumberOfTasks));
         }
+        
         dispatch(setMode(POMODORO)); 
         if (!autoStartPomodoro) {
             dispatch(stateTimer(PAUSED));
@@ -191,8 +196,8 @@ export function useTimer({taskId}: UseTimerProps) {
 
             if (minutes === 0 && seconds === 0) {
                 if (mode === POMODORO) {
-                    handlePomodoroEnd();
                     handleCompletePomodoro();
+                    handlePomodoroEnd();
                 } else if (mode === SHORT || mode === LONG) {
                     handleBreakEnd();
                 }
@@ -201,7 +206,6 @@ export function useTimer({taskId}: UseTimerProps) {
     }, [state, minutes, seconds]); 
 
     useEffect(() => {
-        // Если lastTask не определен или является пустым объектом
         if (!lastTask || Object.keys(lastTask).length === 0) {
             // Возвращаем таймер в исходное состояние
             dispatch(stateTimer(''));
@@ -209,8 +213,9 @@ export function useTimer({taskId}: UseTimerProps) {
             dispatch(setMode(POMODORO));
             dispatch(setSeries(0));
             dispatch(setBreaks(1));
-            //setCounterBreak(1);
-            clearInterval(intervalIdRef.current); // Очищаем текущий интервал
+            //dispatch(setIndex(1));
+            dispatch(setNumberTask(1))
+            clearInterval(intervalIdRef.current);
             setMinutes(Math.floor(duration / 1000 / 60));
             setSeconds(Math.floor((duration / 1000) % 60));
         }
@@ -218,7 +223,6 @@ export function useTimer({taskId}: UseTimerProps) {
 
     const clickStart = () => {
         dispatch(stateTimer(STARTED));
-        // dispatch(setCurrentTaskId(taskId));
         const nowTime = Date.now();
         if (started === 0) {
             if (series === 0) {
@@ -244,7 +248,6 @@ export function useTimer({taskId}: UseTimerProps) {
 
     const clickStopped = () => {
         dispatch(stateTimer(STOPPED));
-        //dispatch(clearCurrentTaskId());
         resetTimer();
         clearInterval(intervalIdRef.current);
         setMinutes(Math.floor(duration / 1000 / 60));
@@ -272,7 +275,6 @@ export function useTimer({taskId}: UseTimerProps) {
         } else if (mode === POMODORO && state === STOPPED) {
             return
         } else if (mode === POMODORO && series > 0) {
-            //setCounterBreak(1);
             dispatch(setSeries(series - 1));
         }
     }
@@ -289,10 +291,11 @@ export function useTimer({taskId}: UseTimerProps) {
         seconds,
         series,
         breaks,
+        indexTask,
         clickStart,
         clickPause,
         clickStopped,
         clickMinutes,
-        //counterBreak,
+        numberTask
     };
 }

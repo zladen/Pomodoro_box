@@ -1,55 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './dropdown.module.scss';
+import useDropdown from '../../hooks/useDropdown';
+
 
 interface IDropdownProps {
-	button?: React.ReactNode;
-	children: React.ReactNode;
-	isOpen?: boolean;
-	onOpen?: () => void;
-	onClose?: () => void;
-	language: string;
+    button?: React.ReactNode;
+    children: React.ReactNode;
+    isOpen?: boolean;
+    onOpen?: () => void;
+    onClose?: () => void;
 }
 
-const NOOP = () => {};
+export function Dropdown({button, children, isOpen, onClose, onOpen}: IDropdownProps) {
+    const { isOpen: isDropdownOpen, setIsOpen, dropdownRef, buttonRef } = useDropdown({
+        isOpen,
+        onOpen,
+        onClose
+    });
 
-export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOOP, language}: IDropdownProps) {
-	const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
-	useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
-	useEffect(() => isDropdownOpen ? onOpen() : onClose(), [isDropdownOpen]);
+    const handleOpen = () => {
+        setIsOpen(prev => !prev);
+    }
 
-	const handleOpen = () => {
-		if (isOpen === undefined) {
-		  	setIsDropdownOpen(!isDropdownOpen);
-			if (!isDropdownOpen) {
-				onCloseAll();
-			}
-		} else {
-		  	setIsDropdownOpen(isOpen);
-			if (isOpen) {
-				onCloseAll();
-			}
-		}
-	}
-
-	const onCloseAll = () => {
-		const dropdowns = document.querySelectorAll(`.${styles.listContainer}`);
-		if (dropdowns) {
-			dropdowns.forEach(dropdown => {
-				if (dropdown.parentNode) {
-					dropdown.parentNode.removeChild(dropdown);
-				}
-			});
-		}
-	};
-
-	const menuNode = document.querySelector('#menu_root');
-    if (!menuNode) return null;
-
-	const buttonRef = useRef<HTMLDivElement>(null);
-	const [position, setPosition] = useState({ top: 0, left: 0 });
-
-	useEffect(() => {
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+		useEffect(() => {
 		function updatePos() {
 			if (buttonRef.current !== null) {
 				const pos = buttonRef.current.getBoundingClientRect();
@@ -71,15 +46,15 @@ export function Dropdown({button, children, isOpen, onClose = NOOP, onOpen = NOO
 
 	}, [isDropdownOpen]);
 
-	return(
-		<div className={styles.dropdownBtnContainer}>
-			<div ref={buttonRef} onClick={handleOpen}>{ button }</div>
-			{isDropdownOpen && ReactDOM.createPortal(
-				<div className={styles.dropdownContainer} style={{top: `${position.top}px`, left: `${position.left}px`}}>
-					<div className={styles.dropdownListContainer} onClick={() => setIsDropdownOpen(false)}>{children}</div>
-				</div>,
-				menuNode,
-			)}
-		</div>
-	);
+    return(
+        <div className={styles.dropdownBtnContainer}>
+            <div ref={buttonRef} onClick={handleOpen}>{ button }</div>
+            {isDropdownOpen && ReactDOM.createPortal(
+                <div ref={dropdownRef} className={styles.dropdownContainer} style={{top: `${position.top}px`, left: `${position.left}px`}}>
+                    <div className={styles.dropdownListContainer} onClick={() => setIsOpen(false)}>{children}</div>
+                </div>,
+                document.querySelector('#menu_root')!,
+            )}
+        </div>
+    );
 }

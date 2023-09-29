@@ -9,14 +9,12 @@ export interface Task {
 
 interface TasksState {
     tasks: Record<string, Task>;
-    currentTaskId: string | null;  // <-- новое поле
 }
 
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: {
         tasks: {},
-        currentTaskId: null,
     } as TasksState,
 
     reducers: {
@@ -29,10 +27,6 @@ const tasksSlice = createSlice({
                 duration: action.payload.duration,
             };
             state.tasks[id] = newTask;
-        },
-
-        setCurrentTask: (state, action: PayloadAction<string>) => {
-            state.currentTaskId = action.payload;  // <-- устанавливаем текущую задачу
         },
 
         updateTime(state, action) {
@@ -59,6 +53,6 @@ const tasksSlice = createSlice({
     },
 });
 
-export const {addTask, setCurrentTask, removeTask, editTask, updateTime, updateTask } = tasksSlice.actions;
+export const {addTask, removeTask, editTask, updateTime, updateTask } = tasksSlice.actions;
 export default tasksSlice.reducer;
 

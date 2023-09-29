@@ -18,20 +18,20 @@ export function Timer({taskId, taskDescr}: ITimer) {
     const { t } = useTranslation();
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
     const [scale, setScale] = useState(1);
-    const [numberTask, setNumberTask] = useState(1)
-
+    
     const { 
         state, 
         mode, 
         minutes, 
         seconds, 
         series,
-        breaks, 
+        breaks,
+        indexTask, 
         clickStart, 
         clickPause, 
         clickStopped, 
-        clickMinutes, 
-        //counterBreak 
+        clickMinutes,
+        numberTask  
     } = useTimer({taskId});
 
     const min = minutes.toString().padStart(2, "0");

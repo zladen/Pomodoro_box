@@ -13,8 +13,9 @@ export interface TimerState {
     interruptions: number,
     paused: number,
     pausedTime: number,
-    currentTaskId: string | null;
     breaks: number;
+    indexTask: number;
+    numberTask: number;
 }
 
 export const initialState: TimerState = {
@@ -30,8 +31,9 @@ export const initialState: TimerState = {
     interruptions: 0,
     paused: 0,
     pausedTime: 0,
-    currentTaskId: '',
-    breaks: 1
+    breaks: 1,
+    indexTask: 1,
+    numberTask: 1
 };
 
 const timerSlice = createSlice({
@@ -90,13 +92,20 @@ const timerSlice = createSlice({
         setBreaks: (state, action) => {
             state.breaks = action.payload;
         },
-        
-        // setCurrentTaskId(state, action) {
-        //     state.currentTaskId = action.payload;
-        // },
-        // clearCurrentTaskId(state) {
-        //     state.currentTaskId = null;
-        // },
+
+        setIndex: (state) => {
+            state.indexTask += 1;  // Увеличьте счетчик на 1 при завершении задачи
+            // const totalNumberOfTasks = action.payload;
+            // if (state.indexTask >= totalNumberOfTasks) {
+            //     state.indexTask = +1; // Сбросить на 1 только после завершения последней задачи
+            // } else {
+            //     state.indexTask = 1; // Иначе просто увеличьте индекс
+            // }
+        },
+
+        setNumberTask: (state, action) => {
+            state.numberTask = action.payload;
+        },
     },
 });
 
@@ -113,8 +122,8 @@ export const {
     setInterruptions,
     setPaused,
     setPausedTime,
-    setBreaks
-    // setCurrentTaskId,
-    // clearCurrentTaskId
+    setBreaks,
+    setIndex,
+    setNumberTask
 } = timerSlice.actions;
 export default timerSlice.reducer;
