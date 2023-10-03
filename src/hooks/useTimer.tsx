@@ -5,7 +5,6 @@ import {
     setBreaks,
     setDuration, 
     setEndTime, 
-    setIndex, 
     setInterruptions, 
     setMode, 
     setNumberTask, 
@@ -23,6 +22,7 @@ import { useSystemNotify } from './useSystemNotify';
 import { setCompleted } from '../store/reducers/historySlice';
 import { selectLastTask } from '../features/PomodoroPage/Pomodoro';
 import { useMenu } from './useMenu';
+import { useTranslation } from 'react-i18next';
 
 interface UseTimerProps {
 	taskId?: string;
@@ -36,6 +36,7 @@ const SHORT = 'short';
 const LONG = 'long';
 
 export function useTimer({taskId}: UseTimerProps) {
+    const { t } = useTranslation();
     const { 
         pomodoro, 
         short, 
@@ -63,8 +64,6 @@ export function useTimer({taskId}: UseTimerProps) {
         breaks, 
         numberTask
     } = useSelector((state: RootState) => state.timer);
-
-
 
     const { handleCompletePomodoro, tasks } = useMenu({taskId});
 
@@ -100,32 +99,32 @@ export function useTimer({taskId}: UseTimerProps) {
     useEffect(() => {
         if (mode === POMODORO) {
             dispatch(setDuration(pomodoro * 1000));
-            if (remains !== null) {
+            if (resumed == null) {
                 dispatch(setRemains(pomodoro * 1000));
             }
         }
 
         if (mode === SHORT) {
             dispatch(setDuration(short * 1000))
-            if (remains !== null) {
+            if (resumed == null) {
                 dispatch(setRemains(short * 1000));
             }
         }
 
         if (mode === LONG) {
             dispatch(setDuration(long * 1000))
-            if (remains !== null) {
+            if (resumed == null) {
                 dispatch(setRemains(long * 1000));
             }
         }
-    }, [mode, pomodoro, short, long, remains]);
+    }, [mode, pomodoro, short, long]);
 
     
     useEffect(() => {
 
         if (state === 'started') {
             intervalIdRef.current = setInterval(() => {
-                setSeconds((prevValue) => prevValue > 0 ? prevValue - 1 : 9);
+                setSeconds((prevValue) => prevValue > 0 ? prevValue - 1 : 59);
                 setMinutes((prevValue) => prevValue > 0 && seconds === 0 ? prevValue - 1 : prevValue);
             }, 1000);
         }
@@ -149,7 +148,7 @@ export function useTimer({taskId}: UseTimerProps) {
         resetTimer();
 
         if (notify) {
-            systemNotify("Помидор закончился, начинаем перерыв");
+            systemNotify(t("tomato_out"));
         }
         playAlarmSoundOnTickEnd();
 
@@ -166,13 +165,11 @@ export function useTimer({taskId}: UseTimerProps) {
     const handleBreakEnd = () => {
         resetTimer();
         if (notify) {
-            systemNotify("Перерыв закончился, начинаем помидор");
+            systemNotify(t("break_over"));
         }
         playAlarmSoundOnTickEnd();
         if (mode === SHORT || LONG) {
             dispatch(setBreaks(breaks + 1));
-            // const totalNumberOfTasks = tasks.length; // где tasks - это массив всех ваших задач.
-			// dispatch(setIndex(totalNumberOfTasks));
         }
         
         dispatch(setMode(POMODORO)); 
@@ -190,7 +187,7 @@ export function useTimer({taskId}: UseTimerProps) {
                 }
     
                 if (notify && minutes !== 0) {
-                    systemNotify("До завершения меньше одной минуты");
+                    systemNotify(t("minute_completion"));
                 }
             }
 
@@ -213,7 +210,6 @@ export function useTimer({taskId}: UseTimerProps) {
             dispatch(setMode(POMODORO));
             dispatch(setSeries(0));
             dispatch(setBreaks(1));
-            //dispatch(setIndex(1));
             dispatch(setNumberTask(1))
             clearInterval(intervalIdRef.current);
             setMinutes(Math.floor(duration / 1000 / 60));
@@ -244,7 +240,10 @@ export function useTimer({taskId}: UseTimerProps) {
         dispatch(setPaused(Date.now()));
         dispatch(setRemains(endtime - Date.now()));
         dispatch(setInterruptions(interruptions + 1));
+        console.log(endtime - Date.now())
     }
+
+    
 
     const clickStopped = () => {
         dispatch(stateTimer(STOPPED));

@@ -11,6 +11,7 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../../lib/i18n';
 import { CardTomatoes } from './Cards/CardTomatoes/CardTomatoes';
 import { daysOfWeek } from '../../../constants';
+import { FocusIcon, PausedIcon, StoppedIcon } from '../../../ui/Icons';
 
 
 export interface InfoBlockProps {
@@ -79,6 +80,8 @@ export function InfoBlock({ tasksData, selectedInterval }: InfoBlockProps) {
         return dayNames[dayId] || '';
     }
 
+    console.log(timePaused);
+
     return (
         <I18nextProvider i18n={i18n}>
             <div className={styles.statistic}>
@@ -101,24 +104,23 @@ export function InfoBlock({ tasksData, selectedInterval }: InfoBlockProps) {
                     />
                 </div>
                 <div className={styles.blockStopped}>
-                    <DataBlock 
-                        //title={t("focus")} 
-                        icon={<Icons name={EIcons.focus}/>} 
-                        className={styles.cardFocus}
+                    <DataBlock  
+                        icon={<FocusIcon strokeColor={focus === 0 ? '#C4C4C4' : "#FFAE35"} />} 
                         value={`${focus}%`}
                         title={`${t("focus")}`}
+                        className={`${styles.cardFocus} ${focus === 0 ? styles.cardNoData : ''}`}
                     />
                     <DataBlock 
                         title={`${t("time_paused")}`} 
-                        icon={<Icons name={EIcons.paused}/>} 
-                        className={styles.cardPaused}
-                        value={universalFormatter(timePaused, 'totalTimePaused', t) || 0}
+                        icon={<PausedIcon strokeColor={timePaused === 0 ? '#C4C4C4' : '#9C97D7'} />} 
+                        className={`${styles.cardPaused} ${timePaused === 0 ? styles.cardNoData : ''}`}
+                        value={universalFormatter(timePaused, 'totalTimePaused', t) || 0 + ''}
                     />
                     <DataBlock 
                         title={`${t("stops")}`} 
-                        icon={<Icons name={EIcons.stopped}/>} 
-                        className={styles.cardStopped}
+                        icon={<StoppedIcon strokeColor={activeDayStops === 0 ? '#C4C4C4' : "#7FC2D7"} />} 
                         value={activeDayStops || 0}
+                        className={`${styles.cardStopped} ${activeDayStops === 0 ? styles.cardNoData : ''}`}
                     />
                 </div>
             </div>

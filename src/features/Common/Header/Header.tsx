@@ -6,6 +6,7 @@ import { EIcons, Icons } from '../../../ui/Icons'
 import { Button } from "../../../ui/Button/Button";
 import { ModalSetting } from '../../Modal/ModalSettings/ModalSettings'
 import { useLocation, useNavigate } from 'react-router'
+import { AnimatePresence } from 'framer-motion';
 
 export function Header() {
     const [isModalSettingOpened, setIsModalSettingOpened] = useState(false);
@@ -27,9 +28,12 @@ export function Header() {
                 <Logo />
                 <Button icon={<Icons name={EIcons.settings} />} onClick={handleSettingsClick}/>
                 <StatisticsLink />
-                {isModalSettingOpened && (
-                    <ModalSetting onClose={() => { setIsModalSettingOpened(false) }} />
-                )}
+                <AnimatePresence>
+                    {isModalSettingOpened && (
+                        <ModalSetting onClose={() => { setIsModalSettingOpened(false) }} />
+                    )}
+                </AnimatePresence>
+                
             </div>
         </header>
 	)

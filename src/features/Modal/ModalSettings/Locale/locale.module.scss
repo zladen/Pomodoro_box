@@ -1,7 +1,7 @@
 .timeZone {
     width: 50%;
     height: 50px;
-    background: var(--grayF4);
+    background: var(--greyF4);
     border: none;
     outline: none !important;
     font-family: "sf ui display";
@@ -12,7 +12,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url(src/assets/arrowUp.svg) no-repeat right var(--grayF4);
+    background: url(src/assets/arrowUp.svg) no-repeat right var(--greyF4);
     background-position: right 10px center;
     
 }

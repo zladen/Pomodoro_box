@@ -12,24 +12,36 @@
 	--blue:           #C5F1FF;
 	--green4F:        #A8B64F;
 	--green41:        #899441;
-	--grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+	--greyF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4%));
 	--greyCE:         hsl(0, 0%, calc(var(--whiteLightness) - 7%));
 	--greyE5:         hsl(0, 0%, calc(var(--whiteLightness) - 10%));
 	--greyC4:         hsl(0, 0%, calc(var(--whiteLightness) - 23%));
 	--grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
-	--body_background: #E5E5E5;
-	--text_color: #333333;
-	--background_modal: #FFFFFF;
-	--timer_header: #C4C4C4;
-	--lineChart: #333333;
+	--body_background: var(--white); 
+	--header_background: var(--white);
+	--text_color: var(--black);
+	--body_background_timer: var(--greyF4);
+	--timer_header: var(--greyC4);
+	--lineChart: var(--black);
+	--scaleX: #ECECEC;
+	--select_hover: #eee;
+	--card_focus: var(--orange);
+	--card_paused: var(--violet);
+	--card_stopped: var(--blue);
 }
 
 [data-theme='dark'] {
 	--body_background: #1e1e2f;
-	--background_modal: #27293d;
+	--header_background: #27293d;
+	--body_background_timer: #27293d;
 	--text_color: white;
 	--timer_header: #2b2e4c;
 	--lineChart: #C4C4C4;
+	--scaleX: #2b2e4c;
+	--select_hover: #C4C4C4;
+	--card_focus: #7e643c;
+	--card_paused: #423d79;
+	--card_stopped: #3d7181;
 }
 
 * {

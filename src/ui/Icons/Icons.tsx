@@ -2,7 +2,7 @@
 		MenuIcon, 
 		IncreaseIcon, 
 		EditIcon, 
-		ReductionIcon, 
+		MinusIcon, 
 		DeleteIcon, 
 		StatisticsIcon, 
 		ArrowIcon, 
@@ -20,7 +20,7 @@
 export enum EIcons {
 	statistics = 'StatisticIcon',
     plus = "IncreaseIcon",
-    minus = 'ReductionIcon',
+    minus = 'MinusIcon',
 	edit = 'EditIcon',
     del = 'DeleteIcon',
     menu = 'MenuIcon',
@@ -39,6 +39,7 @@ export enum EIcons {
 export interface IIconProps {
     name?: EIcons;
 	className?: string | undefined;
+	strokeColor?: string
 }
 
 export function Icons(props: IIconProps) {
@@ -52,7 +53,7 @@ export function Icons(props: IIconProps) {
 			return <IncreaseIcon />;
 
 		case EIcons.minus:
-			return <ReductionIcon className={className}/>;
+			return <MinusIcon className={className}/>;
 				
 		case EIcons.edit:
 			return <EditIcon />;
@@ -82,10 +83,10 @@ export function Icons(props: IIconProps) {
 			return <FocusIcon />;
 
 		case EIcons.paused:
-			return <PausedIcon />;
+			return <PausedIcon className={className}/>;
 
 		case EIcons.stopped:
-			return <StoppedIcon />;
+			return <StoppedIcon className={className}/>;
 
 		case EIcons.tomatoes:
 			return <TomatoesIcon />;

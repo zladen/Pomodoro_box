@@ -23,8 +23,8 @@ export const Locale = () => {
             onChange={(e) => changeLanguage(e.target.value)} 
             className={styles.timeZone} 
             value={selectedLanguage}>
-            <option value="en" key='en'>English</option>
-            <option value="ru" key='ru'>Русский</option>
+            <option value="en-EN" key='i18nextLng'>English</option>
+            <option value="ru-RU" key='ri18nextLng'>Русский</option>
         </select>
     );
 };

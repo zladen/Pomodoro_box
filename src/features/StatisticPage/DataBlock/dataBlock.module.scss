@@ -18,7 +18,7 @@
 
 .dataDay {
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 4rem;
     padding-bottom: 1.57vh;
 }
 
@@ -27,4 +27,14 @@
     width: 23.89vw;
     display: flex;
     justify-content: space-between;
+}
+
+.noData {
+    display: flex;
+    flex-direction: row;
+    width: 28.13vw;
+    height: 17.48vh;
+    justify-content: center;
+    align-items: center;
+    background: var(--greyF4);
 }

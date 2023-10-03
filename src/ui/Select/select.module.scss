@@ -35,26 +35,24 @@ $height: 46px;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-        background: var(--background_modal);
-        border-bottom: 1px solid #DEDEDE;
+        background: var(--body_background_timer);
         font-weight: 400;
         padding: 0 1.47vw;
+
+        &:hover {
+            background-color: var(--select_hover);
+            cursor: pointer;
+            transition: .15s background-color ease-in;
+        }
     }
 
     &__dropdown {
         display: block;
         position: absolute;
-        /* overflow-y: auto; */
         z-index: 100;
         width: 25.7vw;
-        background: var(--grayF4);
+        background: var(--greyF4);
     }
-
-    /* &__list {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    } */
 
     &__backdrop {
         position: fixed;
@@ -69,19 +67,19 @@ $height: 46px;
 
     &__item {
         display: flex;
-        border-bottom: 1px solid #DEDEDE;
+        border-top: 1px solid #DEDEDE;
         height: 5.37vh;
         font-weight: 400;
         align-items: center;
         padding-left: 1.47vw;
-        background: var(--background_modal);
+        background: var(--body_background_timer);
 
         &.selected {
             background-color: bisque;
         }
 
         &:hover {
-            background-color: #eee;
+            background-color: var(--select_hover);
             cursor: pointer;
             transition: .15s background-color ease-in;
         }

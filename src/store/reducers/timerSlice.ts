@@ -95,12 +95,6 @@ const timerSlice = createSlice({
 
         setIndex: (state) => {
             state.indexTask += 1;  // Увеличьте счетчик на 1 при завершении задачи
-            // const totalNumberOfTasks = action.payload;
-            // if (state.indexTask >= totalNumberOfTasks) {
-            //     state.indexTask = +1; // Сбросить на 1 только после завершения последней задачи
-            // } else {
-            //     state.indexTask = 1; // Иначе просто увеличьте индекс
-            // }
         },
 
         setNumberTask: (state, action) => {
@@ -123,7 +117,6 @@ export const {
     setPaused,
     setPausedTime,
     setBreaks,
-    setIndex,
     setNumberTask
 } = timerSlice.actions;
 export default timerSlice.reducer;

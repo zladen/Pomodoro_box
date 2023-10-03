@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../Common/Header";
 import Select from "../../ui/Select/Select";
 import { InfoBlock } from "./infoBlock";
@@ -6,9 +6,11 @@ import styles from './statistic.module.scss'
 import { IntervalTimeProps, getIntervalTime } from "../../constants";
 import { useStatistic } from "../../hooks/useStatistic";
 import { useTranslation } from 'react-i18next';
+import { useTheme } from "../../hooks/useTheme";
 
 
 export function Statistics() {
+    const { theme } = useTheme();
     const { t } = useTranslation();
     const intervalTime = getIntervalTime(t);
     const [selectedInterval, setSelectedInterval] = useState<IntervalTimeProps>({ id: 'thisWeek', value: t("this_week") });
@@ -17,6 +19,10 @@ export function Statistics() {
     const handleIntervalChange = (selected: IntervalTimeProps) => {
         setSelectedInterval(selected);
     };
+
+    useEffect(() => {
+        document.body.setAttribute("data-theme", theme);
+    }, [theme]);
 
     return (
         <>

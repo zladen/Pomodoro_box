@@ -11,7 +11,7 @@ export const useSystemNotify = () => {
         if ("Notification" in window) {
             Notification.requestPermission().then((permission) => {
                 if (permission === "granted") {
-                    new Notification("Уведомление", {
+                    new Notification(t("notification"), {
                         body: message,
                     });
                 }
@@ -23,7 +23,7 @@ export const useSystemNotify = () => {
         (newValue: string | boolean) => {
             dispatch(setNotify(newValue));
             if (newValue) {
-                systemNotify("Настройки сохранены");
+                systemNotify(t("setting_saved"));
             }
         },
         [dispatch]

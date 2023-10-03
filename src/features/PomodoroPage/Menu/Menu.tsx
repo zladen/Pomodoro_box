@@ -4,7 +4,6 @@ import { MenuItemsList } from './MenuItemsList';
 import { EIcons, Icons } from '../../../ui/Icons';
 import { Button } from '../../../ui/Button/Button';
 import { ModalRemoveTask } from '../../Modal/ModalRemoveTask';
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useMenu } from '../../../hooks/useMenu';
 
@@ -57,7 +56,6 @@ export function Menu(props: IMenuItemsProps) {
 		<div className={styles.dropdownMenuBtn}>
 			<Dropdown 
 				button={<Button icon={<Icons name={EIcons.menu} />}/>}
-				language={i18next.language}
 			>	
 				<MenuItemsList 
 					menuItems={menuItemsPomodoro}

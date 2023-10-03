@@ -85,5 +85,10 @@
     "last_week": "Last week",
     "two_weeks_ago": "Two weeks ago",
     "your_activity": "Your activity",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "tomato_out": "Tomato's out, let's take a break",
+    "break_over": "Break's over, let's start the tomato",
+    "minute_completion": "Less than one minute to completion",
+    "notification": "Notification",
+    "setting_saved": "Settings saved"
 }

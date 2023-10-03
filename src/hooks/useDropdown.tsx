@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import styles from '../ui/Dropdown/dropdown.module.scss';
 
 interface UseDropdownOptions {
     isOpen?: boolean;

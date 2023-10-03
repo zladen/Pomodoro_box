@@ -12,7 +12,7 @@
     justify-content: center;
     min-width: 296px;
     min-height: 179px;
-    background: var(--grayF4);
+    background: var(--greyF4);
     margin-top: 32px;
 }
 
@@ -34,7 +34,7 @@
     flex-direction: row;
     width: 28.13vw;
     height: 17.48vh;
-    background: var(--grayF4);
+    background: var(--greyF4);
     justify-content: center;
     align-items: center;
 }
@@ -44,7 +44,7 @@
     flex-direction: column;
     width: 20.56vw;
     height: 25.39vh;
-    background: var(--background_modal);
+    background: var(--body_background_timer);
     padding: 25px;
     justify-content: flex-start;
     align-items: flex-start;
@@ -54,7 +54,7 @@
     display: flex;
     width: 20.56vw;
     height: 17.48vh;
-    background: var(--background_modal);
+    background: var(--body_background_timer);
     justify-content: center;
     align-items: center;
 }
@@ -72,7 +72,7 @@
     height: 17.48vh;
     justify-content: center;
     align-items: center;
-    background: #FFDDA9;
+    background: var(--card_focus);
 }
 
 .cardPaused {
@@ -82,7 +82,7 @@
     height: 17.48vh;
     justify-content: center;
     align-items: center;
-    background: #DFDCFE;
+    background: var(--card_paused);
 }
 
 .cardStopped {
@@ -92,5 +92,15 @@
     height: 17.48vh;
     justify-content: center;
     align-items: center;
-    background: #C5F1FF;
+    background: var(--card_stopped);
+}
+
+.cardNoData {
+    display: flex;
+    flex-direction: row;
+    width: 28.13vw;
+    height: 17.48vh;
+    justify-content: center;
+    align-items: center;
+    background: var(--body_background_timer);
 }

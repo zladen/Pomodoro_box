@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTasksArray } from "../features/PomodoroPage/Tasks";
 import { removeTask, updateTask } from "../store/reducers/tasksSlice";
-import { setIndex, setNumberTask } from "../store/reducers/timerSlice";
+import { setNumberTask } from "../store/reducers/timerSlice";
 import { RootState } from "../store/reducers/configSlice";
 
 interface UseMenuProps {
@@ -13,7 +13,7 @@ interface UseMenuProps {
 export const useMenu = (props: UseMenuProps) => {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const tasks = useSelector(selectTasksArray);
-	const {numberTask} = useSelector((state: RootState) => state.timer);
+	const { numberTask } = useSelector((state: RootState) => state.timer);
 	const dispatch = useDispatch();
 	const id = props.taskId;
 	const task = tasks.find((task) => task.id === id);
@@ -42,7 +42,6 @@ export const useMenu = (props: UseMenuProps) => {
 		if (task) {
 			if (task.duration === 1) {
 				dispatch(removeTask({ id: task.id }));
-				//dispatch(setIndex());
 				dispatch(setNumberTask(numberTask + 1))
 			} else {
 				const updated = {
