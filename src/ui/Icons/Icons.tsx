@@ -83,10 +83,10 @@ export function Icons(props: IIconProps) {
 			return <FocusIcon />;
 
 		case EIcons.paused:
-			return <PausedIcon className={className}/>;
+			return <PausedIcon />;
 
 		case EIcons.stopped:
-			return <StoppedIcon className={className}/>;
+			return <StoppedIcon />;
 
 		case EIcons.tomatoes:
 			return <TomatoesIcon />;

@@ -1,6 +1,6 @@
 import styles from "./switch.module.scss";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducers/tasksSlice";
+import { RootState } from "../../store/reducers/configSlice";
 import { useSystemNotify } from "../../hooks/useSystemNotify";
 
 interface ISwitch {
