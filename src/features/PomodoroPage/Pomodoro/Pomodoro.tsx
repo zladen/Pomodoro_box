@@ -5,6 +5,7 @@ import { Timer } from '../Timer';
 import styles from './pomodoro.module.scss'
 import { RootState } from '../../../store/reducers/configSlice';
 import { createSelector } from '@reduxjs/toolkit';
+import { ModalPopup } from '../../Modal/ModalPopup/ModalPopup';
 
 export const selectTasksState = (state: RootState) => state.tasks.tasks;
 export const selectLastTask = createSelector(
@@ -26,7 +27,8 @@ export function Pomodoro() {
                 <Instructions />
                 <Tasks />
             </div>
-            <Timer taskId={id} taskDescr={descr}/> 
+            <Timer taskId={id} taskDescr={descr}/>
+            {/* <ModalPopup />  */}
         </main>
     );  
 }

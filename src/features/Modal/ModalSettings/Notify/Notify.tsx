@@ -14,7 +14,7 @@ export const Notify = () => {
     const { handleNotify } = useSystemNotify();
     const { handleAlerts } = useShowAlerts();
     const config = useSelector((state: RootState) => state.config);
-    const { playAlarmSound, notify, alerts, notify_duration } = config;
+    const { playAlarmSound, notify, alerts, notify_duration, remains_minute } = config;
     const dispatch = useDispatch();
 
     const handleRemains = useCallback(
@@ -68,7 +68,7 @@ export const Notify = () => {
                 htmlFor={'remains'} 
                 id={'remains'} 
                 action={handleRemains}
-                //value={remains}
+                value={remains_minute}
             />
 
             <Switch 

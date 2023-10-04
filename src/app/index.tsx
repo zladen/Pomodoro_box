@@ -37,27 +37,3 @@ i18n.init().then(() => {
         </React.StrictMode>
     );
 });
-
-// ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-//     <React.StrictMode>
-//         <Suspense fallback='Loading...'>
-//             <Provider store={store}>
-//                 <PersistGate loading={null} persistor={persistor}>
-//                     <Router>
-//                         <Layout>
-//                             <Routes>
-//                                 <Route path="/" element={<App />}>
-//                                     <Route path="settings" element={<ModalSetting />} />
-//                                 </Route>
-//                                 <Route path="statistic" element={<Statistic />}>
-//                                     <Route path="settings" element={<ModalSetting />} />
-//                                 </Route>
-//                                 <Route path="*" element={<Page404 />} />
-//                             </Routes>
-//                         </Layout>
-//                     </Router> 
-//                 </PersistGate>
-//             </Provider>
-//         </Suspense>
-//     </React.StrictMode>
-// )
