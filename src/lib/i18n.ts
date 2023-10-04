@@ -12,7 +12,7 @@ i18n
     
     .init({
         backend: {
-            loadPath: 'public/locales/ru-RU/translation.json'
+            loadPath: 'locales/ru-RU/translation.json'
         },
 
         debug: false,
