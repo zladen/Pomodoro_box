@@ -65,13 +65,13 @@ export function useTimer({taskId}: UseTimerProps) {
         numberTask
     } = useSelector((state: RootState) => state.timer);
 
-    const { handleCompletePomodoro, tasks } = useMenu({taskId});
+    const { handleCompletePomodoro } = useMenu({taskId});
 
     const lastTask = useSelector(selectLastTask);
     const { descr } = lastTask ?? {};
 
     const initialTime = () => {
-        if (remains !== null) {
+        if (remains !== 0) {
             let initialMinutes = Math.floor(remains / 1000 / 60);
             let initialSeconds = Math.floor((remains / 1000) % 60);
             return [initialSeconds, initialMinutes];
@@ -97,31 +97,28 @@ export function useTimer({taskId}: UseTimerProps) {
     const intervalIdRef = useRef<number | NodeJS.Timeout>();
 
     useEffect(() => {
-        if (mode === POMODORO) {
-            dispatch(setDuration(pomodoro * 1000));
-            if (resumed == null) {
-                dispatch(setRemains(pomodoro * 1000));
+        const updateDuration = (time: number) => {
+            dispatch(setDuration(time * 1000));
+            if (remains === null && remains === duration) {
+                dispatch(setRemains(time * 1000));
             }
-        }
-
-        if (mode === SHORT) {
-            dispatch(setDuration(short * 1000))
-            if (resumed == null) {
-                dispatch(setRemains(short * 1000));
-            }
-        }
-
-        if (mode === LONG) {
-            dispatch(setDuration(long * 1000))
-            if (resumed == null) {
-                dispatch(setRemains(long * 1000));
-            }
+        };
+    
+        switch (mode) {
+            case POMODORO:
+                updateDuration(pomodoro);
+                break;
+            case SHORT:
+                updateDuration(short);
+                break;
+            case LONG:
+                updateDuration(long);
+                break;
+            default:
         }
     }, [mode, pomodoro, short, long]);
-
     
     useEffect(() => {
-
         if (state === 'started') {
             intervalIdRef.current = setInterval(() => {
                 setSeconds((prevValue) => prevValue > 0 ? prevValue - 1 : 59);
@@ -130,7 +127,22 @@ export function useTimer({taskId}: UseTimerProps) {
         }
             
         return () => clearInterval(intervalIdRef.current);
-    }, [state, pomodoro, short, long, minutes, seconds]);
+    }, [state, minutes, seconds]);
+
+    useEffect(() => {
+        const currentTime = Date.now();
+        if (state == STARTED) {
+            if (started && endtime) {
+                const remainingTime = endtime - currentTime;
+                if (remainingTime > 0) {
+                    const remainingMinutes = Math.floor(remainingTime / 1000 / 60);
+                    const remainingSeconds = (Math.floor((remainingTime / 1000) % 60));
+                    setMinutes(remainingMinutes);
+                    setSeconds(remainingSeconds);
+                } 
+            } 
+        }
+    }, []);
 
     const resetTimer = () => {
         dispatch(setStarted(0));
@@ -145,7 +157,9 @@ export function useTimer({taskId}: UseTimerProps) {
     const handlePomodoroEnd = () => {
         dispatch(setCompleted({ descr, duration: 1, created: Date.now() }));
         dispatch(setSeries(series + 1));
-        resetTimer();
+        dispatch(setStarted(Date.now()));
+        dispatch(setRemains(duration));
+        dispatch(setEndTime(Date.now() + duration));
 
         if (notify) {
             systemNotify(t("tomato_out"));
@@ -163,7 +177,9 @@ export function useTimer({taskId}: UseTimerProps) {
     };
 
     const handleBreakEnd = () => {
-        resetTimer();
+        dispatch(setStarted(Date.now()));
+        dispatch(setRemains(duration));
+        dispatch(setEndTime(Date.now() + duration));
         if (notify) {
             systemNotify(t("break_over"));
         }

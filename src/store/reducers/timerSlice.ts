@@ -4,7 +4,7 @@ export interface TimerState {
     duration: number
     endtime: number
     mode: string
-    remains: number | null
+    remains: number
     resumed: number | null
     series: number 
     started: number
@@ -22,7 +22,7 @@ export const initialState: TimerState = {
     duration: 0,
     endtime: 0,
     mode: 'pomodoro',
-    remains: null,
+    remains: 0,
     resumed: null,
     series: 0, 
     started: 0,

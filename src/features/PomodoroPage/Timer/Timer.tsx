@@ -26,7 +26,6 @@ export function Timer({taskId, taskDescr}: ITimer) {
         seconds, 
         series,
         breaks,
-        indexTask, 
         clickStart, 
         clickPause, 
         clickStopped, 
