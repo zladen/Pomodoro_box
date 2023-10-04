@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Chart } from '../Chart/Chart'
 import { DataBlock } from '../DataBlock/DataBlock'
-import { EIcons, Icons } from '../../../ui/Icons/Icons'
 import styles from './infoBlock.module.scss'
 import { IntervalTimeProps, WeekDaysResult, defaultStatisticData } from '../../../constants';
 import { TimeFilter } from '../../../hooks/useStatistic';
@@ -79,8 +78,6 @@ export function InfoBlock({ tasksData, selectedInterval }: InfoBlockProps) {
         };
         return dayNames[dayId] || '';
     }
-
-    console.log(timePaused);
 
     return (
         <I18nextProvider i18n={i18n}>

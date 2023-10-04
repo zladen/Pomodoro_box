@@ -256,7 +256,6 @@ export function useTimer({taskId}: UseTimerProps) {
         dispatch(setPaused(Date.now()));
         dispatch(setRemains(endtime - Date.now()));
         dispatch(setInterruptions(interruptions + 1));
-        console.log(endtime - Date.now())
     }
 
     

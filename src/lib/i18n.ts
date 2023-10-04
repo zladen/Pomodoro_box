@@ -11,8 +11,12 @@ i18n
     .use(initReactI18next)
     
     .init({
+        backend: {
+            loadPath: 'public/locales/ru-RU/translation.json'
+        },
+
         debug: false,
-        fallbackLng: 'ru',
+        fallbackLng: 'ru-RU',
         interpolation: {
             escapeValue: false, 
         }

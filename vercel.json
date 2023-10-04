@@ -1,7 +1,9 @@
 {
     "routes": [
-        { "src": "/statistics", "dest": "/statistics" },
-        { "src": "/(.*)", "dest": "/$1" }
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
     ]
 }
   
