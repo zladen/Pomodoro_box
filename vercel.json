@@ -1,7 +1,9 @@
 {
     "routes": [
-        { "src": "features/StatisticPage", "dest": "features/StatisticPage" },
-        { "src": "/(.*)", "dest": "/$1" }
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
+        }
     ]
 }
   
