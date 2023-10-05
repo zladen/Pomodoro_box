@@ -90,5 +90,10 @@
     "break_over": "Break's over, let's start the tomato",
     "minute_completion": "Less than one minute to completion",
     "notification": "Notification",
-    "setting_saved": "Settings saved"
+    "setting_saved": "Settings saved",
+    "error_message_pomodoro": "The minimum duration of the tomato is 20 minutes",
+    "error_message_shortbreak": "Minimum duration of short break 3 minutes",
+    "error_message_longbreak": "Minimum duration of long break 10 minutes",
+    "error_message_longbreak_after": "Minimum through the tomato"
+
 }

@@ -68,3 +68,13 @@
     margin-bottom: 15px;
     
 }
+
+.errorMessage {
+    display: flex;
+    height: 4vw;
+    justify-content: space-around;
+    background: var(--red22);
+    color: var(--white);
+    font-weight: 500;
+    align-items: center;
+}

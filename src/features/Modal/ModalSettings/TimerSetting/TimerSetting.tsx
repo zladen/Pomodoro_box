@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import styles from './timerSetting.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store/reducers/configSlice';
@@ -13,6 +13,7 @@ import {
 import { Field } from '../Field/Field';
 
 export const TimerSetting = () => {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const config = useSelector((state: RootState) => state.config);
@@ -32,47 +33,64 @@ export const TimerSetting = () => {
 
     const handleDelay = useCallback(
         (newValue: number) => {
-            dispatch(setDelay(newValue));
-        },
-        [dispatch]
+            if (newValue >= 2) {
+                dispatch(setDelay(newValue));
+                setErrorMessage(null);
+            } else {
+                setErrorMessage(t("error_message_longbreak_after"));
+            }
+            
+        }, [dispatch]
     );
 
     const handlePomodoro = useCallback(
         (newValue: number) => {
             const newPomodoroSeconds = newValue * 60; 
-            dispatch(setPomodoro(newPomodoroSeconds));
-        },
-        [dispatch]
+            if (newPomodoroSeconds >= 1200) {
+                dispatch(setPomodoro(newPomodoroSeconds));
+                setErrorMessage(null);
+            } else {
+                setErrorMessage(t("error_message_pomodoro"));
+            }
+            
+        }, [dispatch]
     );
 
     const handleShortBreak = useCallback(
         (newValue: number) => {
             const newShortBreak = newValue * 60; 
-            dispatch(setShortBreak(newShortBreak));
-        },
-        [dispatch]
+            if (newShortBreak >= 180) {
+                dispatch(setShortBreak(newShortBreak));
+                setErrorMessage(null);
+            } else {
+                setErrorMessage(t("error_message_shortbreak"));
+            }
+        }, [dispatch]
     );
 
     const handleLongBreak = useCallback(
         (newValue: number) => {
             const newLongBreak = newValue * 60; 
-            dispatch(setLongBreak(newLongBreak));
-        },
-        [dispatch]
+            if (newLongBreak >= 600) {
+                dispatch(setLongBreak(newLongBreak));
+                setErrorMessage(null);
+            } else {
+                setErrorMessage(t("error_message_longbreak"));
+            }
+            
+        }, [dispatch]
     );
 
     const handleAutoStartPomodoro = useCallback(
         (newValue: boolean) => {
             dispatch(setAutoStartPomodoro(newValue));
-        },
-        [dispatch]
+        }, [dispatch]
     );
 
     const handleAutoStartBreak = useCallback(
         (newValue: boolean) => {
             dispatch(setAutoStartBreak(newValue));
-        },
-        [dispatch]
+        }, [dispatch]
     );
 
     return (
@@ -129,6 +147,8 @@ export const TimerSetting = () => {
                     value={autoStartBreak} 
                     action={handleAutoStartBreak}
                 />
+
+                {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
             </div>
         </>
     )
