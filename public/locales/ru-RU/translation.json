@@ -94,5 +94,13 @@
     "error_message_pomodoro": "Минимальная продолжительность помидора 20 минут",
     "error_message_shortbreak": "Минимальная продолжительность короткого перерыва 3 минуты",
     "error_message_longbreak": "Минимальная продолжительность длинного перерыва 10 минут",
-    "error_message_longbreak_after": "Минимум через помидор"
+    "error_message_longbreak_after": "Минимум через помидор",
+    "play_finish_sound": "Проигрывать финишный звук",
+    "notify_one_minute": "Оповещать за минуту до завершения",
+    "enable_system_notifications": "Включить системные уведомления",
+    "enable_popup": "Включить всплывающие окна",
+    "never": "Никогда",
+    "through": "Через",
+    "seconds": "секунды",
+    "second": "секунд"
 }

@@ -94,6 +94,14 @@
     "error_message_pomodoro": "The minimum duration of the tomato is 20 minutes",
     "error_message_shortbreak": "Minimum duration of short break 3 minutes",
     "error_message_longbreak": "Minimum duration of long break 10 minutes",
-    "error_message_longbreak_after": "Minimum through the tomato"
+    "error_message_longbreak_after": "Minimum through the tomato",
+    "play_finish_sound": "Play the finish sound",
+    "notify_one_minute": "Notify one minute before completion",
+    "enable_system_notifications": "Enable system notifications",
+    "enable_popup": "Enable pop-up windows",
+    "never": "Never",
+    "through": "Through",
+    "seconds": "seconds",
+    "second": "seconds"
 
 }

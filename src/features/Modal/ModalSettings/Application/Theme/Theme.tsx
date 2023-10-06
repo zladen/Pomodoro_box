@@ -4,8 +4,10 @@ import { useTheme } from "../../../../../hooks/useTheme";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../store/reducers/configSlice";
 import { useSystemNotify } from "../../../../../hooks/useSystemNotify";
+import { useTranslation } from "react-i18next";
 
 export const Theme = () => {
+    const { t } = useTranslation();
     const { theme, setTheme } = useTheme();
     const { notify } = useSelector((state: RootState) => state.config);
     const { systemNotify } = useSystemNotify();
@@ -25,7 +27,7 @@ export const Theme = () => {
     const handleToggleTheme = useCallback((event: { target: { checked: boolean } }) => {
         event.target.checked ? setDarkMode() : setLightMode();
         if (notify) {
-            systemNotify('Настройки сохранены')
+            systemNotify(t("setting_saved"))
         }
     }, [setDarkMode, setLightMode]);
 

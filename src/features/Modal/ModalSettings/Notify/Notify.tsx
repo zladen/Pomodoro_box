@@ -72,14 +72,14 @@ export const Notify = () => {
             />
 
             <Switch 
-                label={"enable_system_notifications"} 
+                label={t("enable_system_notifications")} 
                 htmlFor={'notify'} 
                 id={'notify'} 
                 action={handleNotify}
                 value={notify}
             />
             <div className={styles.soundsAlert}>
-                <Switch 
+                {/* <Switch 
                     label={t("enable_popup")} 
                     htmlFor={'alerts'} 
                     id={'alerts'} 
@@ -100,7 +100,7 @@ export const Notify = () => {
                             <option value="5000">t("through" 5 "second")</option>
                         </select>
                     </div>  
-                )}
+                )} */}
             </div>
             
 
