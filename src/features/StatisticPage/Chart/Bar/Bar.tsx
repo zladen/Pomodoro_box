@@ -26,7 +26,7 @@ export const Bar = ({activeBar, onClick, days}: IBar) => {
                             styles.column, 
                             { 
                                 [styles.activeClass]: dayKey === activeBar,
-                                [styles.barNoData]: dayData.tomatoes === 0  // если нет данных, применяем стиль emptyBar
+                                [styles.barNoData]: dayData.tomatoes === 0
                             }
                         )}
                         style={{ height: dayData.tomatoes !== 0 ? `${columnHeight(dayData.tomatoes)}vh` : 'auto' }}

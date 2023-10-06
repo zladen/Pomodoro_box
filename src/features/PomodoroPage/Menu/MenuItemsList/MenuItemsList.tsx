@@ -2,8 +2,8 @@ import styles from './menuItemsList.module.scss';
 import { Button } from '../../../../ui/Button/Button';
 import { t } from 'i18next';
 import { useSelector } from 'react-redux';
-import { selectTasksArray } from '../../Tasks';
 import React from 'react';
+import { selectTasksArray } from '../../Tasks/Tasks';
 
 export interface menuItem {
 	className: string;

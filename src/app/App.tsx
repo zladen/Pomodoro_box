@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Header } from "../features/Common/Header"
-import { Pomodoro } from "../features/PomodoroPage/Pomodoro"
 import { useTheme } from "../hooks/useTheme";
-import { ModalRemoveTask } from "../features/Modal/ModalRemoveTask";
 import { useShowAlerts } from "../hooks/useShowAlerts";
 import { ModalPopup } from "../features/Modal/ModalPopup/ModalPopup";
+import { Header } from "../features/Common/Header/Header";
+import { ModalRemoveTask } from "../features/Modal/ModalRemoveTask/ModalRemoveTask";
+import { Pomodoro } from "../features/PomodoroPage/Pomodoro/Pomodoro";
 
 function App() {
 	const { theme } = useTheme();

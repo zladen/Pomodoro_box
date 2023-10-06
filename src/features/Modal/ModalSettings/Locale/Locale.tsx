@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/reducers/configSlice";
 import { useSystemNotify } from "../../../../hooks/useSystemNotify";
+import { useTranslation } from "react-i18next";
 
 export const Locale = () => {
+    const { t } = useTranslation();
     const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
     const { notify } = useSelector((state: RootState) => state.config);
     const { systemNotify } = useSystemNotify();
@@ -14,17 +16,17 @@ export const Locale = () => {
         i18n.changeLanguage(language);
         setSelectedLanguage(language);
         if (notify) {
-            systemNotify('Настройки сохранены');
+            systemNotify(t("setting_saved"));
         }
     };
-    
+
     return (
         <select 
             onChange={(e) => changeLanguage(e.target.value)} 
             className={styles.timeZone} 
             value={selectedLanguage}>
-            <option value="en-EN" key='i18nextLng'>English</option>
-            <option value="ru-RU" key='ri18nextLng'>Русский</option>
+            <option value="en-EN" key='en'>English</option>
+            <option value="ru-RU" key='ru'>Русский</option>
         </select>
     );
 };

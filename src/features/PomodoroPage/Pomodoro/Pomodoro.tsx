@@ -1,11 +1,10 @@
 import { useSelector } from 'react-redux';
-import { Instructions } from '../Instructions';
-import { Tasks } from '../Tasks';
 import { Timer } from '../Timer';
 import styles from './pomodoro.module.scss'
 import { RootState } from '../../../store/reducers/configSlice';
 import { createSelector } from '@reduxjs/toolkit';
-import { ModalPopup } from '../../Modal/ModalPopup/ModalPopup';
+import { Instructions } from '../Instructions/Instructions';
+import { Tasks } from '../Tasks/Tasks';
 
 export const selectTasksState = (state: RootState) => state.tasks.tasks;
 export const selectLastTask = createSelector(

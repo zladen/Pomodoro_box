@@ -16,7 +16,6 @@ export interface ConfigState {
     dateWeek: string
     delay: number
     goal: null
-    locale: string
     long: number
     notifications: number
     notify: boolean
@@ -49,22 +48,21 @@ export const initialState: ConfigState = {
     complete: true,
     dateShort: "DD.MM",
     dateWeek: "isoweek",
-    delay: 4, //4
+    delay: 4,
     goal: null,
-    locale: "ru",
-    long: 900, //900
+    long: 900,
     notifications: 10,
     notify: false,
     notify_duration: 0,
     playAlarmSound: false,
     playTickTockSoundWhileBreaks: false,
-    pomodoro: 1500, //1500
+    pomodoro: 1500, 
     rating: true,
     remains_minute: false,
     report_daily: false,
     report_time: 8,
     report_weekly: false,
-    short: 300, //300
+    short: 300, 
     tasksTop:true,
     theme: "light",
     time: "HH:mm",

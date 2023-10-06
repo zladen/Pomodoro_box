@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTasksArray } from "../features/PomodoroPage/Tasks";
 import { removeTask, updateTask } from "../store/reducers/tasksSlice";
 import { setNumberTask } from "../store/reducers/timerSlice";
 import { RootState } from "../store/reducers/configSlice";
+import { selectTasksArray } from "../features/PomodoroPage/Tasks/Tasks";
 
 interface UseMenuProps {
 	taskId?: string;

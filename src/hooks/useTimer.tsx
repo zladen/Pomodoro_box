@@ -20,9 +20,9 @@ import {
 import { useSoundAlerts } from './useSoundAlerts';
 import { useSystemNotify } from './useSystemNotify';
 import { setCompleted } from '../store/reducers/historySlice';
-import { selectLastTask } from '../features/PomodoroPage/Pomodoro';
 import { useMenu } from './useMenu';
 import { useTranslation } from 'react-i18next';
+import { selectLastTask } from '../features/PomodoroPage/Pomodoro/Pomodoro';
 
 interface UseTimerProps {
 	taskId?: string;
@@ -99,7 +99,7 @@ export function useTimer({taskId}: UseTimerProps) {
     useEffect(() => {
         const updateDuration = (time: number) => {
             dispatch(setDuration(time * 1000));
-            if (remains === null && remains === duration) {
+            if (resumed === null) {
                 dispatch(setRemains(time * 1000));
             }
         };
@@ -155,7 +155,15 @@ export function useTimer({taskId}: UseTimerProps) {
     }
 
     const handlePomodoroEnd = () => {
-        dispatch(setCompleted({ descr, duration: 1, created: Date.now() }));
+        //dispatch(setCompleted({ descr, duration: 1, created: Date.now() }));
+        dispatch(setCompleted({ 
+            descr, 
+            duration: 1, 
+            created: Date.now(), 
+            started: started, 
+            interruptions: interruptions,
+            pausedTime: pausedTime + (Date.now() - paused)
+        }));
         dispatch(setSeries(series + 1));
         dispatch(setStarted(Date.now()));
         dispatch(setRemains(duration));

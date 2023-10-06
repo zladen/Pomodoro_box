@@ -1,8 +1,6 @@
-import { createContext, useEffect, useState } from 'react'
 import styles from './application.module.scss'
 import { TimeZone } from './TimeZone/TimeZone'
-import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n from '../../../../lib/i18n';
+import { useTranslation } from 'react-i18next';
 import { Theme } from '../Application/Theme/Theme';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/reducers/configSlice';

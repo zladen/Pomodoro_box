@@ -12,7 +12,6 @@ import { CardTomatoes } from './Cards/CardTomatoes/CardTomatoes';
 import { daysOfWeek } from '../../../constants';
 import { FocusIcon, PausedIcon, StoppedIcon } from '../../../ui/Icons';
 
-
 export interface InfoBlockProps {
     selectedInterval?: IntervalTimeProps;
     tasksData: WeekDaysResult | undefined;

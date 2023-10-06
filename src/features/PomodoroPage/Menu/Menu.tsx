@@ -1,11 +1,11 @@
 import styles from './menu.module.scss';
 import { Dropdown } from '../../../ui/Dropdown';
-import { MenuItemsList } from './MenuItemsList';
 import { EIcons, Icons } from '../../../ui/Icons';
 import { Button } from '../../../ui/Button/Button';
-import { ModalRemoveTask } from '../../Modal/ModalRemoveTask';
 import { useTranslation } from 'react-i18next';
 import { useMenu } from '../../../hooks/useMenu';
+import { ModalRemoveTask } from '../../Modal/ModalRemoveTask/ModalRemoveTask';
+import { MenuItemsList } from './MenuItemsList/MenuItemsList';
 
 interface IMenuItemsProps {
 	taskId?: string;

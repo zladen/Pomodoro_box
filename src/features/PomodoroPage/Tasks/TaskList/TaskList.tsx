@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/reducers/configSlice';
-import { selectTasksArray } from '../../Tasks';
 import { universalFormatter } from '../../../../utils/helpers/universalFormatter';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './taskList.module.scss';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence } from 'framer-motion';
+import { selectTasksArray } from '../Tasks';
 
 
 export const TaskList = () => {

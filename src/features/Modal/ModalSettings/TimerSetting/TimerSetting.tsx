@@ -46,19 +46,20 @@ export const TimerSetting = () => {
     const handlePomodoro = useCallback(
         (newValue: number) => {
             const newPomodoroSeconds = newValue * 60; 
+            dispatch(setPomodoro(newPomodoroSeconds));
             if (newPomodoroSeconds >= 1200) {
                 dispatch(setPomodoro(newPomodoroSeconds));
                 setErrorMessage(null);
             } else {
                 setErrorMessage(t("error_message_pomodoro"));
             }
-            
         }, [dispatch]
     );
 
     const handleShortBreak = useCallback(
         (newValue: number) => {
             const newShortBreak = newValue * 60; 
+            dispatch(setShortBreak(newShortBreak));
             if (newShortBreak >= 180) {
                 dispatch(setShortBreak(newShortBreak));
                 setErrorMessage(null);
@@ -71,13 +72,13 @@ export const TimerSetting = () => {
     const handleLongBreak = useCallback(
         (newValue: number) => {
             const newLongBreak = newValue * 60; 
+            dispatch(setLongBreak(newLongBreak));
             if (newLongBreak >= 600) {
                 dispatch(setLongBreak(newLongBreak));
                 setErrorMessage(null);
             } else {
                 setErrorMessage(t("error_message_longbreak"));
             }
-            
         }, [dispatch]
     );
 
@@ -147,7 +148,6 @@ export const TimerSetting = () => {
                     value={autoStartBreak} 
                     action={handleAutoStartBreak}
                 />
-
                 {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
             </div>
         </>

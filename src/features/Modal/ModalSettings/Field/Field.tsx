@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import styles from './field.module.scss'
 import { RootState } from '../../../../store/reducers/configSlice';
 import { useSystemNotify } from '../../../../hooks/useSystemNotify';
+import { useTranslation } from 'react-i18next';
 
 interface IField {
     label: string,
@@ -13,6 +14,7 @@ interface IField {
 }
 
 export const Field = (props: IField) => {
+    const { t } = useTranslation();
     const { label, id, htmlFor, notes, value } = props;
     const { notify } = useSelector((state: RootState) => state.config);
     const { systemNotify } = useSystemNotify();
@@ -21,7 +23,7 @@ export const Field = (props: IField) => {
         const newValue = parseInt(event.target.value);
         props.action && props.action(newValue);
         if (notify) {
-            systemNotify("Настройки сохранены");
+            systemNotify(t("setting_saved"));
         }
     }
 

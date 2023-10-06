@@ -2,8 +2,7 @@ import moment from 'moment';
 import 'moment-timezone';
 import styles from './timeZone.module.scss';
 import Locale from '../../Locale/Locale';
-import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n from '../../../../../lib/i18n';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setDate, setTime, setTimeZone } from '../../../../../store/reducers/configSlice';
 import { useSystemNotify } from '../../../../../hooks/useSystemNotify';
@@ -28,26 +27,26 @@ export const TimeZone = () => {
     const handleTimeZoneChange = (e: { target: { value: string; }; }) => {
         dispatch(setTimeZone(e.target.value));
         if (notify) {
-            systemNotify('Настройки сохранены');
+            systemNotify(t("setting_saved"));
         }
     };
 
     const handleDateChange = (e: { target: { value: string; }; }) => {
         dispatch(setDate(e.target.value));
         if (notify) {
-            systemNotify('Настройки сохранены');
+            systemNotify(t("setting_saved"));
         }
     };
 
     const handleTimeChange = (e: { target: { value: string; }; }) => {
         dispatch(setTime(e.target.value));
         if (notify) {
-            systemNotify('Настройки сохранены');
+            systemNotify(t("setting_saved"));
         }
     };
 
     return (
-        <I18nextProvider i18n={i18n}>
+        <>
             <div className={styles.formatDate}>
                 <label>{t("language")}</label> 
                 <Locale />
@@ -93,7 +92,7 @@ export const TimeZone = () => {
                     <option value="HH:mm">24</option>
                 </select>
             </div>
-        </I18nextProvider>
+        </>
     );
 };
 

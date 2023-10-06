@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { editTask } from '../../../../store/reducers/tasksSlice';
-import { Menu } from '../../Menu';
 import { selectTasksArray } from '../Tasks';
 import styles from './taskItem.module.scss';
 import { motion } from 'framer-motion';
+import { Menu } from '../../Menu/Menu';
 
 export interface TaskItemProps {
     nameTask: string;

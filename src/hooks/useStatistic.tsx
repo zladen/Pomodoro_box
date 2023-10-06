@@ -64,7 +64,8 @@ export const useStatistic = ({selectedInterval}: UseStatisticProps) => {
         };
     
         tasks.forEach(task => {
-            const dayOfWeek = moment(task.started).format('ddd').toLowerCase();;
+
+            const dayOfWeek = moment(task.started).format('ddd').toLowerCase();
             if (result[dayOfWeek]) {
                 result[dayOfWeek].tomatoes += 1;
                 result[dayOfWeek].totalTime += moment(task.created).diff(task.started);
@@ -83,7 +84,6 @@ export const useStatistic = ({selectedInterval}: UseStatisticProps) => {
     };
     
     const tasksGroupedByDay = groupTasksByDay(filteredTasks(historyData, selectedInterval)) || defaultStatisticData;
-
     return {
         tasksGroupedByDay
     };

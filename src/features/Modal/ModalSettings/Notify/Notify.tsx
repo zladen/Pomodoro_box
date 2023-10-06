@@ -39,7 +39,7 @@ export const Notify = () => {
         <div className={styles.formSettings}>
             <div className={styles.soundsAlert}>
                 <Switch 
-                    label={'Проигрывать финишный звук'} 
+                    label={t("play_finish_sound")} 
                     htmlFor={'playAlarmSound'} 
                     id={'playAlarmSound'} 
                     action={handlePlaySound}
@@ -64,7 +64,7 @@ export const Notify = () => {
             </div>
 
             <Switch 
-                label={'Оповещать за минуту до завершения'} 
+                label={t("notify_one_minute")} 
                 htmlFor={'remains'} 
                 id={'remains'} 
                 action={handleRemains}
@@ -72,7 +72,7 @@ export const Notify = () => {
             />
 
             <Switch 
-                label={'Включить системные уведомления'} 
+                label={"enable_system_notifications"} 
                 htmlFor={'notify'} 
                 id={'notify'} 
                 action={handleNotify}
@@ -80,7 +80,7 @@ export const Notify = () => {
             />
             <div className={styles.soundsAlert}>
                 <Switch 
-                    label={'Включить всплывающие окна'} 
+                    label={t("enable_popup")} 
                     htmlFor={'alerts'} 
                     id={'alerts'} 
                     action={handleAlerts}
@@ -94,10 +94,10 @@ export const Notify = () => {
                             onChange={handleNotifyDuration}
                             value={notify_duration}
                         >
-                            <option value="0">Никогда</option>
-                            <option value="2000">через 2 секунды</option>
-                            <option value="3000">через 3 секунды</option>
-                            <option value="5000">через 5 секунд</option>
+                            <option value="0">t("never")</option>
+                            <option value="2000">t("through" 2 "seconds")</option>
+                            <option value="3000">t("through" 2 "seconds")</option>
+                            <option value="5000">t("through" 5 "second")</option>
                         </select>
                     </div>  
                 )}

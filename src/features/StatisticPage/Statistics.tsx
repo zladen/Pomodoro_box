@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Header } from "../Common/Header";
 import Select from "../../ui/Select/Select";
-import { InfoBlock } from "./infoBlock";
 import styles from './statistic.module.scss'
 import { IntervalTimeProps, getIntervalTime } from "../../constants";
 import { useStatistic } from "../../hooks/useStatistic";
 import { useTranslation } from 'react-i18next';
 import { useTheme } from "../../hooks/useTheme";
+import { Header } from "../Common/Header/Header";
+import { InfoBlock } from "./infoBlock/InfoBlock";
 
 
 export function Statistics() {
